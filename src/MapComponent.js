@@ -1,0 +1,87 @@
+import { clone, forEach, keys, reduce } from 'lodash'
+import { Component } from 'react'
+
+export const EVENTS_RE = /^on(.+)$/i
+
+export default class MapComponent extends Component {
+  _mapEvents
+  tileMapElement
+
+  constructor(props, context) {
+    super(props, context)
+    this._mapEvents = {}
+  }
+
+  componentWillMount() {
+    this._mapEvents = this.extractEvents(this.props)
+  }
+
+  componentDidMount() {
+    this.bindEvents(this._mapEvents)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const next = this.extractEvents(nextProps)
+    this._mapEvents = this.bindEvents(next, this._mapEvents)
+  }
+
+  componentWillUnmount() {
+    const el = this.tileMapElement
+    if (!el) return
+
+    forEach(this._mapEvents, (cb, ev) => {
+      el.removeEventListener(ev, cb)
+    })
+  }
+
+  extractEvents(props) {
+    return reduce(
+      keys(props),
+      (res, prop) => {
+        if (EVENTS_RE.test(prop)) {
+          const key = prop.replace(EVENTS_RE, (match, p) => p.toLowerCase())
+          if (props[prop] != null) {
+            res[key] = props[prop]
+          }
+        }
+        return res
+      },
+      {},
+    )
+  }
+
+  bindEvents(
+    next,
+    prev,
+  ) {
+    const el = this.tileMapElement
+    if (el == null || el.on == null) return {}
+
+    const diff = clone(prev)
+    forEach(prev, (cb, ev) => {
+      if (!next[ev] || cb !== next[ev]) {
+        delete diff[ev]
+        el.removeEventListener(ev, cb)
+      }
+    })
+
+    forEach(next, (cb, ev) => {
+      if (!prev[ev] || cb !== prev[ev]) {
+        diff[ev] = cb
+        el.addEventListener(ev, cb)
+      }
+    })
+
+    return diff
+  }
+
+  fireEvent(type, data) {
+    const el = this.tileMapElement
+    if (el) el.dispatchEvent(type, data)
+  }
+
+  getOptions(props){
+    const pane = props.pane == null ? this.context.pane : props.pane
+    return pane ? { ...props, pane } : props
+  }
+}

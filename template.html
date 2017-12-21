@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="http://uc.101.com/support/image/nd_logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="//cdncs.101.com/v0.1/static/fish/2.0.0/dist/fish.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ root }}index.css" />
+  <!--[if lt IE 10]>
+      <script src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,es5-shim/4.5.7/es5-shim.min.js,es5-shim/4.5.7/es5-sham.min.js,html5shiv/3.7.2/html5shiv.min.js,media-match/2.0.2/media.match.min.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <script src="//cdncs.101.com/v0.1/static/fish/script/media-polyfill.min.js"></script>
+    <![endif]-->
+  <script>
+    if (!window.Intl) {
+      document.writeln('<script src="https://as.alipayobjects.com/g/component/intl/1.0.1/??Intl.js,locale-data/jsonp/en.js,locale-data/jsonp/zh.js">' + '<' + '/script>');
+    }
+    if (!window.Promise) {
+      document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' + '>' + '<' + '/' + 'script>');
+    }
+  </script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zIT2dNIgEojIIYjD91wIbiespAnwM0Zu"></script>
+</head>
+
+<body>
+  <div id="react-content">{{ content | safe }}</div>
+</body>
+<script src="{{ root }}common.js"></script>
+<script src="{{ root }}index.js"></script>
+
+</html>
