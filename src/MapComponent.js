@@ -1,31 +1,31 @@
-import { clone, forEach, keys, reduce } from 'lodash'
+import { clone, forEach, keys, reduce, isString } from 'lodash'
 import { Component } from 'react'
-
+import { render } from 'react-dom'
 export const EVENTS_RE = /^on(.+)$/i
 
 export default class MapComponent extends Component {
   _mapEvents
   tileMapElement
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
     this._mapEvents = {}
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this._mapEvents = this.extractEvents(this.props)
   }
 
-  componentDidMount() {
-    this.bindEvents(this._mapEvents)
+  componentDidMount () {
+    this.bindEvents(this._mapEvents, {})
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const next = this.extractEvents(nextProps)
     this._mapEvents = this.bindEvents(next, this._mapEvents)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     const el = this.tileMapElement
     if (!el) return
 
@@ -34,7 +34,7 @@ export default class MapComponent extends Component {
     })
   }
 
-  extractEvents(props) {
+  extractEvents (props) {
     return reduce(
       keys(props),
       (res, prop) => {
@@ -46,16 +46,13 @@ export default class MapComponent extends Component {
         }
         return res
       },
-      {},
+      {}
     )
   }
 
-  bindEvents(
-    next,
-    prev,
-  ) {
+  bindEvents (next, prev) {
     const el = this.tileMapElement
-    if (el == null || el.on == null) return {}
+    if (el == null || el.addEventListener == null) return {}
 
     const diff = clone(prev)
     forEach(prev, (cb, ev) => {
@@ -75,13 +72,22 @@ export default class MapComponent extends Component {
     return diff
   }
 
-  fireEvent(type, data) {
+  fireEvent (type, data) {
     const el = this.tileMapElement
     if (el) el.dispatchEvent(type, data)
   }
 
-  getOptions(props){
+  getOptions (props) {
     const pane = props.pane == null ? this.context.pane : props.pane
     return pane ? { ...props, pane } : props
+  }
+  getHtmlDomByReactDom (reactDom) {
+    if (isString(reactDom)) {
+      return reactDom
+    } else {
+      var section = document.createElement('section')
+      render(reactDom, section)
+      return section
+    }
   }
 }

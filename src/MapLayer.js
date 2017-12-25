@@ -32,18 +32,8 @@ export default class MapLayer extends MapComponent {
     this.tileMapElement = this.createtileMapElement(this.props)
   }
 
-  componentDidMount () {
-    super.componentDidMount()
-    this.getLayerContainer().addTileLayer(this.tileMapElement)
-  }
-
   componentDidUpdate (prevProps) {
     this.updatetileMapElement(prevProps, this.props)
-  }
-
-  componentWillUnmount () {
-    super.componentWillUnmount()
-    this.getLayerContainer().removeTileLayer(this.tileMapElement)
   }
 
   render () {
