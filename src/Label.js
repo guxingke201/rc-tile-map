@@ -38,6 +38,7 @@ export default class Label extends MapComponent {
   }
 
   updatetileMapElement (fromProps, toProps) {
+    this.updatePropsBySetFun('setContent', fromProps.children, toProps.children)
     this.updatePropsBySetFun('setStyle', fromProps.style, toProps.style)
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
     this.updatePropsBySetFun('setZIndex', fromProps.zIndex, toProps.zIndex)

@@ -84,13 +84,7 @@ class App extends React.Component {
               <span>{JSON.stringify(this.state.infoWindowPoint)}</span>
             </InfoWindow>
           ) : null}
-          <Marker
-            {...this.state.marker}
-            onClick={() => null}
-            onDragend={({ point }) =>
-              this.setState({ infoWindowMarkerPoint: point })
-            }
-          >
+          <Marker {...this.state.marker}>
             <InfoWindow title={this.state.infoWindowMarkerPoint.lat.toString()}>
               <span>
                 A pretty CSS3 popup. <br /> Easily customizable.
