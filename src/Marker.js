@@ -6,7 +6,7 @@ import { point, size, layer, children, layerContainer, map } from './propTypes'
 export default class Marker extends OverLayer {
   static defaultProps = {
     enableMassClear: true,
-    enableDragging: true,
+    enableDragging: false,
     enableClicking: true,
     raiseOnDrag: false
   }

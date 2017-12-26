@@ -54,8 +54,8 @@ class App extends React.Component {
       offset: new NDMap.Size(20, -10)
     },
     markerIcon: {
-      imageUrl: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
-      size: new BMap.Size(300, 157)
+      imageUrl: "http://api0.map.bdimg.com/images/marker_red_sprite.png",
+      size: new NDMap.Size(19, 25)
     }
   };
   onClickMap = ({ point, target, overlay }) => {
@@ -101,7 +101,6 @@ class App extends React.Component {
             <Label title="覆盖物label" {...this.state.label}>
               我是文字标注哦~
             </Label>
-            <MarkerIcon {...this.state.markerIcon} />
           </Marker>
           <Polyline
             points={[
@@ -141,6 +140,16 @@ class App extends React.Component {
             fillOpacity={0.3}
             {...this.state.common}
           />
+          <Marker
+            point={new NDMap.Point(116.404, 39.908)}
+            icon={
+              new NDMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif", {
+                size: new NDMap.Size(300, 157)
+              })
+            }
+          >
+            <MarkerIcon {...this.state.markerIcon} />
+          </Marker>
         </Map>
         <button
           onClick={() =>
@@ -192,7 +201,8 @@ class App extends React.Component {
             this.setState({
               markerIcon: {
                 ...this.state.markerIcon,
-                imageUrl: "//cdncs.101.com/v0.1/static/fep/static/ndlogo.png"
+                imageUrl: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+                size: new NDMap.Size(300, 157)
               }
             })
           }
