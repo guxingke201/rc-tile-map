@@ -1,4 +1,4 @@
-import { clone, forEach, keys, reduce, isString } from 'lodash'
+import { clone, forEach, keys, reduce, isString, isEqual } from 'lodash'
 import { Component } from 'react'
 import { render } from 'react-dom'
 export const EVENTS_RE = /^on(.+)$/i
@@ -81,6 +81,9 @@ export default class MapComponent extends Component {
     const pane = props.pane == null ? this.context.pane : props.pane
     return pane ? { ...props, pane } : props
   }
+  getComponentInstance () {
+    return this.tileMapElement
+  }
   getHtmlDomByReactDom (reactDom) {
     if (isString(reactDom)) {
       return reactDom
@@ -88,6 +91,20 @@ export default class MapComponent extends Component {
       var section = document.createElement('section')
       render(reactDom, section)
       return section
+    }
+  }
+  updatePropsBySetFun (funcName, fromProp, toProp) {
+    if (!isEqual(fromProp, toProp)) {
+      return this.tileMapElement[funcName](toProp)
+    }
+  }
+  updatePropsByBoolFun (funcNameTrue, funcNameFalse, fromProp, toProp) {
+    if (fromProp !== toProp) {
+      if (toProp === true) {
+        this.tileMapElement[funcNameTrue]()
+      } else {
+        this.tileMapElement[funcNameFalse]()
+      }
     }
   }
 }

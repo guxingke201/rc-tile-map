@@ -6,7 +6,7 @@ import map from './propTypes/map'
 
 export default class OverLayer extends MapLayer {
   static propTypes = {
-    children: children,
+    children: children
   }
   static contextTypes = {
     layerContainer: layerContainer,

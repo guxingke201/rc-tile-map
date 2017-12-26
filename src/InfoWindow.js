@@ -1,9 +1,6 @@
-// @flow
-
 import { Children, PropTypes } from 'react'
-
+import { isEqual } from 'lodash'
 import MapComponent from './MapComponent'
-import latlng from './propTypes/latlng'
 import layer from './propTypes/layer'
 import map from './propTypes/map'
 import { point, size } from './propTypes/index'
@@ -11,12 +8,13 @@ import { point, size } from './propTypes/index'
 export default class InfoWindow extends MapComponent {
   static defaultProps = {
     width: 0,
-    height: 0
+    height: 0,
+    enableAutoPan: true,
+    enableCloseOnClick: true,
+    enableMessage: true
   }
   static propTypes = {
     children: PropTypes.node,
-    onClose: PropTypes.func,
-    onOpen: PropTypes.func,
     width: PropTypes.number,
     height: PropTypes.number,
     maxWidth: PropTypes.number,
@@ -31,7 +29,7 @@ export default class InfoWindow extends MapComponent {
 
   static contextTypes = {
     map: map,
-    infoWindowContainer: layer
+    markerInstance: layer
   }
   createtileMapElement (props) {
     return new BMap.InfoWindow(
@@ -41,9 +39,21 @@ export default class InfoWindow extends MapComponent {
   }
 
   updatetileMapElement (fromProps, toProps) {
-    if (toProps.title !== fromProps.title) {
-      this.tileMapElement.setTitle(toProps.title)
-    }
+    this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
+    this.updatePropsBySetFun('setWidth', fromProps.width, toProps.width)
+    this.updatePropsBySetFun('setHeight', fromProps.height, toProps.height)
+    this.updatePropsByBoolFun(
+      'enableAutoPan',
+      'disableAutoPan',
+      fromProps.enableAutoPan,
+      toProps.enableAutoPan
+    )
+    this.updatePropsByBoolFun(
+      'enableCloseOnClick',
+      'disableCloseOnClick',
+      fromProps.enableCloseOnClick,
+      toProps.enableCloseOnClick
+    )
   }
 
   componentWillMount () {
@@ -53,12 +63,12 @@ export default class InfoWindow extends MapComponent {
 
   componentDidMount () {
     const { position } = this.props
-    const { map, infoWindowContainer } = this.context
+    const { map, markerInstance } = this.context
     const el = this.tileMapElement
-    if (infoWindowContainer) {
+    if (markerInstance) {
       // Attach to container component
-      infoWindowContainer.addEventListener('click', function () {
-        infoWindowContainer.openInfoWindow(el)
+      markerInstance.addEventListener('click', function () {
+        markerInstance.openInfoWindow(el)
       })
     } else {
       // Attach to a Map
@@ -70,9 +80,20 @@ export default class InfoWindow extends MapComponent {
 
   componentDidUpdate (prevProps) {
     this.updatetileMapElement(prevProps, this.props)
-
+    if (
+      this.props.position &&
+      !isEqual(prevProps.position, this.props.position)
+    ) {
+      this.context.map.openInfoWindow(this.tileMapElement, this.props.position)
+    }
     if (this.tileMapElement.isOpen()) {
-      this.renderInfoWindowContent()
+      if (this.props.children == null) {
+        this.removeInfoWindowContent()
+      } else {
+        this.tileMapElement.setContent(
+          this.getHtmlDomByReactDom(this.props.children)
+        )
+      }
     }
   }
 
@@ -80,17 +101,9 @@ export default class InfoWindow extends MapComponent {
     this.removeInfoWindowContent()
     super.componentWillUnmount()
   }
-  renderInfoWindowContent = () => {
-    if (this.props.children == null) {
-      this.removeInfoWindowContent()
-    } else {
-      this.tileMapElement.setContent(this.getHtmlDomByReactDom(props.children))
-    }
-  }
-
   removeInfoWindowContent = () => {
-    if (this.context.infoWindowContainer) {
-      this.context.infoWindowContainer.closeInfoWindow()
+    if (this.context.markerInstance) {
+      this.context.markerInstance.closeInfoWindow()
     } else {
       if (this.props.position) {
         this.context.map.closeInfoWindow()

@@ -1,14 +1,18 @@
-// @flow
-
 import { PropTypes } from 'react'
 import { isEqual } from 'lodash'
 import OverLayer from './OverLayer'
 import { point, size, layer, children, layerContainer, map } from './propTypes'
 
 export default class Marker extends OverLayer {
+  static defaultProps = {
+    enableMassClear: true,
+    enableDragging: true,
+    enableClicking: true,
+    raiseOnDrag: false
+  }
   static propTypes = {
     children: children,
-    position: point.isRequired,
+    point: point.isRequired,
     offset: size,
     icon: PropTypes.instanceOf(BMap.Icon),
     enableMassClear: PropTypes.bool,
@@ -26,51 +30,41 @@ export default class Marker extends OverLayer {
     pane: PropTypes.string
   }
   static childContextTypes = {
-    infoWindowContainer: layer
+    markerInstance: layer
   }
 
   getChildContext () {
     return {
-      infoWindowContainer: this.tileMapElement
+      markerInstance: this.tileMapElement
     }
   }
 
   createtileMapElement (props) {
-    return new BMap.Marker(props.position, this.getOptions(props))
+    return new BMap.Marker(props.point, this.getOptions(props))
   }
 
   updatetileMapElement (fromProps, toProps) {
-    if (!toProps.position.equals(fromProps.position)) {
-      this.tileMapElement.setPosition(toProps.position)
-    }
-    if (!isEqual(toProps.offset, fromProps.offset)) {
-      this.tileMapElement.setOffset(toProps.offset)
-    }
-    if (!isEqual(toProps.icon, fromProps.icon)) {
-      this.tileMapElement.setIcon(toProps.icon)
-    }
-    if (toProps.enableMassClear !== fromProps.enableMassClear) {
-      if (toProps.enableMassClear === true) {
-        this.tileMapElement.enableMassClear()
-      } else {
-        this.tileMapElement.disableMassClear()
-      }
-    }
-    if (toProps.enableDragging !== fromProps.enableDragging) {
-      if (toProps.enableDragging === true) {
-        this.tileMapElement.enableDragging()
-      } else {
-        this.tileMapElement.disableDragging()
-      }
-    }
-    if (toProps.rotation !== fromProps.rotation) {
-      this.tileMapElement.setRotation(toProps.rotation)
-    }
-    if (!isEqual(toProps.shadow, fromProps.shadow)) {
-      this.tileMapElement.setShadow(toProps.shadow)
-    }
-    if (toProps.title !== fromProps.title) {
-      this.tileMapElement.setTitle(toProps.title)
-    }
+    this.updatePropsBySetFun('setPosition', fromProps.point, toProps.point)
+    this.updatePropsBySetFun('setOffset', fromProps.offset, toProps.offset)
+    this.updatePropsBySetFun('setIcon', fromProps.icon, toProps.icon)
+    this.updatePropsByBoolFun(
+      'enableMassClear',
+      'disableMassClear',
+      fromProps.enableMassClear,
+      toProps.enableMassClear
+    )
+    this.updatePropsByBoolFun(
+      'enableDragging',
+      'disableDragging',
+      fromProps.enableDragging,
+      toProps.enableDragging
+    )
+    this.updatePropsBySetFun(
+      'setRotation',
+      fromProps.rotation,
+      toProps.rotation
+    )
+    this.updatePropsBySetFun('setShadow', fromProps.shadow, toProps.shadow)
+    this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
   }
 }
