@@ -3,7 +3,7 @@ order: 2
 title: 添加覆盖物
 ---
 
-添加覆盖物：点（Marker）,信息窗口（InfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（Icon）
+添加覆盖物：标注（Marker）,信息窗口（InfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（Icon）
 
 ```jsx
 import {
@@ -20,6 +20,7 @@ import {
 var pStart = new NDMap.Point(116.392214, 39.918985);
 var pEnd = new NDMap.Point(116.41478, 39.911901);
 class App extends React.Component {
+  markerValue;
   state = {
     common: {
       strokeColor: "red",
@@ -30,6 +31,7 @@ class App extends React.Component {
       enableMassClear: true,
       enableClicking: true
     },
+
     marker: {
       enableMassClear: true,
       enableDragging: true,
@@ -42,7 +44,6 @@ class App extends React.Component {
     },
     showMapInfoWindow: false,
     infoWindowPoint: new NDMap.Point(116.404, 39.915),
-    infoWindowMarkerPoint: new NDMap.Point(116.404, 39.915),
     label: {
       style: {
         color: "red",
@@ -84,13 +85,25 @@ class App extends React.Component {
               <span>{JSON.stringify(this.state.infoWindowPoint)}</span>
             </InfoWindow>
           ) : null}
-          <Marker {...this.state.marker}>
-            <InfoWindow title={this.state.infoWindowMarkerPoint.lat.toString()}>
-              <span>
-                A pretty CSS3 popup. <br /> Easily customizable.
-                <br />
-                <span>{JSON.stringify(this.state.infoWindowMarkerPoint)}</span>
-              </span>
+          <Marker
+            {...this.state.marker}
+            setComponentInstance={markerValue => {
+              this.markerValue = markerValue;
+            }}
+          >
+            <InfoWindow title="天安门">
+              <div>
+                <img
+                  id="imgDemo"
+                  src="//lbsyun.baidu.com/jsdemo/img/tianAnMen.jpg"
+                  width="139"
+                  height="104"
+                  title="天安门"
+                />
+                <p>
+                  天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...
+                </p>
+              </div>
             </InfoWindow>
             <Label title="覆盖物label" {...this.state.label}>
               我是文字标注哦~
@@ -155,7 +168,7 @@ class App extends React.Component {
             })
           }
         >
-          {`更新点：拖拽` + this.state.marker.enableDragging}
+          {`更新标注：拖拽` + this.state.marker.enableDragging}
         </button>
         <button
           onClick={() =>
@@ -167,7 +180,7 @@ class App extends React.Component {
             })
           }
         >
-          更新点：位置
+          更新标注：位置
         </button>
         <button
           onClick={() =>
@@ -202,6 +215,14 @@ class App extends React.Component {
           }
         >
           更新图标
+        </button>
+        <button
+          onClick={() => {
+            console.log("this.markerValue", this.markerValue);
+            alert(JSON.stringify(this.markerValue.getPosition()));
+          }}
+        >
+          获取标注当前位置
         </button>
       </div>
     );

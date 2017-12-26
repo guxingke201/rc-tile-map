@@ -104,6 +104,9 @@ export default class Map extends MapComponent {
   }
   componentDidMount () {
     this.tileMapElement = this.createtileMapElement(this.props)
+    if (this.props.setComponentInstance) {
+      this.props.setComponentInstance(this.tileMapElement)
+    }
     super.componentDidMount()
     this.forceUpdate() // Re-render now that tileMapElement is created
   }

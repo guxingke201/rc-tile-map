@@ -30,8 +30,10 @@ export default class MapLayer extends MapComponent {
   componentWillMount () {
     super.componentWillMount()
     this.tileMapElement = this.createtileMapElement(this.props)
+    if (this.props.setComponentInstance) {
+      this.props.setComponentInstance(this.tileMapElement)
+    }
   }
-
   componentDidUpdate (prevProps) {
     this.updatetileMapElement(prevProps, this.props)
   }

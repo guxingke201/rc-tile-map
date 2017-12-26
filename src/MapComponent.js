@@ -81,9 +81,6 @@ export default class MapComponent extends Component {
     const pane = props.pane == null ? this.context.pane : props.pane
     return pane ? { ...props, pane } : props
   }
-  getComponentInstance () {
-    return this.tileMapElement
-  }
   getHtmlDomByReactDom (reactDom) {
     if (isString(reactDom)) {
       return reactDom
