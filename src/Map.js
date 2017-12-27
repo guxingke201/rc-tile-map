@@ -56,12 +56,12 @@ export default class Map extends MapComponent {
 
   getChildContext () {
     return {
-      layerContainer: this.tileMapElement,
-      map: this.tileMapElement
+      layerContainer: this.componentInstance,
+      map: this.componentInstance
     }
   }
 
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     const {
       viewport,
       center,
@@ -84,35 +84,35 @@ export default class Map extends MapComponent {
     return mapNow
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this._updating = true
     const { center, viewport, maxZoom, minZoom, zoom } = toProps
     if (viewport && !isEqual(viewport, fromProps.viewport)) {
-      this.tileMapElement.setViewport(viewport)
+      this.componentInstance.setViewport(viewport)
     } else if (center && !center.equals(fromProps.center)) {
-      this.tileMapElement.centerAndZoom(center, zoom)
+      this.componentInstance.centerAndZoom(center, zoom)
     } else if (typeof zoom === 'number' && zoom !== fromProps.zoom) {
-      this.tileMapElement.centerAndZoom(center, zoom)
+      this.componentInstance.centerAndZoom(center, zoom)
     }
     if (typeof maxZoom === 'number' && maxZoom !== fromProps.maxZoom) {
-      this.tileMapElement.setMaxZoom(maxZoom)
+      this.componentInstance.setMaxZoom(maxZoom)
     }
     if (typeof minZoom === 'number' && minZoom !== fromProps.minZoom) {
-      this.tileMapElement.setMinZoom(minZoom)
+      this.componentInstance.setMinZoom(minZoom)
     }
     this._updating = false
   }
   componentDidMount () {
-    this.tileMapElement = this.createtileMapElement(this.props)
+    this.componentInstance = this.createComponentInstance(this.props)
     if (this.props.setComponentInstance) {
-      this.props.setComponentInstance(this.tileMapElement)
+      this.props.setComponentInstance(this.componentInstance)
     }
     super.componentDidMount()
-    this.forceUpdate() // Re-render now that tileMapElement is created
+    this.forceUpdate() // Re-render now that componentInstance is created
   }
 
   componentDidUpdate (prevProps) {
-    this.updatetileMapElement(prevProps, this.props)
+    this.updateComponentInstance(prevProps, this.props)
   }
 
   componentWillUnmount () {
@@ -124,7 +124,7 @@ export default class Map extends MapComponent {
   }
 
   render () {
-    const map = this.tileMapElement
+    const map = this.componentInstance
     const children = map ? this.props.children : null
 
     return (

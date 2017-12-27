@@ -15,13 +15,13 @@ export default class OverLayer extends MapLayer {
   }
   componentDidMount () {
     super.componentDidMount()
-    this.getLayerContainer().addOverlay(this.tileMapElement)
+    this.getLayerContainer().addOverlay(this.componentInstance)
   }
   componentWillUnmount () {
     super.componentWillUnmount()
-    this.getLayerContainer().removeOverlay(this.tileMapElement)
+    this.getLayerContainer().removeOverlay(this.componentInstance)
   }
-  updatetileMapElement (fromProps, toProps) {
-    super.updatetileMapElement(fromProps, toProps)
+  updateComponentInstance (fromProps, toProps) {
+    super.updateComponentInstance(fromProps, toProps)
   }
 }

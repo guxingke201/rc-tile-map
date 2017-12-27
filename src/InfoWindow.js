@@ -31,14 +31,14 @@ export default class InfoWindow extends MapComponent {
     map: map,
     markerInstance: layer
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     return new BMap.InfoWindow(
       this.getHtmlDomByReactDom(props.children),
       this.getOptions(props)
     )
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
     this.updatePropsBySetFun('setWidth', fromProps.width, toProps.width)
     this.updatePropsBySetFun('setHeight', fromProps.height, toProps.height)
@@ -58,16 +58,16 @@ export default class InfoWindow extends MapComponent {
 
   componentWillMount () {
     super.componentWillMount()
-    this.tileMapElement = this.createtileMapElement(this.props)
+    this.componentInstance = this.createComponentInstance(this.props)
     if (this.props.setComponentInstance) {
-      this.props.setComponentInstance(this.tileMapElement)
+      this.props.setComponentInstance(this.componentInstance)
     }
   }
 
   componentDidMount () {
     const { position } = this.props
     const { map, markerInstance } = this.context
-    const el = this.tileMapElement
+    const el = this.componentInstance
     if (markerInstance) {
       // Attach to container component
       markerInstance.addEventListener('click', function () {
@@ -82,18 +82,18 @@ export default class InfoWindow extends MapComponent {
   }
 
   componentDidUpdate (prevProps) {
-    this.updatetileMapElement(prevProps, this.props)
+    this.updateComponentInstance(prevProps, this.props)
     if (
       this.props.position &&
       !isEqual(prevProps.position, this.props.position)
     ) {
-      this.context.map.openInfoWindow(this.tileMapElement, this.props.position)
+      this.context.map.openInfoWindow(this.componentInstance, this.props.position)
     }
-    if (this.tileMapElement.isOpen()) {
+    if (this.componentInstance.isOpen()) {
       if (this.props.children == null) {
         this.removeInfoWindowContent()
       } else {
-        this.tileMapElement.setContent(
+        this.componentInstance.setContent(
           this.getHtmlDomByReactDom(this.props.children)
         )
       }

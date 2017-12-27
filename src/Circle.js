@@ -32,11 +32,11 @@ export default class Circle extends OverLayer {
     map: map,
     pane: PropTypes.string
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     return new BMap.Circle(props.center, props.radius, this.getOptions(props))
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun('setCenter', fromProps.center, toProps.center)
     this.updatePropsBySetFun('setRadius', fromProps.radius, toProps.radius)
     this.updatePropsBySetFun(

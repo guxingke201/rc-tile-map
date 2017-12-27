@@ -5,7 +5,7 @@ export const EVENTS_RE = /^on(.+)$/i
 
 export default class MapComponent extends Component {
   _mapEvents
-  tileMapElement
+  componentInstance
 
   constructor (props, context) {
     super(props, context)
@@ -26,7 +26,7 @@ export default class MapComponent extends Component {
   }
 
   componentWillUnmount () {
-    const el = this.tileMapElement
+    const el = this.componentInstance
     if (!el) return
 
     forEach(this._mapEvents, (cb, ev) => {
@@ -51,7 +51,7 @@ export default class MapComponent extends Component {
   }
 
   bindEvents (next, prev) {
-    const el = this.tileMapElement
+    const el = this.componentInstance
     if (el == null || el.addEventListener == null) return {}
 
     const diff = clone(prev)
@@ -73,7 +73,7 @@ export default class MapComponent extends Component {
   }
 
   fireEvent (type, data) {
-    const el = this.tileMapElement
+    const el = this.componentInstance
     if (el) el.dispatchEvent(type, data)
   }
 
@@ -92,15 +92,15 @@ export default class MapComponent extends Component {
   }
   updatePropsBySetFun (funcName, fromProp, toProp) {
     if (!isEqual(fromProp, toProp)) {
-      return this.tileMapElement[funcName](toProp)
+      return this.componentInstance[funcName](toProp)
     }
   }
   updatePropsByBoolFun (funcNameTrue, funcNameFalse, fromProp, toProp) {
     if (fromProp !== toProp) {
       if (toProp === true) {
-        this.tileMapElement[funcNameTrue]()
+        this.componentInstance[funcNameTrue]()
       } else {
-        this.tileMapElement[funcNameFalse]()
+        this.componentInstance[funcNameFalse]()
       }
     }
   }

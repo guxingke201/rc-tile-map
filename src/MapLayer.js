@@ -20,22 +20,22 @@ export default class MapLayer extends MapComponent {
   }
 
   // eslint-disable-next-line no-unused-vars
-  createtileMapElement (props) {
-    throw new Error('createtileMapElement() must be implemented')
+  createComponentInstance (props) {
+    throw new Error('createComponentInstance() must be implemented')
   }
 
   // eslint-disable-next-line no-unused-vars
-  updatetileMapElement (fromProps, toProps) {}
+  updateComponentInstance (fromProps, toProps) {}
 
   componentWillMount () {
     super.componentWillMount()
-    this.tileMapElement = this.createtileMapElement(this.props)
+    this.componentInstance = this.createComponentInstance(this.props)
     if (this.props.setComponentInstance) {
-      this.props.setComponentInstance(this.tileMapElement)
+      this.props.setComponentInstance(this.componentInstance)
     }
   }
   componentDidUpdate (prevProps) {
-    this.updatetileMapElement(prevProps, this.props)
+    this.updateComponentInstance(prevProps, this.props)
   }
 
   render () {

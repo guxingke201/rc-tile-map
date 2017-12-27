@@ -35,15 +35,15 @@ export default class Marker extends OverLayer {
 
   getChildContext () {
     return {
-      markerInstance: this.tileMapElement
+      markerInstance: this.componentInstance
     }
   }
 
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     return new BMap.Marker(props.point, this.getOptions(props))
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun('setPosition', fromProps.point, toProps.point)
     this.updatePropsBySetFun('setOffset', fromProps.offset, toProps.offset)
     this.updatePropsBySetFun('setIcon', fromProps.icon, toProps.icon)

@@ -23,7 +23,7 @@ export default class Label extends MapComponent {
     map: map,
     markerInstance: layer
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     const label = new BMap.Label(props.children, this.getOptions(props))
     if (props.style) {
       label.setStyle(props.style)
@@ -37,7 +37,7 @@ export default class Label extends MapComponent {
     return label
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun('setContent', fromProps.children, toProps.children)
     this.updatePropsBySetFun('setStyle', fromProps.style, toProps.style)
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
@@ -58,16 +58,16 @@ export default class Label extends MapComponent {
 
   componentWillMount () {
     super.componentWillMount()
-    this.tileMapElement = this.createtileMapElement(this.props)
+    this.componentInstance = this.createComponentInstance(this.props)
     if (this.props.setComponentInstance) {
-      this.props.setComponentInstance(this.tileMapElement)
+      this.props.setComponentInstance(this.componentInstance)
     }
   }
 
   componentDidMount () {
     const { position } = this.props
     const { map, markerInstance } = this.context
-    const el = this.tileMapElement
+    const el = this.componentInstance
     if (markerInstance) {
       // Attach to container component
       markerInstance.setLabel(el)
@@ -80,7 +80,7 @@ export default class Label extends MapComponent {
   }
 
   componentDidUpdate (prevProps) {
-    this.updatetileMapElement(prevProps, this.props)
+    this.updateComponentInstance(prevProps, this.props)
   }
 
   componentWillUnmount () {
@@ -91,7 +91,7 @@ export default class Label extends MapComponent {
     if (this.context.markerInstance) {
       // 跟随marker一起移除
     } else {
-      this.context.map.removeOverlay(this.tileMapElement)
+      this.context.map.removeOverlay(this.componentInstance)
     }
   }
 

@@ -31,11 +31,11 @@ export default class Polygon extends OverLayer {
     map: map,
     pane: PropTypes.string
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     return new BMap.Polygon(props.points, this.getOptions(props))
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun('setPath', fromProps.points, toProps.points)
     this.updatePropsBySetFun(
       'setStrokeColor',

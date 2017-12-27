@@ -16,7 +16,7 @@ export default class TileLayer extends MapLayer {
     map: map,
     pane: PropTypes.string
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     const layer = new BMap.TileLayer(this.getOptions(props))
     if (props.getTilesUrl) {
       layer.getTilesUrl = props.getTilesUrl
@@ -25,14 +25,14 @@ export default class TileLayer extends MapLayer {
   }
   componentDidMount () {
     super.componentDidMount()
-    this.getLayerContainer().addTileLayer(this.tileMapElement)
+    this.getLayerContainer().addTileLayer(this.componentInstance)
   }
   componentWillUnmount () {
     super.componentWillUnmount()
-    this.getLayerContainer().removeTileLayer(this.tileMapElement)
+    this.getLayerContainer().removeTileLayer(this.componentInstance)
   }
 
-  updatetileMapElement (fromProps, toProps) {
-    super.updatetileMapElement(fromProps, toProps)
+  updateComponentInstance (fromProps, toProps) {
+    super.updateComponentInstance(fromProps, toProps)
   }
 }

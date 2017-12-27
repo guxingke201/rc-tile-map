@@ -15,7 +15,7 @@ export default class Icon extends MapComponent {
   static contextTypes = {
     markerInstance: layer
   }
-  createtileMapElement (props) {
+  createComponentInstance (props) {
     const label = new BMap.Icon(
       props.imageUrl,
       props.size,
@@ -27,7 +27,7 @@ export default class Icon extends MapComponent {
     return label
   }
 
-  updatetileMapElement (fromProps, toProps) {
+  updateComponentInstance (fromProps, toProps) {
     this.updatePropsBySetFun(
       'setImageUrl',
       fromProps.imageUrl,
@@ -52,24 +52,24 @@ export default class Icon extends MapComponent {
     )
     const { markerInstance } = this.context
     if (markerInstance) {
-      markerInstance.setIcon(this.tileMapElement)
+      markerInstance.setIcon(this.componentInstance)
     }
   }
 
   componentWillMount () {
     super.componentWillMount()
-    this.tileMapElement = this.createtileMapElement(this.props)
+    this.componentInstance = this.createComponentInstance(this.props)
   }
 
   componentDidMount () {
     const { markerInstance } = this.context
     if (markerInstance) {
-      markerInstance.setIcon(this.tileMapElement)
+      markerInstance.setIcon(this.componentInstance)
     }
   }
 
   componentDidUpdate (prevProps) {
-    this.updatetileMapElement(prevProps, this.props)
+    this.updateComponentInstance(prevProps, this.props)
   }
 
   componentWillUnmount () {
