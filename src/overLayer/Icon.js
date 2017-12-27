@@ -1,6 +1,6 @@
 import { Children, PropTypes } from 'react'
-import MapComponent from './MapComponent'
-import { layer, size } from './propTypes/index'
+import MapComponent from '../MapComponent'
+import { layer, size } from '../propTypes/index'
 
 export default class Icon extends MapComponent {
   static propTypes = {

@@ -1,8 +1,8 @@
 import { PropTypes } from 'react'
 
-import latlngList from './latlngList'
+import point from './point'
 
 export default PropTypes.oneOfType([
   PropTypes.instanceOf(BMap.Bounds),
-  latlngList
+  PropTypes.arrayOf(point)
 ])

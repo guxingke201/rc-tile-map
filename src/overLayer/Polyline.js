@@ -1,14 +1,12 @@
 import { PropTypes } from 'react'
 import OverLayer from './OverLayer'
-import { point, children, map } from './propTypes'
+import { point, children, map } from '../propTypes'
 
-export default class Polygon extends OverLayer {
+export default class Polyline extends OverLayer {
   static defaultProps = {
     strokeColor: 'blue',
-    fillColor: 'white',
     strokeWeight: 2,
     strokeOpacity: 0.5,
-    fillOpacity: 0.5,
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
@@ -18,10 +16,8 @@ export default class Polygon extends OverLayer {
     children: children,
     points: PropTypes.arrayOf(point).isRequired,
     strokeColor: PropTypes.string,
-    fillColor: PropTypes.string,
     strokeWeight: PropTypes.number,
     strokeOpacity: PropTypes.number,
-    fillOpacity: PropTypes.number,
     strokeStyle: PropTypes.string,
     enableMassClear: PropTypes.bool,
     enableEditing: PropTypes.bool,
@@ -32,7 +28,7 @@ export default class Polygon extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Polygon(props.points, this.getOptions(props))
+    return new BMap.Polyline(props.points, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {
@@ -43,11 +39,6 @@ export default class Polygon extends OverLayer {
       toProps.strokeColor
     )
     this.updatePropsBySetFun(
-      'setFillColor',
-      fromProps.fillColor,
-      toProps.fillColor
-    )
-    this.updatePropsBySetFun(
       'setStrokeWeight',
       fromProps.strokeWeight,
       toProps.strokeWeight
@@ -56,11 +47,6 @@ export default class Polygon extends OverLayer {
       'setStrokeOpacity',
       fromProps.strokeOpacity,
       toProps.strokeOpacity
-    )
-    this.updatePropsBySetFun(
-      'setFillOpacity',
-      fromProps.fillOpacity,
-      toProps.fillOpacity
     )
     this.updatePropsBySetFun(
       'setStrokeStyle',

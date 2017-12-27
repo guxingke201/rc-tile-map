@@ -1,9 +1,9 @@
 import { Children, PropTypes } from 'react'
 import { isEqual } from 'lodash'
-import MapComponent from './MapComponent'
-import layer from './propTypes/layer'
-import map from './propTypes/map'
-import { point, size } from './propTypes/index'
+import MapComponent from '../MapComponent'
+import layer from '../propTypes/layer'
+import map from '../propTypes/map'
+import { point, size } from '../propTypes/index'
 
 export default class InfoWindow extends MapComponent {
   static defaultProps = {
@@ -87,7 +87,10 @@ export default class InfoWindow extends MapComponent {
       this.props.position &&
       !isEqual(prevProps.position, this.props.position)
     ) {
-      this.context.map.openInfoWindow(this.componentInstance, this.props.position)
+      this.context.map.openInfoWindow(
+        this.componentInstance,
+        this.props.position
+      )
     }
     if (this.componentInstance.isOpen()) {
       if (this.props.children == null) {

@@ -1,8 +1,8 @@
 import { PropTypes } from 'react'
 
-import latlng from './latlng'
+import point from './point'
 
 export default PropTypes.shape({
-  center: latlng,
+  center: point,
   zoom: PropTypes.number
 })

@@ -33,7 +33,7 @@ class App extends React.Component {
   };
   render() {
     return (
-      <section>
+      <section className="tilemap-container-demo">
         <Map
           disableDoubleClickZoom
           disableScrollWheelZoom
@@ -41,10 +41,7 @@ class App extends React.Component {
           zoom={this.state.zoom}
           className="tilemap-demo"
         >
-          <TileLayer
-            zIndex={3}
-            getTilesUrl={this.getTilesUrl}
-          />
+          <TileLayer zIndex={3} getTilesUrl={this.getTilesUrl} />
           <TileLayer
             zIndex={1}
             tileUrlTemplate="http://lbsyun.baidu.com/jsdemo/demo/tiles/{Z}/tile{X}_{Y}.png"
@@ -70,5 +67,8 @@ ReactDOM.render(<App />, mountNode);
 .tilemap-demo {
   width: 100%;
   height: 500px;
+}
+.tilemap-container-demo button {
+  margin: 5px;
 }
 ```

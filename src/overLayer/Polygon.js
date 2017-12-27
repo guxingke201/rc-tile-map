@@ -1,8 +1,8 @@
 import { PropTypes } from 'react'
 import OverLayer from './OverLayer'
-import { point, children, map } from './propTypes'
+import { point, children, map } from '../propTypes'
 
-export default class Circle extends OverLayer {
+export default class Polygon extends OverLayer {
   static defaultProps = {
     strokeColor: 'blue',
     fillColor: 'white',
@@ -16,8 +16,7 @@ export default class Circle extends OverLayer {
   }
   static propTypes = {
     children: children,
-    center: point.isRequired,
-    radius: PropTypes.number,
+    points: PropTypes.arrayOf(point).isRequired,
     strokeColor: PropTypes.string,
     fillColor: PropTypes.string,
     strokeWeight: PropTypes.number,
@@ -33,12 +32,11 @@ export default class Circle extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Circle(props.center, props.radius, this.getOptions(props))
+    return new BMap.Polygon(props.points, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {
-    this.updatePropsBySetFun('setCenter', fromProps.center, toProps.center)
-    this.updatePropsBySetFun('setRadius', fromProps.radius, toProps.radius)
+    this.updatePropsBySetFun('setPath', fromProps.points, toProps.points)
     this.updatePropsBySetFun(
       'setStrokeColor',
       fromProps.strokeColor,

@@ -1,12 +1,14 @@
 import { PropTypes } from 'react'
 import OverLayer from './OverLayer'
-import { point, children, map } from './propTypes'
+import { point, children, map } from '../propTypes'
 
-export default class Polyline extends OverLayer {
+export default class Circle extends OverLayer {
   static defaultProps = {
     strokeColor: 'blue',
+    fillColor: 'white',
     strokeWeight: 2,
     strokeOpacity: 0.5,
+    fillOpacity: 0.5,
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
@@ -14,10 +16,13 @@ export default class Polyline extends OverLayer {
   }
   static propTypes = {
     children: children,
-    points: PropTypes.arrayOf(point).isRequired,
+    center: point.isRequired,
+    radius: PropTypes.number,
     strokeColor: PropTypes.string,
+    fillColor: PropTypes.string,
     strokeWeight: PropTypes.number,
     strokeOpacity: PropTypes.number,
+    fillOpacity: PropTypes.number,
     strokeStyle: PropTypes.string,
     enableMassClear: PropTypes.bool,
     enableEditing: PropTypes.bool,
@@ -28,15 +33,21 @@ export default class Polyline extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Polyline(props.points, this.getOptions(props))
+    return new BMap.Circle(props.center, props.radius, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {
-    this.updatePropsBySetFun('setPath', fromProps.points, toProps.points)
+    this.updatePropsBySetFun('setCenter', fromProps.center, toProps.center)
+    this.updatePropsBySetFun('setRadius', fromProps.radius, toProps.radius)
     this.updatePropsBySetFun(
       'setStrokeColor',
       fromProps.strokeColor,
       toProps.strokeColor
+    )
+    this.updatePropsBySetFun(
+      'setFillColor',
+      fromProps.fillColor,
+      toProps.fillColor
     )
     this.updatePropsBySetFun(
       'setStrokeWeight',
@@ -47,6 +58,11 @@ export default class Polyline extends OverLayer {
       'setStrokeOpacity',
       fromProps.strokeOpacity,
       toProps.strokeOpacity
+    )
+    this.updatePropsBySetFun(
+      'setFillOpacity',
+      fromProps.fillOpacity,
+      toProps.fillOpacity
     )
     this.updatePropsBySetFun(
       'setStrokeStyle',

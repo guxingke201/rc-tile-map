@@ -1,7 +1,7 @@
 import { PropTypes } from 'react'
 import { isEqual } from 'lodash'
 import OverLayer from './OverLayer'
-import { point, size, layer, children, layerContainer, map } from './propTypes'
+import { point, size, layer, children, layerContainer, map } from '../propTypes'
 
 export default class Marker extends OverLayer {
   static defaultProps = {

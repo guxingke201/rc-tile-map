@@ -1,9 +1,9 @@
 import { Children, PropTypes } from 'react'
 import { isEqual } from 'lodash'
-import MapComponent from './MapComponent'
-import layer from './propTypes/layer'
-import map from './propTypes/map'
-import { point, size } from './propTypes/index'
+import MapComponent from '../MapComponent'
+import layer from '../propTypes/layer'
+import map from '../propTypes/map'
+import { point, size } from '../propTypes/index'
 
 export default class Label extends MapComponent {
   static defaultProps = {

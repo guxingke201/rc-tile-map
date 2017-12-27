@@ -30,12 +30,12 @@ class App extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="tilemap-container-demo">
         <Map
           {...this.state}
           onClick={this.onClickMap}
           className="tilemap-demo"
-          style={{ height: 600 }}
+          style={{ height: 501 }}
         />
         <button
           onClick={() =>
@@ -77,5 +77,8 @@ ReactDOM.render(<App />, mountNode);
 .tilemap-demo {
   width: 100%;
   height: 500px;
+}
+.tilemap-container-demo button {
+  margin: 5px;
 }
 ```
