@@ -23,7 +23,7 @@ export const MapTypeControl = require('./control/MapTypeControl')
 export const NavigationControl = require('./control/NavigationControl')
 export const OverviewMapControl = require('./control/OverviewMapControl')
 export const PanoramaControl = require('./control/PanoramaControl')
-export const CityListControl = require('./control/CityListControl')
+// export const CityListControl = require('./control/CityListControl') //ie8下js异常，样式异常，不开放了
 export const CustomControl = require('./control/CustomControl')
 
 export const LoadMapScript = require('./LoadMapScript')

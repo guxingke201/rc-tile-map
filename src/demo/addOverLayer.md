@@ -3,7 +3,7 @@ order: 2
 title: 添加覆盖物
 ---
 
-添加覆盖物：标注（Marker）,信息窗口（InfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（Icon）
+添加覆盖物：标注（Marker）,信息窗口（InfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（MarkerIcon）
 
 ```jsx
 import {
@@ -159,6 +159,7 @@ class App extends React.Component {
           </Marker>
         </Map>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               marker: {
@@ -171,6 +172,7 @@ class App extends React.Component {
           {`更新标注：拖拽` + this.state.marker.enableDragging}
         </button>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               marker: {
@@ -183,6 +185,7 @@ class App extends React.Component {
           更新标注：位置
         </button>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               common: { ...this.state.common, strokeColor: "blue" }
@@ -192,6 +195,7 @@ class App extends React.Component {
           更新颜色
         </button>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               common: {
@@ -204,6 +208,7 @@ class App extends React.Component {
           {"更新编辑状态" + this.state.common.enableEditing}
         </button>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               markerIcon: {
@@ -217,6 +222,7 @@ class App extends React.Component {
           更新图标
         </button>
         <button
+          className="button-demo"
           onClick={() => {
             console.log("this.markerValue", this.markerValue);
             alert(JSON.stringify(this.markerValue.getPosition()));
@@ -230,14 +236,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, mountNode);
-```
-
-```css
-.tilemap-demo {
-  width: 100%;
-  height: 500px;
-}
-.tilemap-container-demo button {
-  margin: 5px;
-}
 ```

@@ -38,16 +38,21 @@ class App extends React.Component {
           style={{ height: 501 }}
         />
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({ center: new BMap.Point(116.404, 39.915) })
           }
         >
           更新地图中心
         </button>
-        <button onClick={() => this.setState({ zoom: 15 })}>
+        <button
+          className="button-demo"
+          onClick={() => this.setState({ zoom: 15 })}
+        >
           更新缩放级别
         </button>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               viewport: {
@@ -59,10 +64,16 @@ class App extends React.Component {
         >
           更新视角
         </button>
-        <button onClick={() => this.setState({ maxZoom: 18 })}>
+        <button
+          className="button-demo"
+          onClick={() => this.setState({ maxZoom: 18 })}
+        >
           更新最大缩放级别
         </button>
-        <button onClick={() => this.setState({ minZoom: 3 })}>
+        <button
+          className="button-demo"
+          onClick={() => this.setState({ minZoom: 3 })}
+        >
           更新最小缩放级别
         </button>
       </div>
@@ -78,7 +89,7 @@ ReactDOM.render(<App />, mountNode);
   width: 100%;
   height: 500px;
 }
-.tilemap-container-demo button {
+.tilemap-container-demo .button-demo {
   margin: 5px;
 }
 ```

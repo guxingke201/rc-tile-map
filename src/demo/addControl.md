@@ -3,7 +3,7 @@ order: 3
 title: 添加控件
 ---
 
-添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）,城市列表控件（CityListControl）,自定义控件（CustomControl）。
+添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）,自定义控件（CustomControl）。
 
 ```jsx
 import {
@@ -16,7 +16,6 @@ import {
   MapTypeControl,
   OverviewMapControl,
   PanoramaControl,
-  CityListControl,
   CustomControl
 } from "@sdp.nd/nd-tile-map";
 class App extends React.Component {
@@ -85,10 +84,6 @@ class App extends React.Component {
             {...this.state.common}
             offset={new NDMap.Size(0, 200)}
           />
-          <CityListControl
-            {...this.state.common}
-            offset={new NDMap.Size(250, 0)}
-          />
           <CustomControl
             {...this.state.common}
             offset={new NDMap.Size(360, 10)}
@@ -115,6 +110,7 @@ class App extends React.Component {
           </CustomControl>
         </Map>
         <button
+          className="button-demo"
           onClick={() =>
             this.setState({
               common: {
@@ -132,14 +128,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, mountNode);
-```
-
-```css
-.tilemap-demo {
-  width: 100%;
-  height: 500px;
-}
-.tilemap-container-demo button {
-  margin: 5px;
-}
 ```

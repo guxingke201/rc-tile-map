@@ -53,22 +53,16 @@ class App extends React.Component {
             />
           ) : null}
         </Map>
-        <button onClick={this.onClickAdd}>添加网格图层</button>
-        <button onClick={this.onClickDel}>删除网格图层</button>
+        <button className="button-demo" onClick={this.onClickAdd}>
+          添加网格图层
+        </button>
+        <button className="button-demo" onClick={this.onClickDel}>
+          删除网格图层
+        </button>
       </section>
     );
   }
 }
 
 ReactDOM.render(<App />, mountNode);
-```
-
-```css
-.tilemap-demo {
-  width: 100%;
-  height: 500px;
-}
-.tilemap-container-demo button {
-  margin: 5px;
-}
 ```
