@@ -24,6 +24,7 @@ export const NavigationControl = require('./control/NavigationControl')
 export const OverviewMapControl = require('./control/OverviewMapControl')
 export const PanoramaControl = require('./control/PanoramaControl')
 export const CityListControl = require('./control/CityListControl')
+export const CustomControl = require('./control/CustomControl')
 
 export const LoadMapScript = require('./LoadMapScript')
 export const NDMap = BMap

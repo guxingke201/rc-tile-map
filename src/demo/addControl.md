@@ -3,7 +3,7 @@ order: 3
 title: 添加控件
 ---
 
-添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）,城市列表控件（CityListControl）
+添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）,城市列表控件（CityListControl）,自定义控件（CustomControl）。
 
 ```jsx
 import {
@@ -16,9 +16,11 @@ import {
   MapTypeControl,
   OverviewMapControl,
   PanoramaControl,
-  CityListControl
+  CityListControl,
+  CustomControl
 } from "@sdp.nd/nd-tile-map";
 class App extends React.Component {
+  mapNow;
   state = {
     common: {
       show: true
@@ -38,7 +40,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="tilemap-container-demo">
-        <Map className="tilemap-demo" zoom={15} onClick={this.onClickMap}>
+        <Map
+          setComponentInstance={mapNow => {
+            this.mapNow = mapNow;
+          }}
+          className="tilemap-demo"
+          zoom={15}
+          onClick={this.onClickMap}
+        >
           <ScaleControl
             {...this.state.common}
             offset={new NDMap.Size(112, 26)}
@@ -80,6 +89,30 @@ class App extends React.Component {
             {...this.state.common}
             offset={new NDMap.Size(250, 0)}
           />
+          <CustomControl
+            {...this.state.common}
+            offset={new NDMap.Size(360, 10)}
+          >
+            <div
+              onClick={() => {
+                this.mapNow.setZoom(this.mapNow.getZoom() + 2);
+              }}
+            >
+              放大两级
+            </div>
+          </CustomControl>
+          <CustomControl
+            {...this.state.common}
+            offset={new NDMap.Size(450, 10)}
+          >
+            <div
+              onClick={() => {
+                this.mapNow.setZoom(this.mapNow.getZoom() - 2);
+              }}
+            >
+              缩小两级
+            </div>
+          </CustomControl>
         </Map>
         <button
           onClick={() =>
