@@ -23,6 +23,7 @@ export const MapTypeControl = require('./control/MapTypeControl')
 export const NavigationControl = require('./control/NavigationControl')
 export const OverviewMapControl = require('./control/OverviewMapControl')
 export const PanoramaControl = require('./control/PanoramaControl')
+export const CityListControl = require('./control/CityListControl')
 
 export const LoadMapScript = require('./LoadMapScript')
 export const NDMap = BMap

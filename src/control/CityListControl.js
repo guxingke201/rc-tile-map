@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { map, controlAnchor, size } from '../propTypes'
 import MapControl from './MapControl'
 
-export default class PanoramaControl extends MapControl {
+export default class CityListControl extends MapControl {
   static defaultProps = {
     show: true,
-    anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: new BMap.Size(0, 0)
+    anchor: window.BMAP_ANCHOR_TOP_LEFT,
+    offset: new BMap.Size(10, 20)
   }
   static propTypes = {
     anchor: controlAnchor,
@@ -18,6 +18,6 @@ export default class PanoramaControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.PanoramaControl(this.getOptions(props))
+    return new BMap.CityListControl(this.getOptions(props))
   }
 }

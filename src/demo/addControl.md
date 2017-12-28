@@ -3,7 +3,7 @@ order: 3
 title: 添加控件
 ---
 
-添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）
+添加地图控件：比例尺控件（ScaleControl）,缩放平移控件（NavigationControl）,版权信息控件（CopyrightControl），地图定位控件（GeolocationControl）,切换地图类型控件（MapTypeControl）,缩略地图控件（OverviewMapControl），切换至全景地图控件（PanoramaControl）,城市列表控件（CityListControl）
 
 ```jsx
 import {
@@ -15,7 +15,8 @@ import {
   GeolocationControl,
   MapTypeControl,
   OverviewMapControl,
-  PanoramaControl
+  PanoramaControl,
+  CityListControl
 } from "@sdp.nd/nd-tile-map";
 class App extends React.Component {
   state = {
@@ -74,6 +75,10 @@ class App extends React.Component {
           <PanoramaControl
             {...this.state.common}
             offset={new NDMap.Size(0, 200)}
+          />
+          <CityListControl
+            {...this.state.common}
+            offset={new NDMap.Size(250, 0)}
           />
         </Map>
         <button
