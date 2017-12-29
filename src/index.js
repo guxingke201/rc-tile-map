@@ -25,6 +25,9 @@ export const OverviewMapControl = require('./control/OverviewMapControl')
 export const PanoramaControl = require('./control/PanoramaControl')
 // export const CityListControl = require('./control/CityListControl') //ie8下js异常，样式异常，不开放了
 export const CustomControl = require('./control/CustomControl')
+// 服务类
+export const Autocomplete = require('./service/Autocomplete')
+export const LocalSearch = require('./service/LocalSearch')
 
 export const LoadMapScript = require('./LoadMapScript')
 export const NDMap = BMap
