@@ -76,7 +76,7 @@ class App extends React.Component {
             keyword={this.state.keyword}
             onSearchComplete={results => {
               console.log("LocalSearch results:", results);
-              var pp = results.getPoi(0); //获取第一个智能搜索的结果
+              var pp = results && results.getPoi(0); //获取第一个智能搜索的结果
               if (pp) {
                 this.setState({
                   mapState: {
