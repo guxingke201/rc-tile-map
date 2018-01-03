@@ -3,13 +3,17 @@ import MapComponent from '../MapComponent'
 import { layer, size } from '../propTypes/index'
 
 export default class Icon extends MapComponent {
+  static defaultProps = {
+    show: true
+  }
   static propTypes = {
     imageUrl: PropTypes.string,
     imageSize: size,
     size: size,
     anchor: size,
     imageOffset: size,
-    infoWindowAnchor: size
+    infoWindowAnchor: size,
+    show: PropTypes.bool
   }
 
   static contextTypes = {
@@ -24,10 +28,14 @@ export default class Icon extends MapComponent {
     if (props.imageSize) {
       label.setImageSize(imageSize)
     }
+    if (!props.show) {
+      label.hide()
+    }
     return label
   }
 
   updateComponentInstance (fromProps, toProps) {
+    this.updatePropsByBoolFun('show', 'hide', fromProps.show, toProps.show)
     this.updatePropsBySetFun(
       'setImageUrl',
       fromProps.imageUrl,

@@ -5,8 +5,12 @@ import layerContainer from '../propTypes/layerContainer'
 import map from '../propTypes/map'
 
 export default class OverLayer extends MapLayer {
+  static defaultProps = {
+    show: true
+  }
   static propTypes = {
-    children: children
+    children: children,
+    show: PropTypes.bool
   }
   static contextTypes = {
     layerContainer: layerContainer,
@@ -21,7 +25,14 @@ export default class OverLayer extends MapLayer {
     super.componentWillUnmount()
     this.getLayerContainer().removeOverlay(this.componentInstance)
   }
+  componentWillMount () {
+    super.componentWillMount()
+    if (!this.props.show) {
+      this.componentInstance.hide()
+    }
+  }
   updateComponentInstance (fromProps, toProps) {
+    this.updatePropsByBoolFun('show', 'hide', fromProps.show, toProps.show)
     super.updateComponentInstance(fromProps, toProps)
   }
 }

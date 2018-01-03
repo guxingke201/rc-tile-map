@@ -11,7 +11,7 @@ export default class InfoWindow extends MapComponent {
     height: 0,
     enableAutoPan: true,
     enableCloseOnClick: true,
-    enableMessage: true
+    show: true
   }
   static propTypes = {
     children: PropTypes.node,
@@ -22,9 +22,8 @@ export default class InfoWindow extends MapComponent {
     title: PropTypes.string,
     enableAutoPan: PropTypes.bool,
     enableCloseOnClick: PropTypes.bool,
-    enableMessage: PropTypes.bool,
-    message: PropTypes.string,
-    position: point
+    position: point,
+    show: PropTypes.bool
   }
 
   static contextTypes = {
@@ -32,13 +31,18 @@ export default class InfoWindow extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    return new BMap.InfoWindow(
+    const instance = new BMap.InfoWindow(
       this.getHtmlDomByReactDom(props.children),
       this.getOptions(props)
     )
+    if (!props.show) {
+      instance.hide()
+    }
+    return instance
   }
 
   updateComponentInstance (fromProps, toProps) {
+    this.updatePropsByBoolFun('show', 'hide', fromProps.show, toProps.show)
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
     this.updatePropsBySetFun('setWidth', fromProps.width, toProps.width)
     this.updatePropsBySetFun('setHeight', fromProps.height, toProps.height)
@@ -70,8 +74,11 @@ export default class InfoWindow extends MapComponent {
     const el = this.componentInstance
     if (markerInstance) {
       // Attach to container component
-      markerInstance.addEventListener('click', function () {
+      markerInstance.addEventListener('click', () => {
         markerInstance.openInfoWindow(el)
+        this.componentInstance.setContent(
+          this.getHtmlDomByReactDom(this.props.children)
+        )
       })
     } else {
       // Attach to a Map

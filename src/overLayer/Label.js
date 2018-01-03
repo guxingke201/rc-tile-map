@@ -4,10 +4,11 @@ import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'
 import { point, size } from '../propTypes/index'
-
+let countNum = 0
 export default class Label extends MapComponent {
   static defaultProps = {
-    enableMassClear: true
+    enableMassClear: true,
+    show: true
   }
   static propTypes = {
     children: PropTypes.string,
@@ -16,7 +17,8 @@ export default class Label extends MapComponent {
     zIndex: PropTypes.number,
     offset: size,
     enableMassClear: PropTypes.bool,
-    position: point
+    position: point,
+    show: PropTypes.bool
   }
 
   static contextTypes = {
@@ -34,10 +36,17 @@ export default class Label extends MapComponent {
     if (props.zIndex) {
       label.setZIndex(props.zIndex)
     }
+    if (!props.show) {
+      label.hide()
+    }
     return label
   }
 
   updateComponentInstance (fromProps, toProps) {
+    // var p = document.createElement('p')
+    // p.innerText = `${countNum++}--${JSON.stringify(toProps)}--`
+    // document.getElementById('error-ie8').appendChild(p)
+    this.updatePropsByBoolFun('show', 'hide', fromProps.show, toProps.show)
     this.updatePropsBySetFun('setContent', fromProps.children, toProps.children)
     this.updatePropsBySetFun('setStyle', fromProps.style, toProps.style)
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)

@@ -12,7 +12,8 @@ export default class Circle extends OverLayer {
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
-    enableClicking: false
+    enableClicking: false,
+    show: true
   }
   static propTypes = {
     children: children,
@@ -37,6 +38,7 @@ export default class Circle extends OverLayer {
   }
 
   updateComponentInstance (fromProps, toProps) {
+    super.updateComponentInstance(fromProps, toProps)
     this.updatePropsBySetFun('setCenter', fromProps.center, toProps.center)
     this.updatePropsBySetFun('setRadius', fromProps.radius, toProps.radius)
     this.updatePropsBySetFun(

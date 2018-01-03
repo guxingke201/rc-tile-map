@@ -8,7 +8,8 @@ export default class Marker extends OverLayer {
     enableMassClear: true,
     enableDragging: false,
     enableClicking: true,
-    raiseOnDrag: false
+    raiseOnDrag: false,
+    show: true
   }
   static propTypes = {
     children: children,
@@ -44,6 +45,7 @@ export default class Marker extends OverLayer {
   }
 
   updateComponentInstance (fromProps, toProps) {
+    super.updateComponentInstance(fromProps, toProps)
     this.updatePropsBySetFun('setPosition', fromProps.point, toProps.point)
     this.updatePropsBySetFun('setOffset', fromProps.offset, toProps.offset)
     this.updatePropsBySetFun('setIcon', fromProps.icon, toProps.icon)

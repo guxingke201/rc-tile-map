@@ -20,6 +20,8 @@ const Map_Options = [
 export default class Map extends MapComponent {
   static defaultProps = {
     mapType: BMAP_NORMAL_MAP,
+    enableAutoResize: true,
+    enableMapClick: true,
     disableDoubleClickZoom: false,
     disableScrollWheelZoom: false,
     center: new BMap.Point(116.404, 39.915),
@@ -29,10 +31,8 @@ export default class Map extends MapComponent {
     minZoom: PropTypes.number,
     maxZoom: PropTypes.number,
     mapType: PropTypes.instanceOf(BMap.MapType),
-    enableHighResolution: PropTypes.bool,
     enableAutoResize: PropTypes.bool,
     enableMapClick: PropTypes.bool,
-    onViewportChange: PropTypes.func,
     disableScrollWheelZoom: PropTypes.bool,
     disableDoubleClickZoom: PropTypes.bool,
     children: children,

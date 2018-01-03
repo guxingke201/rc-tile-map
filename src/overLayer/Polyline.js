@@ -10,7 +10,8 @@ export default class Polyline extends OverLayer {
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
-    enableClicking: false
+    enableClicking: false,
+    show: true
   }
   static propTypes = {
     children: children,
@@ -32,6 +33,7 @@ export default class Polyline extends OverLayer {
   }
 
   updateComponentInstance (fromProps, toProps) {
+    super.updateComponentInstance(fromProps, toProps)
     this.updatePropsBySetFun('setPath', fromProps.points, toProps.points)
     this.updatePropsBySetFun(
       'setStrokeColor',
