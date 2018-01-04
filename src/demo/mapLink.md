@@ -86,7 +86,7 @@ class App extends React.Component {
                 ak="zIT2dNIgEojIIYjD91wIbiespAnwM0Zu"
                 x={119.319642}
                 y={26.096715}
-                zoom={1}
+                z={1}
               >
                 <Icon type="link" />
                 展示坐标（lat:26.096715，lng:119.319642）对应的全景点

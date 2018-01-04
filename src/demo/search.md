@@ -3,7 +3,7 @@ order: 4
 title: 检索相关
 ---
 
-用于位置检索、周边检索和范围检索
+位置检索（LocalSearch）、结果提示及自动完成类（Autocomplete）
 
 ```jsx
 import {

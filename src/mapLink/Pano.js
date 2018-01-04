@@ -7,7 +7,7 @@ export default class MapLinkPano extends BaseMapLink {
     nc: 1,
     lc: 1,
     issc: 1,
-    ac: 0,
+    ac: 1,
     z: 3,
     iec: 1
   }
@@ -24,8 +24,7 @@ export default class MapLinkPano extends BaseMapLink {
     issc: PropTypes.number,
     ac: PropTypes.number,
     z: PropTypes.number,
-    iec: PropTypes.number,
-    zoom: PropTypes.number
+    iec: PropTypes.number
   }
   componentWillMount () {
     const { x, y, pid, uid } = this.props

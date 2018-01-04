@@ -10,7 +10,7 @@ export default class Polyline extends OverLayer {
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
-    enableClicking: false,
+    enableClicking: true,
     show: true
   }
   static propTypes = {

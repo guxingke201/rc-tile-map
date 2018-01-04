@@ -6,7 +6,6 @@ const componyName = '网龙网络控股有限公司'
 export default class BaseMapLink extends Component {
   static propTypes = {
     children: children,
-    href: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.string,
     target: PropTypes.string
@@ -25,7 +24,7 @@ export default class BaseMapLink extends Component {
       toPairs(pick(props, this.getPickArray()))
         .map(item => item.join('='))
         .join('&'),
-      `&output=html&componyName=${componyName}`
+      `&output=html&src=${componyName}`
     ].join('')
   }
 

@@ -12,13 +12,13 @@ export default class Circle extends OverLayer {
     strokeStyle: 'solid',
     enableMassClear: true,
     enableEditing: false,
-    enableClicking: false,
+    enableClicking: true,
     show: true
   }
   static propTypes = {
     children: children,
     center: point.isRequired,
-    radius: PropTypes.number,
+    radius: PropTypes.number.isRequired,
     strokeColor: PropTypes.string,
     fillColor: PropTypes.string,
     strokeWeight: PropTypes.number,

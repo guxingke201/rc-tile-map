@@ -8,7 +8,7 @@ export default class OverviewMapControl extends MapControl {
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
     offset: new BMap.Size(0, 0),
     size: new BMap.Size(150, 150),
-    isOpen: true
+    isOpen: false
   }
   static propTypes = {
     anchor: controlAnchor,
