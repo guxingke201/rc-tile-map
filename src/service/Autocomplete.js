@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { location, renderOptions, htmlElement, map } from '../propTypes'
 import MapComponent from '../MapComponent'
-
+import { isEqual } from 'lodash'
 export default class Autocomplete extends MapComponent {
   static propTypes = {
+    keyword: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     location: location,
     types: PropTypes.arrayOf(PropTypes.string),
     onSearchComplete: PropTypes.func,
@@ -14,7 +15,18 @@ export default class Autocomplete extends MapComponent {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.Autocomplete(this.getOptions(props))
+    let options = {}
+    if (!props.input) {
+      const div = document.createElement('div')
+      document.body.appendChild(div)
+      options = {
+        ...this.getOptions(props),
+        input: div
+      }
+    } else {
+      options = this.getOptions(props)
+    }
+    return new BMap.Autocomplete(options)
   }
 
   updateComponentInstance (fromProps, toProps) {
@@ -23,6 +35,9 @@ export default class Autocomplete extends MapComponent {
       fromProps.location,
       toProps.location
     )
+    if (!isEqual(fromProps.keyword, toProps.keyword)) {
+      return this.componentInstance.search(toProps.keyword)
+    }
   }
 
   componentWillMount () {
