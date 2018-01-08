@@ -25,6 +25,7 @@ let timer = null;
 class App extends React.Component {
   mapNow;
   localSearchDiv;
+  lastClickMarker;
   state = {
     keywordMap: null,
     keyword: null,
@@ -85,7 +86,7 @@ class App extends React.Component {
         ]
       }
     ],
-    historyArray: ["福州长乐", "福州亚太"],
+    historyArray: ["福州市鼓楼区851大楼", "福州长乐", "福州亚太"],
     dataSource: []
   };
   componentDidMount() {
@@ -233,16 +234,32 @@ class App extends React.Component {
       <Marker
         key={pointInfo.uid}
         {...pointInfo.markerProps}
-        point={pointInfo.point}
-        onClick={() =>
+        onClick={() => {
+          if (this.lastClickMarker) {
+            this.updateMarkerItem(this.lastClickMarker.uid, {
+              iconProps: {
+                ...this.lastClickMarker.iconProps,
+                size: new NDMap.Size(20, 28),
+                imageOffset: new NDMap.Size(
+                  -20 * this.lastClickMarker.iconProps.index,
+                  0
+                )
+              }
+            });
+          }
+          this.lastClickMarker = pointInfo;
           this.updateMarkerItem(pointInfo.uid, {
             iconProps: {
               ...pointInfo.iconProps,
               size: new NDMap.Size(28, 40),
               imageOffset: new NDMap.Size(-28 * pointInfo.iconProps.index, -28)
+            },
+            markerProps: {
+              ...pointInfo.markerProps,
+              offset: new NDMap.Size(-4, -22)
             }
-          })
-        }
+          });
+        }}
         onDragend={endPoint => {
           this.setPositionInfo(endPoint, pointInfo.uid);
         }}
@@ -263,7 +280,7 @@ class App extends React.Component {
       >
         <MarkerIcon {...pointInfo.iconProps} />
         <Label {...pointInfo.labelProps}>{pointInfo.title}</Label>
-        <InfoWindow>
+        <InfoWindow offset={new NDMap.Size(4, -13)}>
           <Row>
             <Col span={16}>
               <p>{`${pointInfo.title}`}</p>
@@ -306,7 +323,11 @@ class App extends React.Component {
             imageOffset: new NDMap.Size(-20 * index, 0)
           };
           item.labelProps = { ...this.state.label, show: false };
-          item.markerProps = { ...this.state.markerState };
+          item.markerProps = {
+            ...this.state.markerState,
+            point: item.point,
+            offset: new NDMap.Size(0, -10)
+          };
           return item;
         })
       });

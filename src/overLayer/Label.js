@@ -47,7 +47,13 @@ export default class Label extends MapComponent {
     // p.innerText = `${countNum++}--${JSON.stringify(toProps)}--`
     // document.getElementById('error-ie8').appendChild(p)
     this.updatePropsByBoolFun('show', 'hide', fromProps.show, toProps.show)
-    this.updatePropsBySetFun('setContent', fromProps.children, toProps.children)
+    if (toProps.show) {
+      this.updatePropsBySetFun(
+        'setContent',
+        fromProps.children,
+        toProps.children
+      )
+    }
     this.updatePropsBySetFun('setStyle', fromProps.style, toProps.style)
     this.updatePropsBySetFun('setTitle', fromProps.title, toProps.title)
     this.updatePropsBySetFun('setZIndex', fromProps.zIndex, toProps.zIndex)

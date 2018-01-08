@@ -99,13 +99,19 @@ export default class InfoWindow extends MapComponent {
         this.props.position
       )
     }
-    if (this.componentInstance.isOpen()) {
+    if (this.props.show && this.componentInstance.isOpen()) {
       if (this.props.children == null) {
         this.removeInfoWindowContent()
       } else {
-        this.componentInstance.setContent(
-          this.getHtmlDomByReactDom(this.props.children)
-        )
+        const oldContent = this.getHtmlDomByReactDom(prevProps.children)
+          .innerText
+        const newContent = this.getHtmlDomByReactDom(this.props.children)
+          .innerText
+        if (oldContent !== newContent) {
+          this.componentInstance.setContent(
+            this.getHtmlDomByReactDom(this.props.children)
+          )
+        }
       }
     }
   }
