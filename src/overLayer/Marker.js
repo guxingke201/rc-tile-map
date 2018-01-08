@@ -9,7 +9,11 @@ export default class Marker extends OverLayer {
     enableDragging: false,
     enableClicking: true,
     raiseOnDrag: false,
-    show: true
+    show: true,
+    shadow: new BMap.Icon(
+      '//api0.map.bdimg.com/images/blank.gif',
+      new BMap.Size(1, 1)
+    )
   }
   static propTypes = {
     children: children,
@@ -41,7 +45,12 @@ export default class Marker extends OverLayer {
   }
 
   createComponentInstance (props) {
-    return new BMap.Marker(props.point, this.getOptions(props))
+    const marker = new BMap.Marker(props.point, this.getOptions(props))
+    if (props.shadow) {
+      marker.setShadow(props.shadow)
+    }
+
+    return marker
   }
 
   updateComponentInstance (fromProps, toProps) {
