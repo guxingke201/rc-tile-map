@@ -27,7 +27,7 @@ class App extends React.Component {
       strokeWeight: 3,
       strokeOpacity: 0.9,
       strokeStyle: "dashed",
-      enableEditing: true,
+      enableEditing: false,
       enableMassClear: true,
       enableClicking: true
     },
