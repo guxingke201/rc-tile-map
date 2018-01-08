@@ -7,13 +7,15 @@ title: 初始化地图
 
 ```jsx
 import { Map, NDMap } from "@sdp.nd/nd-tile-map";
+let nowCenter = new NDMap.Point(116.332782, 40.007978);
 class App extends React.Component {
+  mapNow;
   constructor(props) {
     super(props);
     this.state = {
-      center: new NDMap.Point(116.332782, 40.007978),
+      center: nowCenter,
       zoom: 16,
-      minZoom: 13,
+      minZoom: 1,
       maxZoom: 17,
       mapType: BMAP_HYBRID_MAP,
       enableHighResolution: true,
@@ -32,6 +34,9 @@ class App extends React.Component {
     return (
       <div className="tilemap-container-demo">
         <Map
+          setComponentInstance={mapNow => {
+            this.mapNow = mapNow;
+          }}
           {...this.state}
           onClick={this.onClickMap}
           className="tilemap-demo"
@@ -39,15 +44,20 @@ class App extends React.Component {
         />
         <button
           className="button-demo"
-          onClick={() =>
-            this.setState({ center: new BMap.Point(116.404, 39.915) })
-          }
+          onClick={() => {
+            this.setState({
+              center: new NDMap.Point(
+                this.mapNow.getCenter().lng + 0.0005,
+                40.007978
+              )
+            });
+          }}
         >
           更新地图中心
         </button>
         <button
           className="button-demo"
-          onClick={() => this.setState({ zoom: 15 })}
+          onClick={() => this.setState({ zoom: this.mapNow.getZoom() - 1 })}
         >
           更新缩放级别
         </button>
@@ -56,8 +66,11 @@ class App extends React.Component {
           onClick={() =>
             this.setState({
               viewport: {
-                center: new NDMap.Point(116.332782, 40.007978),
-                zoom: 16
+                center: new NDMap.Point(
+                  this.mapNow.getCenter().lng + 0.0005,
+                  40.007978
+                ),
+                zoom: this.mapNow.getZoom() - 1
               }
             })
           }
