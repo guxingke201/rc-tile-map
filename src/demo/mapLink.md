@@ -37,7 +37,7 @@ class App extends React.Component {
                 {...this.state.marker}
               >
                 <Icon type="link" />
-                在（lat:26.097159，lng:119.319762）坐标点上显示名称"851大楼"，内容"福州市鼓楼区温泉支路58号"的信息窗口
+                在指定坐标点上显示名称"851大楼"，内容"福州市鼓楼区温泉支路58号"的信息窗口
               </MapLinkMarker>
             </Row>
             <Row className="line-demo">
