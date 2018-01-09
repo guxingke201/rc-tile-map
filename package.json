@@ -1,6 +1,6 @@
 {
   "name": "@sdp.nd/nd-tile-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "地图组件",
   "license": "MIT",
   "main": "lib/index.js",
@@ -14,9 +14,7 @@
     "build": "npm run babel && shx cp src/style/index.less lib/style/index.less"
   },
   "author": "666595 <pengxing201@163.com>",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "dependencies": {
     "lodash": "^4.17.4",
     "classnames": "~2.2.0",
