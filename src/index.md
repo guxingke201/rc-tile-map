@@ -105,6 +105,7 @@ title: TileMap
 | enableCloseOnClick | 是否开启点击地图关闭信息窗口                                                                                                                                                                       | boolean                                                                            | true   |
 | position           | 指定信息窗口所在的地理位置，没有放到 Marker 的 children 时，必填                                                                                                                                   | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -      |
 | show               | 是否显示组件                                                                                                                                                                                       | boolean                                                                            | true   |
+| contentEvents               | 内容事件绑定（格式是{key:function}，其中key为显示内容中dom元素的className+事件名称，如：confirmButton.click）                                                                                                                                                                                       | {key:function(evt, markerInstance, infoWindowInstance)}                                                                          | {}   |
 
 ### 折线 Polyline
 

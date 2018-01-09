@@ -73,7 +73,26 @@ export default class MapComponent extends Component {
 
     return diff
   }
-
+  getElementsByClassName(dom,className){
+    //解决IE8之类不支持getElementsByClassName
+    if (!dom.getElementsByClassName) {
+      var children = dom.getElementsByTagName('*');
+      var elements = new Array();
+      for (var i = 0; i < children.length; i++) {
+          var child = children[i];
+          var classNames = child.className.split(' ');
+          for (var j = 0; j < classNames.length; j++) {
+              if (classNames[j] === className) {
+                  elements.push(child);
+                  break;
+              }
+          }
+      }
+      return elements;
+    }else{
+      return dom.getElementsByClassName(className)
+    }
+  }
   fireEvent (type, data) {
     const el = this.componentInstance
     if (el) el.dispatchEvent(type, data)

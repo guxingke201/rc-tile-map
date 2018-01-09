@@ -1,5 +1,5 @@
 import { Children, PropTypes } from 'react'
-import { isEqual } from 'lodash'
+import { isEqual, forEach } from 'lodash'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'
@@ -11,7 +11,8 @@ export default class InfoWindow extends MapComponent {
     height: 0,
     enableAutoPan: true,
     enableCloseOnClick: true,
-    show: true
+    show: true,
+    contentEvents: {}
   }
   static propTypes = {
     children: PropTypes.node,
@@ -23,7 +24,8 @@ export default class InfoWindow extends MapComponent {
     enableAutoPan: PropTypes.bool,
     enableCloseOnClick: PropTypes.bool,
     position: point,
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    contentEvents: PropTypes.object
   }
 
   static contextTypes = {
@@ -67,7 +69,7 @@ export default class InfoWindow extends MapComponent {
       this.props.setComponentInstance(this.componentInstance)
     }
   }
-
+  
   componentDidMount () {
     const { position } = this.props
     const { map, markerInstance } = this.context
@@ -76,9 +78,25 @@ export default class InfoWindow extends MapComponent {
       // Attach to container component
       markerInstance.addEventListener('click', () => {
         markerInstance.openInfoWindow(el)
-        this.componentInstance.setContent(
-          this.getHtmlDomByReactDom(this.props.children)
-        )
+        const dom = this.getHtmlDomByReactDom(this.props.children)
+        forEach(this.props.contentEvents, (evtFun, evtName) => {
+          const domNow =
+            evtName.indexOf('.') > 0
+              ? this.getElementsByClassName(dom,(evtName.split('.')[0]))[0]
+              : dom
+          let evtNameNow =
+            evtName.indexOf('.') > 0 ? evtName.split('.')[1] : evtName
+          if (domNow.addEventListener) {
+            domNow.addEventListener(evtNameNow, evt => {
+              evtFun(evt, markerInstance, this.componentInstance)
+            })
+          } else if (domNow.attachEvent) {
+            domNow.attachEvent('on' + evtNameNow, evt => {
+              evtFun(evt, markerInstance, this.componentInstance)
+            })
+          }
+        })
+        this.componentInstance.setContent(dom)
       })
     } else {
       // Attach to a Map

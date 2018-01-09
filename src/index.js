@@ -26,7 +26,7 @@ export const PanoramaControl = require('./control/PanoramaControl')
 // export const CityListControl = require('./control/CityListControl') //ie8下js异常，样式异常，不开放了
 export const CustomControl = require('./control/CustomControl')
 // 服务类
-export const Autocomplete = require('./service/Autocomplete')
+export const AutocompleteMap = require('./service/Autocomplete')
 export const LocalSearch = require('./service/LocalSearch')
 // Web版百度地图面向PC&移动端浏览器的网站应用或移动APP应用，其中PC浏览器调起的百度地图地址为：http://map.baidu.com/
 // http://lbsyun.baidu.com/index.php?title=uri/api/web#service-page-anchor8

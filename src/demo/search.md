@@ -10,7 +10,7 @@ import {
   Map,
   NDMap,
   CustomControl,
-  Autocomplete as AutocompleteMap,
+  AutocompleteMap,
   LocalSearch,
   Marker,
   MarkerIcon,
@@ -280,14 +280,21 @@ class App extends React.Component {
       >
         <MarkerIcon {...pointInfo.iconProps} />
         <Label {...pointInfo.labelProps}>{pointInfo.title}</Label>
-        <InfoWindow offset={new NDMap.Size(4, -13)}>
+        <InfoWindow
+          offset={new NDMap.Size(4, -13)}
+          contentEvents={{
+            "confirmButton.click": (evt, markerInstance) => {
+              this.onClickMark(pointInfo, markerInstance);
+            }
+          }}
+        >
           <Row>
             <Col span={16}>
               <p>{`${pointInfo.title}`}</p>
               <p>{pointInfo.address}</p>
             </Col>
             <Col span={8}>
-              <Button type="ghost" icon="check" onClick={this.onClickMark}>
+              <Button type="ghost" icon="check" className="confirmButton">
                 确认地址
               </Button>
             </Col>
@@ -335,11 +342,13 @@ class App extends React.Component {
       alert("没找到");
     }
   };
-  onClickMark = () => {
+  onClickMark = (pointInfo, markerInstance) => {
+    //react事件和百度地图InfoWindow事件冲突了，目前采用这种方式绑定事件
     this.updateMarkerItem(pointInfo.uid, {
       iconProps: {
         ...pointInfo.iconProps,
-        imageOffset: new NDMap.Size(-40, 0)
+        size: new NDMap.Size(28, 40),
+        imageOffset: new NDMap.Size(0, -68)
       }
     });
     this.setState({
@@ -347,6 +356,7 @@ class App extends React.Component {
         item => item.uid === pointInfo.uid
       )
     });
+    markerInstance.closeInfoWindow();
   };
   render() {
     return (
