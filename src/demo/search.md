@@ -276,6 +276,7 @@ class App extends React.Component {
               imageOffset: new NDMap.Size(-28 * pointInfo.iconProps.index, -28)
             },
             infoWindowProps: { show: true },
+            labelProps: { show: false },
             markerProps: {
               ...pointInfo.markerProps,
               offset: new NDMap.Size(-4, -22)
@@ -309,11 +310,9 @@ class App extends React.Component {
         <MarkerIcon {...pointInfo.iconProps} />
         <Label
           {...pointInfo.labelProps}
-        >{`<p class="global-maplabel-text-main">${
-          pointInfo.title
-        }</p><p class="global-maplabel-text-sub">${pointInfo.province}${
-          pointInfo.city
-        }</p>`}</Label>
+        >{`<p class="global-maplabel-text-main">${pointInfo.title ||
+          ""}</p><p class="global-maplabel-text-sub">${pointInfo.province ||
+          ""}${pointInfo.city || ""}</p>`}</Label>
 
         <SimpleInfoWindow
           {...pointInfo.infoWindowProps}
@@ -329,10 +328,11 @@ class App extends React.Component {
         >
           <Row className="global-maplabel-wrap">
             <Col span={24} className="global-maplabel-content">
-              <p className="global-maplabel-text-main">{`${
-                pointInfo.title
-              }`}</p>
-              <p className="global-maplabel-text-sub">{pointInfo.address}</p>
+              <p className="global-maplabel-text-main">{`${pointInfo.title ||
+                ""}`}</p>
+              <p className="global-maplabel-text-sub">
+                {pointInfo.address || ""}
+              </p>
             </Col>
             <Col span={8} className="global-maplabel-ctrl">
               <Button type="ghost" className="confirmButton">
