@@ -3,7 +3,7 @@ order: 2
 title: 添加覆盖物
 ---
 
-添加覆盖物：标注（Marker）,信息窗口（InfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（MarkerIcon）
+添加覆盖物：标注（Marker）,信息窗口（InfoWindow）,自定义信息窗口（InfoBox）,简单信息窗口（SimpleInfoWindow）,折线（Polyline），多边形（Polygon），圆（Circle），文本标注（Label），图标（MarkerIcon）
 
 ```jsx
 import {
@@ -49,8 +49,11 @@ class App extends React.Component {
       style: {
         color: "red",
         fontSize: "12px",
-        height: "20px",
         lineHeight: "20px",
+        borderColor: "#ddd",
+        boxShadow: "0 2px 6px #aaa",
+        padding: "10px",
+        borderRadius: "0",
         fontFamily: "微软雅黑"
       },
       offset: new NDMap.Size(20, -10)
@@ -100,21 +103,13 @@ class App extends React.Component {
             }}
           >
             <InfoWindow title="天安门">
-              <div>
-                <img
-                  id="imgDemo"
-                  src="//lbsyun.baidu.com/jsdemo/img/tianAnMen.jpg"
-                  width="139"
-                  height="104"
-                  title="天安门"
-                />
-                <p>
-                  天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...
-                </p>
+              <div className="global-maplabel-confirm">
+                <p className="global-maplabel-text-main">xx</p>
+                <p className="global-maplabel-text-sub">福州鼓楼</p>
               </div>
             </InfoWindow>
             <Label title="覆盖物label" {...this.state.label}>
-              我是文字标注哦~
+              {`<p class="global-maplabel-text-main">xx</p><p class="global-maplabel-text-sub">福州鼓楼</p>`}
             </Label>
           </Marker>
           <Polyline
@@ -319,6 +314,16 @@ ReactDOM.render(<App />, mountNode);
 ```
 
 ```css
+.global-maplabel-text-main {
+  line-height:18px;
+  font-size:12px;
+  color:#666;
+}
+.global-maplabel-text-sub {
+  line-height:18px;
+  font-size:12px;
+  color:#bbb
+}
 .infoBoxContent {
   font-size: 12px;
 }

@@ -1,5 +1,5 @@
 import { Children, PropTypes } from 'react'
-import { isEqual, forEach } from 'lodash'
+import { pick, forEach } from 'lodash'
 require('../BMapLib/InfoBox')
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
@@ -11,7 +11,6 @@ export default class InfoBox extends MapComponent {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
-
     contentEvents: {}
   }
   static propTypes = {
@@ -35,7 +34,15 @@ export default class InfoBox extends MapComponent {
     const instance = new BMapLib.InfoBox(
       this.context.map,
       this.getHtmlDomByReactDom(props.children),
-      { ...this.getOptions(props) }
+      pick(props, [
+        'offset',
+        'boxClass',
+        'boxStyle',
+        'closeIconMargin',
+        'closeIconUrl',
+        'enableAutoPan',
+        'align'
+      ])
     )
     if (!props.show) {
       instance.hide()

@@ -10,7 +10,8 @@ export default class SimpleInfoWindow extends InfoBox {
     align: window.INFOBOX_AT_TOP,
     show: true,
     closeIconUrl: '//cdncs.101.com/v0.1/static/fish/image/blank.gif',
-    contentEvents: {}
+    contentEvents: {},
+    offset: new BMap.Size(0, 20)
   }
   static propTypes = {
     children: PropTypes.node,

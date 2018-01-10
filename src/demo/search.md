@@ -40,7 +40,7 @@ class App extends React.Component {
       imageUrl: "//cdncs.101.com/v0.1/static/fish/image/markers_num.png"
     },
     label: {
-      offset: new NDMap.Size(20, -10)
+      offset: new NDMap.Size(30, -15)
     },
     pointInfo: {
       point: null,
@@ -115,15 +115,17 @@ class App extends React.Component {
       })
     });
   };
-  setPositionInfo = (firstPoint, uid) => {
-    console.log("firstPoint:", firstPoint);
-    geoc.getLocation(firstPoint.point, resultLoaction => {
+  setPositionInfo = (endPoint, uid) => {
+    console.log("setPositionInfo endPoint:", endPoint);
+    geoc.getLocation(endPoint.point, resultLoaction => {
       console.log("resultLoaction:", resultLoaction);
       const positionInfo = resultLoaction.addressComponents;
       this.updateMarkerItem(uid, {
-        point: firstPoint.point,
-        address: `${positionInfo.street}${positionInfo.streetNumber}`,
-        title: `${this.getTitle(resultLoaction, firstPoint)}`
+        point: endPoint.point,
+        address: resultLoaction.address,
+        province: positionInfo.province,
+        city: positionInfo.city,
+        title: `${this.getTitle(resultLoaction, endPoint)}`
       });
     });
   };
@@ -210,7 +212,17 @@ class App extends React.Component {
     if (!searchResults || countResult === 0) {
       return [
         <Option disabled key="empty" className="empty-item">
-          <span>未找到相关地点</span>
+          <p className="global-search-empty-text">未找到相关地点</p>
+          <p className="global-search-empty-text">您还可以：</p>
+          <ul className="global-search-empty-list">
+            <li>检查输入是否正确或者输入其他词</li>
+            <li>
+              早网页中查找“<span className="global-search-empty-strong">
+                FLISH
+              </span>”
+            </li>
+            <li>进行意见反馈</li>
+          </ul>
         </Option>
       ];
     } else {
@@ -279,12 +291,18 @@ class App extends React.Component {
         }}
       >
         <MarkerIcon {...pointInfo.iconProps} />
-        <Label {...pointInfo.labelProps}>{pointInfo.title}</Label>
+        <Label
+          {...pointInfo.labelProps}
+        >{`<p class="global-maplabel-text-main">${
+          pointInfo.title
+        }</p><p class="global-maplabel-text-sub">${pointInfo.province}${
+          pointInfo.city
+        }</p>`}</Label>
+
         <SimpleInfoWindow
           boxStyle={{
             backgroundColor: "white"
           }}
-          offset={new NDMap.Size(4, -13)}
           contentEvents={{
             "confirmButton.click": (
               evt,
@@ -321,7 +339,7 @@ class App extends React.Component {
     }
   };
   onLocalSearchComplete = results => {
-    var firstPoint = results && results.getPoi(0); //获取第一个智能搜索的结果
+    var firstPoint = results && results.getPoi(0);
     console.log("onLocalSearchComplete results:", results, firstPoint);
     if (firstPoint) {
       this.setState({
@@ -377,7 +395,7 @@ class App extends React.Component {
               placeholder="请选择地区"
             />
           </Col>
-          <Col span={15}>
+          <Col span={13} offset={1}>
             <AutoComplete
               filterOption={false}
               allowClear
@@ -395,7 +413,7 @@ class App extends React.Component {
               <Input id="divSearch" />
             </AutoComplete>
           </Col>
-          <Col span={3}>
+          <Col span={3} offset={1}>
             <Button
               className="search-btn"
               size="large"
@@ -404,7 +422,7 @@ class App extends React.Component {
                 this.startSearch(this.state.keyword);
               }}
             >
-              <Icon type="search" />
+              搜索
             </Button>
           </Col>
         </Row>
@@ -471,24 +489,38 @@ ReactDOM.render(<App />, mountNode);
   width: 100%;
 }
 
+/* ？ */
 .global-search.ant-select-auto-complete
   .ant-input-affix-wrapper
   .ant-input:not(:last-child) {
   padding-right: 62px;
 }
-
+/* ？ */
 .global-search.ant-select-auto-complete
   .ant-input-affix-wrapper
   .ant-input-suffix {
   right: 0;
 }
+
+.global-search-search-dropdown .ant-select-dropdown-menu-item {
+  padding: 5px 12px 4px;
+}
 .global-search-search-dropdown .ant-select-dropdown-menu-item.del-item {
   text-align: right;
   cursor: default;
+  border-top: 1px solid #ddd;
+}
+.global-search-search-dropdown .ant-select-dropdown-menu-item.del-item .ant-btn-font {
+  font-size: 12px;
+  color:#bbb;
+  vertical-align:top;
+  border:none;
+  height:20px;
+  line-height:20px;
 }
 .global-search-search-dropdown .ant-select-dropdown-menu-item.empty-item {
-  color:gray;
   cursor: default;
+  padding: 16px 20px;
 }
 }
 .global-search-search-dropdown .ant-select-dropdown-menu-item.custom-item {
@@ -500,5 +532,31 @@ ReactDOM.render(<App />, mountNode);
   button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.global-search-empty-text {
+  line-height:24px;
+  font-size:12px;
+  color:#666;
+}
+.global-search-empty-list li {
+  position:relative;
+  padding-left:8px;
+  line-height:20px;
+  font-size:12px;
+  color:#666;
+}
+.global-search-empty-list li:before {
+  position:absolute;
+  left:0;
+  top:50%;
+  width:2px;
+  height:2px;
+  content:"";
+  margin-top:-1px;
+  background-color:#666;
+}
+.global-search-empty-strong {
+  color:#3ba8f0;
 }
 ```
