@@ -14,7 +14,7 @@ import {
   LocalSearch,
   Marker,
   MarkerIcon,
-  InfoWindow,
+  SimpleInfoWindow,
   Label
 } from "@sdp.nd/nd-tile-map";
 import { Input, Button, Icon, Row, Col, Cascader, AutoComplete } from "fish";
@@ -280,11 +280,18 @@ class App extends React.Component {
       >
         <MarkerIcon {...pointInfo.iconProps} />
         <Label {...pointInfo.labelProps}>{pointInfo.title}</Label>
-        <InfoWindow
+        <SimpleInfoWindow
+          boxStyle={{
+            backgroundColor: "white"
+          }}
           offset={new NDMap.Size(4, -13)}
           contentEvents={{
-            "confirmButton.click": (evt, markerInstance) => {
-              this.onClickMark(pointInfo, markerInstance);
+            "confirmButton.click": (
+              evt,
+              markerInstance,
+              infoWindowInstance
+            ) => {
+              this.onClickMark(pointInfo, infoWindowInstance);
             }
           }}
         >
@@ -299,7 +306,7 @@ class App extends React.Component {
               </Button>
             </Col>
           </Row>
-        </InfoWindow>
+        </SimpleInfoWindow>
       </Marker>
     );
   }
@@ -342,7 +349,7 @@ class App extends React.Component {
       alert("没找到");
     }
   };
-  onClickMark = (pointInfo, markerInstance) => {
+  onClickMark = (pointInfo, infoWindowInstance) => {
     //react事件和百度地图InfoWindow事件冲突了，目前采用这种方式绑定事件
     this.updateMarkerItem(pointInfo.uid, {
       iconProps: {
@@ -356,7 +363,7 @@ class App extends React.Component {
         item => item.uid === pointInfo.uid
       )
     });
-    markerInstance.closeInfoWindow();
+    infoWindowInstance.close();
   };
   render() {
     return (

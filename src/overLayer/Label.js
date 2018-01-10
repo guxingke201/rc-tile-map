@@ -8,7 +8,17 @@ let countNum = 0
 export default class Label extends MapComponent {
   static defaultProps = {
     enableMassClear: true,
-    show: true
+    show: true,
+    style: {
+      color: "#666",
+      fontSize: "12px",
+      lineHeight: "20px",
+      borderColor: "#ddd",
+      boxShadow: "0 2px 6px #aaa",
+      padding: "10px",
+      borderRadius: "0",
+      fontFamily: "微软雅黑"
+    }
   }
   static propTypes = {
     children: PropTypes.string,

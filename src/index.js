@@ -14,6 +14,8 @@ export const MarkerIcon = require('./overLayer/Icon')
 export const Label = require('./overLayer/Label')
 export const Polygon = require('./overLayer/Polygon')
 export const Circle = require('./overLayer/Circle')
+export const InfoBox = require('./overLayer/InfoBox')
+export const SimpleInfoWindow = require('./overLayer/SimpleInfoWindow')
 // 控件
 export const MapControl = require('./control/MapControl')
 export const ScaleControl = require('./control/ScaleControl')

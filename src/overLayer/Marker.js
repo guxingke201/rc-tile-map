@@ -11,7 +11,7 @@ export default class Marker extends OverLayer {
     raiseOnDrag: false,
     show: true,
     shadow: new BMap.Icon(
-      '//api0.map.bdimg.com/images/blank.gif',
+      '//cdncs.101.com/v0.1/static/fish/image/blank.gif',
       new BMap.Size(1, 1)
     )
   }
