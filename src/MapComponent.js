@@ -73,23 +73,26 @@ export default class MapComponent extends Component {
 
     return diff
   }
-  getElementsByClassName(dom,className){
-    //解决IE8之类不支持getElementsByClassName
+  getElementsByClassName (dom, className) {
+    if (!dom.getElementsByTagName) {
+      return dom
+    }
+    // 解决IE8之类不支持getElementsByClassName
     if (!dom.getElementsByClassName) {
-      var children = dom.getElementsByTagName('*');
-      var elements = new Array();
+      var children = dom.getElementsByTagName('*')
+      var elements = new Array()
       for (var i = 0; i < children.length; i++) {
-          var child = children[i];
-          var classNames = child.className.split(' ');
-          for (var j = 0; j < classNames.length; j++) {
-              if (classNames[j] === className) {
-                  elements.push(child);
-                  break;
-              }
+        var child = children[i]
+        var classNames = child.className.split(' ')
+        for (var j = 0; j < classNames.length; j++) {
+          if (classNames[j] === className) {
+            elements.push(child)
+            break
           }
+        }
       }
-      return elements;
-    }else{
+      return elements
+    } else {
       return dom.getElementsByClassName(className)
     }
   }
@@ -109,6 +112,27 @@ export default class MapComponent extends Component {
       var section = document.createElement('section')
       render(reactDom, section)
       return section
+    }
+  }
+  bindContentEvents (contentEvents, dom, markerInstance, componentInstance) {
+    if (contentEvents) {
+      forEach(contentEvents, (evtFun, evtName) => {
+        const domNow =
+          evtName.indexOf('.') > 0
+            ? this.getElementsByClassName(dom, evtName.split('.')[0])[0]
+            : dom
+        let evtNameNow =
+          evtName.indexOf('.') > 0 ? evtName.split('.')[1] : evtName
+        if (domNow.addEventListener) {
+          domNow.addEventListener(evtNameNow, evt => {
+            evtFun(evt, markerInstance, this.componentInstance)
+          })
+        } else if (domNow.attachEvent) {
+          domNow.attachEvent('on' + evtNameNow, evt => {
+            evtFun(evt, markerInstance, this.componentInstance)
+          })
+        }
+      })
     }
   }
   updatePropsBySetFun (funcName, fromProp, toProp) {

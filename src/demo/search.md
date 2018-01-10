@@ -217,9 +217,13 @@ class App extends React.Component {
           <ul className="global-search-empty-list">
             <li>检查输入是否正确或者输入其他词</li>
             <li>
-              早网页中查找“<span className="global-search-empty-strong">
-                FLISH
-              </span>”
+              在网页中查找“<a
+                className="global-search-empty-strong"
+                target="_blank"
+                href={`//www.baidu.com/s?wd=${searchResults.keyword}`}
+              >
+                {searchResults.keyword}
+              </a>”
             </li>
             <li>进行意见反馈</li>
           </ul>
@@ -256,6 +260,11 @@ class App extends React.Component {
                   -20 * this.lastClickMarker.iconProps.index,
                   0
                 )
+              },
+              infoWindowProps: { show: false },
+              markerProps: {
+                ...this.lastClickMarker.markerProps,
+                offset: new NDMap.Size(0, -10)
               }
             });
           }
@@ -266,9 +275,16 @@ class App extends React.Component {
               size: new NDMap.Size(28, 40),
               imageOffset: new NDMap.Size(-28 * pointInfo.iconProps.index, -28)
             },
+            infoWindowProps: { show: true },
             markerProps: {
               ...pointInfo.markerProps,
               offset: new NDMap.Size(-4, -22)
+            }
+          });
+          this.setState({
+            mapState: {
+              ...this.state.mapState,
+              center: pointInfo.point
             }
           });
         }}
@@ -300,9 +316,7 @@ class App extends React.Component {
         }</p>`}</Label>
 
         <SimpleInfoWindow
-          boxStyle={{
-            backgroundColor: "white"
-          }}
+          {...pointInfo.infoWindowProps}
           contentEvents={{
             "confirmButton.click": (
               evt,
@@ -313,14 +327,16 @@ class App extends React.Component {
             }
           }}
         >
-          <Row>
-            <Col span={16}>
-              <p>{`${pointInfo.title}`}</p>
-              <p>{pointInfo.address}</p>
+          <Row className="global-maplabel-wrap">
+            <Col span={24} className="global-maplabel-content">
+              <p className="global-maplabel-text-main">{`${
+                pointInfo.title
+              }`}</p>
+              <p className="global-maplabel-text-sub">{pointInfo.address}</p>
             </Col>
-            <Col span={8}>
-              <Button type="ghost" icon="check" className="confirmButton">
-                确认地址
+            <Col span={8} className="global-maplabel-ctrl">
+              <Button type="ghost" className="confirmButton">
+                确定
               </Button>
             </Col>
           </Row>
@@ -355,6 +371,7 @@ class App extends React.Component {
             imageOffset: new NDMap.Size(-20 * index, 0)
           };
           item.labelProps = { ...this.state.label, show: false };
+          item.infoWindowProps = { show: false };
           item.markerProps = {
             ...this.state.markerState,
             point: item.point,
@@ -558,5 +575,39 @@ ReactDOM.render(<App />, mountNode);
 }
 .global-search-empty-strong {
   color:#3ba8f0;
+}
+.global-maplabel-wrap {
+  position:relative;
+  padding: 10px;
+  padding-right: 54px;
+}
+.global-maplabel-ctrl {
+  position: absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:54px;
+  border-left:1px solid #ddd;
+}
+.global-maplabel-ctrl .confirmButton {
+  width:100%;
+  padding: 5px;
+  border: none;
+  font-size:12px;
+  color: #3ba8f0;
+  height: 100%;
+  text-align:center;
+}
+.global-maplabel-ctrl .confirmButton:after {
+  display: inline-block;
+  vertical-align:middle;
+  width: 0;
+  height: 100%;
+  content: "";
+}
+.global-maplabel-ctrl .confirmButton > span {
+  display: inline-block;
+  vertical-align:middle;
+  margin: 0;
 }
 ```

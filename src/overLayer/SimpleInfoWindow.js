@@ -9,9 +9,13 @@ export default class SimpleInfoWindow extends InfoBox {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
+    offset: new BMap.Size(0, 43),
+    boxClass: 'ant-map-maplabel',
+    boxStyle: {},
+    closeIconMargin: '2px',
     closeIconUrl: '//cdncs.101.com/v0.1/static/fish/image/blank.gif',
     contentEvents: {},
-    offset: new BMap.Size(0, 20)
+    ignoreMarkerSize: true
   }
   static propTypes = {
     children: PropTypes.node,
@@ -23,7 +27,8 @@ export default class SimpleInfoWindow extends InfoBox {
     enableAutoPan: PropTypes.bool,
     align: PropTypes.oneOf([window.INFOBOX_AT_TOP, window.INFOBOX_AT_BOTTOM]),
     show: PropTypes.bool,
-    contentEvents: PropTypes.object
+    contentEvents: PropTypes.object,
+    ignoreMarkerSize: PropTypes.bool
   }
 
   static contextTypes = {

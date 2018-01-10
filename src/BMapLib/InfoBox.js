@@ -276,8 +276,10 @@ var INFOBOX_AT_TOP = 1,
       this._opts.offset = opts.offset || new BMap.Size(0, 0)
       this._opts.boxClass = opts.boxClass || 'infoBox'
       this._opts.boxStyle = opts.boxStyle || {}
+      this._opts.ignoreMarkerSize = opts.ignoreMarkerSize
       this._opts.closeIconMargin = opts.closeIconMargin || '2px'
-      this._opts.closeIconUrl = opts.closeIconUrl || '//cdncs.101.com/v0.1/static/fish/image/close.png'
+      this._opts.closeIconUrl =
+        opts.closeIconUrl || '//cdncs.101.com/v0.1/static/fish/image/close.png'
       this._opts.enableAutoPan = !!opts.enableAutoPan
       this._opts.align = opts.align || INFOBOX_AT_TOP
     })
@@ -554,10 +556,12 @@ var INFOBOX_AT_TOP = 1,
                 -(
                   pixel.y -
                   this._opts.offset.height -
-                  icon.anchor.height +
-                  icon.infoWindowAnchor.height
-                ) -
-                this._marker.getOffset().height +
+                  (!this._opts.ignoreMarkerSize
+                    ? icon.anchor.height -
+                      icon.infoWindowAnchor.height -
+                      this._marker.getOffset().height
+                    : 0)
+                ) +
                 2 +
                 'px'
             } else {
@@ -570,9 +574,11 @@ var INFOBOX_AT_TOP = 1,
               this._div.style.top =
                 pixel.y +
                 this._opts.offset.height -
-                icon.anchor.height +
-                icon.infoWindowAnchor.height +
-                this._marker.getOffset().height +
+                (!this._opts.ignoreMarkerSize
+                  ? icon.anchor.height -
+                    icon.infoWindowAnchor.height -
+                    this._marker.getOffset().height
+                  : 0) +
                 'px'
             } else {
               this._div.style.top = pixel.y + this._opts.offset.height + 'px'
@@ -582,14 +588,18 @@ var INFOBOX_AT_TOP = 1,
 
         if (this._marker) {
           this._div.style.left =
-            pixel.x -
-            icon.anchor.width +
-            this._marker.getOffset().width +
-            icon.infoWindowAnchor.width -
+            pixel.x +
+            this._opts.offset.width -
+            (!this._opts.ignoreMarkerSize
+              ? icon.anchor.width -
+                this._marker.getOffset().width -
+                icon.infoWindowAnchor.width
+              : 0) -
             this._boxWidth / 2 +
             'px'
         } else {
-          this._div.style.left = pixel.x - this._boxWidth / 2 + 'px'
+          this._div.style.left =
+            pixel.x - this._opts.offset.width - this._boxWidth / 2 + 'px'
         }
       },
       /**

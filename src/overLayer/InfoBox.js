@@ -1,5 +1,5 @@
 import { Children, PropTypes } from 'react'
-import { pick, forEach } from 'lodash'
+import { forEach } from 'lodash'
 require('../BMapLib/InfoBox')
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
@@ -11,6 +11,11 @@ export default class InfoBox extends MapComponent {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
+    offset: new BMap.Size(0, 15),
+    boxClass: 'infoBox',
+    boxStyle: {},
+    closeIconMargin: '2px',
+    closeIconUrl: '//cdncs.101.com/v0.1/static/fish/image/close.png',
     contentEvents: {}
   }
   static propTypes = {
@@ -34,15 +39,7 @@ export default class InfoBox extends MapComponent {
     const instance = new BMapLib.InfoBox(
       this.context.map,
       this.getHtmlDomByReactDom(props.children),
-      pick(props, [
-        'offset',
-        'boxClass',
-        'boxStyle',
-        'closeIconMargin',
-        'closeIconUrl',
-        'enableAutoPan',
-        'align'
-      ])
+      { ...this.getOptions(props) }
     )
     if (!props.show) {
       instance.hide()
@@ -77,23 +74,12 @@ export default class InfoBox extends MapComponent {
       markerInstance.addEventListener('click', () => {
         this.componentInstance.open(markerInstance)
         const dom = this.getHtmlDomByReactDom(this.props.children)
-        forEach(this.props.contentEvents, (evtFun, evtName) => {
-          const domNow =
-            evtName.indexOf('.') > 0
-              ? this.getElementsByClassName(dom, evtName.split('.')[0])[0]
-              : dom
-          let evtNameNow =
-            evtName.indexOf('.') > 0 ? evtName.split('.')[1] : evtName
-          if (domNow.addEventListener) {
-            domNow.addEventListener(evtNameNow, evt => {
-              evtFun(evt, markerInstance, this.componentInstance)
-            })
-          } else if (domNow.attachEvent) {
-            domNow.attachEvent('on' + evtNameNow, evt => {
-              evtFun(evt, markerInstance, this.componentInstance)
-            })
-          }
-        })
+        this.bindContentEvents(
+          this.props.contentEvents,
+          dom,
+          markerInstance,
+          this.componentInstance
+        )
         this.componentInstance.setContent(dom)
       })
     }
@@ -106,9 +92,14 @@ export default class InfoBox extends MapComponent {
       const newContent = this.getHtmlDomByReactDom(this.props.children)
         .innerText
       if (oldContent !== newContent) {
-        this.componentInstance.setContent(
-          this.getHtmlDomByReactDom(this.props.children)
+        const dom = this.getHtmlDomByReactDom(this.props.children)
+        this.bindContentEvents(
+          this.props.contentEvents,
+          dom,
+          this.context.markerInstance,
+          this.componentInstance
         )
+        this.componentInstance.setContent(dom)
       }
     }
   }

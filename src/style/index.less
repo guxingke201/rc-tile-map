@@ -1,1 +1,22 @@
-
+.ant-map {
+  &-maplabel {
+    position: relative;
+    max-width: 500px;
+    box-shadow: 0 2px 6px #aaa;
+    min-width: 150px;
+    width: 250px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    &:after {
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      width: 20px;
+      height: 11px;
+      margin-left: -10px;
+      content: "";
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMBAMAAACQIoDIAAAAElBMVEUAAADd3d3d3d3d3d3////j4+MoV3zfAAAABHRSTlMAf4J8vDiOKQAAAEVJREFUCNdjcIEDhhAYy5VBFcYMYmAKgQoqMACFoYIMDIwhYEEBBiAQBTEDgQyQMEQQLAwShADmEKAgFJgGAwmosAGIBABpjxMS8/LlpQAAAABJRU5ErkJggg==");
+      background-repeat: no-repeat;
+    }
+  }
+}
