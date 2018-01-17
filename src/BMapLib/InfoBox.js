@@ -283,6 +283,9 @@ var INFOBOX_AT_TOP = 1,
       this._opts.enableAutoPan = !!opts.enableAutoPan
       this._opts.align = opts.align || INFOBOX_AT_TOP
     })
+    if(!window.BMap){
+      return 
+    }
     InfoBox.prototype = new BMap.Overlay()
     InfoBox.prototype.initialize = function (map) {
       var me = this

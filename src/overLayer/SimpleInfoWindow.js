@@ -9,7 +9,7 @@ export default class SimpleInfoWindow extends InfoBox {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
-    offset: new BMap.Size(0, 43),
+    offset: window.BMap && new BMap.Size(0, 43),
     boxClass: 'ant-map-maplabel',
     boxStyle: {},
     closeIconMargin: '2px',

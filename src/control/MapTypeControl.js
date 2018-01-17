@@ -6,14 +6,9 @@ export default class MapTypeControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_TOP_LEFT,
-    offset: new BMap.Size(10, 10),
+    offset: window.BMap && new BMap.Size(10, 10),
     type: window.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
-    mapTypes: [
-      window.BMAP_NORMAL_MAP,
-      window.BMAP_SATELLITE_MAP,
-      window.BMAP_PERSPECTIVE_MAP,
-      window.BMAP_HYBRID_MAP
-    ]
+    mapTypes: [window.BMAP_NORMAL_MAP, window.BMAP_SATELLITE_MAP, window.BMAP_PERSPECTIVE_MAP, window.BMAP_HYBRID_MAP]
   }
   static propTypes = {
     anchor: controlAnchor,

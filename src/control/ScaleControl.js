@@ -5,8 +5,8 @@ import MapControl from './MapControl'
 export default class ScaleControl extends MapControl {
   static defaultProps = {
     show: true,
-    anchor: BMAP_ANCHOR_BOTTOM_LEFT,
-    offset: new BMap.Size(112, 26)
+    anchor: window.BMAP_ANCHOR_BOTTOM_LEFT,
+    offset: window.BMap && new BMap.Size(112, 26)
   }
   static propTypes = {
     anchor: controlAnchor,

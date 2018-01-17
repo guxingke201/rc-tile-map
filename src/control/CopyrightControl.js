@@ -6,7 +6,7 @@ export default class CopyrightControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: new BMap.Size(5, 2)
+    offset: window.BMap && new BMap.Size(5, 2)
   }
   static propTypes = {
     anchor: controlAnchor,

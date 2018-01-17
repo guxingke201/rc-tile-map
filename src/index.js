@@ -41,4 +41,4 @@ export const MapLinkPlaceDetail = require('./mapLink/PlaceDetail')
 export const MapLinkPlaceSearch = require('./mapLink/PlaceSearch')
 
 export const LoadMapScript = require('./LoadMapScript')
-export const NDMap = BMap
+export const NDMap = window.BMap

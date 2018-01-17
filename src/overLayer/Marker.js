@@ -10,7 +10,7 @@ export default class Marker extends OverLayer {
     enableClicking: true,
     raiseOnDrag: false,
     show: true,
-    shadow: new BMap.Icon(
+    shadow: window.BMap && new BMap.Icon(
       '//cdncs.101.com/v0.1/static/fish/image/blank.gif',
       new BMap.Size(1, 1)
     )
@@ -19,14 +19,14 @@ export default class Marker extends OverLayer {
     children: children,
     point: point.isRequired,
     offset: size,
-    icon: PropTypes.instanceOf(BMap.Icon),
+    icon: PropTypes.object,
     enableMassClear: PropTypes.bool,
     enableDragging: PropTypes.bool,
     enableClicking: PropTypes.bool,
     raiseOnDrag: PropTypes.bool,
     draggingCursor: PropTypes.string,
     rotation: PropTypes.number,
-    shadow: PropTypes.instanceOf(BMap.Icon),
+    shadow: PropTypes.object,
     title: PropTypes.string
   }
   static contextTypes = {

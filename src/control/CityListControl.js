@@ -6,7 +6,7 @@ export default class CityListControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_TOP_LEFT,
-    offset: new BMap.Size(10, 20)
+    offset: window.BMap && new BMap.Size(10, 20)
   }
   static propTypes = {
     anchor: controlAnchor,

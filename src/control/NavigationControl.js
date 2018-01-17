@@ -6,7 +6,7 @@ export default class NavigationControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_TOP_LEFT,
-    offset: new BMap.Size(10, 10),
+    offset: window.BMap && new BMap.Size(10, 10),
     type: window.BMAP_NAVIGATION_CONTROL_LARGE,
     showZoomInfo: true,
     enableGeolocation: false

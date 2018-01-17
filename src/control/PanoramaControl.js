@@ -6,7 +6,7 @@ export default class PanoramaControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: new BMap.Size(0, 0)
+    offset: window.BMap && new BMap.Size(0, 0)
   }
   static propTypes = {
     anchor: controlAnchor,

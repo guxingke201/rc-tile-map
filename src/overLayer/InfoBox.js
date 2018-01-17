@@ -11,7 +11,7 @@ export default class InfoBox extends MapComponent {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
-    offset: new BMap.Size(0, 15),
+    offset: window.BMap && new BMap.Size(0, 15),
     boxClass: 'infoBox',
     boxStyle: {},
     closeIconMargin: '2px',
@@ -36,11 +36,9 @@ export default class InfoBox extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    const instance = new BMapLib.InfoBox(
-      this.context.map,
-      this.getHtmlDomByReactDom(props.children),
-      { ...this.getOptions(props) }
-    )
+    const instance = new BMapLib.InfoBox(this.context.map, null, {
+      ...this.getOptions(props)
+    })
     if (!props.show) {
       instance.hide()
     }

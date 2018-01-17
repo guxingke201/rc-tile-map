@@ -6,8 +6,8 @@ export default class OverviewMapControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: new BMap.Size(0, 0),
-    size: new BMap.Size(150, 150),
+    offset: window.BMap && new BMap.Size(0, 0),
+    size: window.BMap && new BMap.Size(150, 150),
     isOpen: false
   }
   static propTypes = {
@@ -27,11 +27,6 @@ export default class OverviewMapControl extends MapControl {
   updateComponentInstance (fromProps, toProps) {
     super.updateComponentInstance(fromProps, toProps)
     this.updatePropsBySetFun('setSize', fromProps.size, toProps.size)
-    this.updatePropsByBoolFun(
-      'changeView',
-      'changeView',
-      fromProps.isOpen,
-      toProps.isOpen
-    )
+    this.updatePropsByBoolFun('changeView', 'changeView', fromProps.isOpen, toProps.isOpen)
   }
 }

@@ -1,3 +1,3 @@
 import { PropTypes } from 'react'
 
-export default PropTypes.instanceOf(BMap.Point)
+export default PropTypes.object

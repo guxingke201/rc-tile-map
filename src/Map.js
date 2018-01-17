@@ -9,28 +9,21 @@ import layerContainer from './propTypes/layerContainer'
 import map from './propTypes/map'
 import viewport from './propTypes/viewport'
 
-const Map_Options = [
-  'minZoom',
-  'maxZoom',
-  'mapType',
-  'enableHighResolution',
-  'enableAutoResize',
-  'enableMapClick'
-]
+const Map_Options = ['minZoom', 'maxZoom', 'mapType', 'enableHighResolution', 'enableAutoResize', 'enableMapClick']
 export default class Map extends MapComponent {
   static defaultProps = {
-    mapType: BMAP_NORMAL_MAP,
+    mapType: window.BMAP_NORMAL_MAP,
     enableAutoResize: true,
     enableMapClick: true,
     disableDoubleClickZoom: false,
     disableScrollWheelZoom: false,
-    center: new BMap.Point(116.404, 39.915),
+    center: window.BMap && new BMap.Point(116.404, 39.915),
     zoom: 11
   }
   static propTypes = {
     minZoom: PropTypes.number,
     maxZoom: PropTypes.number,
-    mapType: PropTypes.instanceOf(BMap.MapType),
+    mapType: PropTypes.object,
     enableAutoResize: PropTypes.bool,
     enableMapClick: PropTypes.bool,
     disableScrollWheelZoom: PropTypes.bool,
@@ -62,13 +55,7 @@ export default class Map extends MapComponent {
   }
 
   createComponentInstance (props) {
-    const {
-      viewport,
-      center,
-      zoom,
-      disableScrollWheelZoom,
-      disableDoubleClickZoom
-    } = props
+    const { viewport, center, zoom, disableScrollWheelZoom, disableDoubleClickZoom } = props
     const mapNow = new BMap.Map(this.container, pick(props, Map_Options))
     mapNow.centerAndZoom(center, zoom)
     if (disableScrollWheelZoom) {
@@ -89,7 +76,7 @@ export default class Map extends MapComponent {
     const { center, viewport, maxZoom, minZoom, zoom } = toProps
     if (viewport && !isEqual(viewport, fromProps.viewport)) {
       this.componentInstance.setViewport(viewport)
-    } else if (center && !center.equals(fromProps.center)) {
+    } else if (center && !isEqual(center, fromProps.center)) {
       this.componentInstance.centerAndZoom(center, zoom)
     } else if (typeof zoom === 'number' && zoom !== fromProps.zoom) {
       this.componentInstance.centerAndZoom(center, zoom)
@@ -128,12 +115,7 @@ export default class Map extends MapComponent {
     const children = map ? this.props.children : null
 
     return (
-      <div
-        className={this.props.className}
-        id={this.props.id}
-        ref={this.bindContainer}
-        style={this.props.style}
-      >
+      <div className={this.props.className} id={this.props.id} ref={this.bindContainer} style={this.props.style}>
         {children}
       </div>
     )

@@ -6,7 +6,7 @@ export default class GeolocationControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_LEFT,
-    offset: new BMap.Size(0, 50),
+    offset: window.BMap && new BMap.Size(0, 50),
     showAddressBar: true,
     enableAutoLocation: false
   }
@@ -16,7 +16,7 @@ export default class GeolocationControl extends MapControl {
     show: PropTypes.bool,
     showAddressBar: PropTypes.bool,
     enableAutoLocation: PropTypes.bool,
-    locationIcon: PropTypes.instanceOf(BMap.Icon)
+    locationIcon: PropTypes.object
   }
 
   static contextTypes = {
