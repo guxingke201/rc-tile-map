@@ -74,12 +74,16 @@ export default class Map extends MapComponent {
   updateComponentInstance (fromProps, toProps) {
     this._updating = true
     const { center, viewport, maxZoom, minZoom, zoom } = toProps
+    const centerChange = center && !isEqual(center, fromProps.center)
+    const zoomChange = typeof zoom === 'number' && zoom !== fromProps.zoom
     if (viewport && !isEqual(viewport, fromProps.viewport)) {
       this.componentInstance.setViewport(viewport)
-    } else if (center && !isEqual(center, fromProps.center)) {
+    } else if (centerChange && zoomChange) {
       this.componentInstance.centerAndZoom(center, zoom)
-    } else if (typeof zoom === 'number' && zoom !== fromProps.zoom) {
-      this.componentInstance.centerAndZoom(center, zoom)
+    } else if (centerChange && !zoomChange) {
+      this.componentInstance.setCenter(center)
+    }else if (zoomChange && !centerChange) {
+      this.componentInstance.setZoom(zoom)
     }
     if (typeof maxZoom === 'number' && maxZoom !== fromProps.maxZoom) {
       this.componentInstance.setMaxZoom(maxZoom)

@@ -48,7 +48,7 @@ class App extends React.Component {
             this.setState({
               center: new NDMap.Point(
                 this.mapNow.getCenter().lng + 0.0005,
-                40.007978
+                this.mapNow.getCenter().lat
               )
             });
           }}
