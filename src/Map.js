@@ -33,7 +33,7 @@ export default class Map extends MapComponent {
     id: PropTypes.string,
     style: PropTypes.object,
     viewport: viewport,
-    center: point,
+    center: PropTypes.oneOfType([PropTypes.string, point]),
     zoom: PropTypes.number
   }
 

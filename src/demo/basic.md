@@ -13,7 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: nowCenter,
+      center: "北京",
       zoom: 16,
       minZoom: 1,
       maxZoom: 17,
