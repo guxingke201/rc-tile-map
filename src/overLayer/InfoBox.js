@@ -62,24 +62,25 @@ export default class InfoBox extends MapComponent {
       this.props.setComponentInstance(this.componentInstance)
     }
   }
-
+  onClickMarker = () => {
+    const { markerInstance } = this.context
+    this.componentInstance.open(markerInstance)
+    const dom = this.getHtmlDomByReactDom(this.props.children)
+    this.bindContentEvents(
+      this.props.contentEvents,
+      dom,
+      markerInstance,
+      this.componentInstance
+    )
+    this.componentInstance.setContent(dom)
+  }
   componentDidMount () {
     const { position } = this.props
     const { map, markerInstance } = this.context
     const el = this.componentInstance
     if (markerInstance) {
       // Attach to container component
-      markerInstance.addEventListener('click', () => {
-        this.componentInstance.open(markerInstance)
-        const dom = this.getHtmlDomByReactDom(this.props.children)
-        this.bindContentEvents(
-          this.props.contentEvents,
-          dom,
-          markerInstance,
-          this.componentInstance
-        )
-        this.componentInstance.setContent(dom)
-      })
+      markerInstance.addEventListener('click', this.onClickMarker)
     }
   }
 
@@ -104,6 +105,10 @@ export default class InfoBox extends MapComponent {
 
   componentWillUnmount () {
     this.componentInstance.close()
+    const { markerInstance } = this.context
+    if (markerInstance) {
+      markerInstance.removeEventListener('click', this.onClickMarker)
+    }
     super.componentWillUnmount()
   }
 

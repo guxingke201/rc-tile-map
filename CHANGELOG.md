@@ -13,12 +13,18 @@ timeline: true
 
 ---
 
+## 1.0.6
+
+`2018-02-24`
+
+* 修复 InfoBox,SimpleInfoWindow,InfoWindow 和 Marker 组合使用时，Marker 的点击事件未移除的缺陷
+
 ## 1.0.5
 
 `2018-01-30`
 
-* Map组件支持传城市名称来定位地图中心
-* 修复更新中心导致zoom变化
+* Map 组件支持传城市名称来定位地图中心
+* 修复更新中心导致 zoom 变化
 
 ## 1.0.4
 

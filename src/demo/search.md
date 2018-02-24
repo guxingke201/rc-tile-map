@@ -27,6 +27,7 @@ class App extends React.Component {
   localSearchDiv;
   lastClickMarker;
   state = {
+    hasSelect: false,
     keywordMap: null,
     keyword: null,
     mapState: {
@@ -251,6 +252,9 @@ class App extends React.Component {
         key={pointInfo.uid}
         {...pointInfo.markerProps}
         onClick={() => {
+          if (this.state.hasSelect) {
+            return;
+          }
           if (this.lastClickMarker) {
             this.updateMarkerItem(this.lastClickMarker.uid, {
               iconProps: {
@@ -313,34 +317,35 @@ class App extends React.Component {
         >{`<p class="global-maplabel-text-main">${pointInfo.title ||
           ""}</p><p class="global-maplabel-text-sub">${pointInfo.province ||
           ""}${pointInfo.city || ""}</p>`}</Label>
-
-        <SimpleInfoWindow
-          {...pointInfo.infoWindowProps}
-          contentEvents={{
-            "confirmButton.click": (
-              evt,
-              markerInstance,
-              infoWindowInstance
-            ) => {
-              this.onClickMark(pointInfo, infoWindowInstance);
-            }
-          }}
-        >
-          <Row className="global-maplabel-wrap">
-            <Col span={24} className="global-maplabel-content">
-              <p className="global-maplabel-text-main">{`${pointInfo.title ||
-                ""}`}</p>
-              <p className="global-maplabel-text-sub">
-                {pointInfo.address || ""}
-              </p>
-            </Col>
-            <Col span={8} className="global-maplabel-ctrl">
-              <Button type="ghost" className="confirmButton">
-                确定
-              </Button>
-            </Col>
-          </Row>
-        </SimpleInfoWindow>
+        {this.state.hasSelect ? null : (
+          <SimpleInfoWindow
+            {...pointInfo.infoWindowProps}
+            contentEvents={{
+              "confirmButton.click": (
+                evt,
+                markerInstance,
+                infoWindowInstance
+              ) => {
+                this.onClickMark(pointInfo, infoWindowInstance);
+              }
+            }}
+          >
+            <Row className="global-maplabel-wrap">
+              <Col span={24} className="global-maplabel-content">
+                <p className="global-maplabel-text-main">{`${pointInfo.title ||
+                  ""}`}</p>
+                <p className="global-maplabel-text-sub">
+                  {pointInfo.address || ""}
+                </p>
+              </Col>
+              <Col span={8} className="global-maplabel-ctrl">
+                <Button type="ghost" className="confirmButton">
+                  确定
+                </Button>
+              </Col>
+            </Row>
+          </SimpleInfoWindow>
+        )}
       </Marker>
     );
   }
@@ -394,6 +399,7 @@ class App extends React.Component {
       }
     });
     this.setState({
+      hasSelect: true,
       markerList: this.state.markerList.filter(
         item => item.uid === pointInfo.uid
       )

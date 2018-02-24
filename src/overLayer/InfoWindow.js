@@ -69,24 +69,25 @@ export default class InfoWindow extends MapComponent {
       this.props.setComponentInstance(this.componentInstance)
     }
   }
-
+  onClickMarker = () => {
+    const { markerInstance } = this.context
+    markerInstance.openInfoWindow(this.componentInstance)
+    const dom = this.getHtmlDomByReactDom(this.props.children)
+    this.bindContentEvents(
+      this.props.contentEvents,
+      dom,
+      markerInstance,
+      this.componentInstance
+    )
+    this.componentInstance.setContent(dom)
+  }
   componentDidMount () {
     const { position } = this.props
     const { map, markerInstance } = this.context
     const el = this.componentInstance
     if (markerInstance) {
       // Attach to container component
-      markerInstance.addEventListener('click', () => {
-        markerInstance.openInfoWindow(el)
-        const dom = this.getHtmlDomByReactDom(this.props.children)
-        this.bindContentEvents(
-          this.props.contentEvents,
-          dom,
-          markerInstance,
-          this.componentInstance
-        )
-        this.componentInstance.setContent(dom)
-      })
+      markerInstance.addEventListener('click', this.onClickMarker)
     } else {
       // Attach to a Map
       if (position) {
@@ -133,11 +134,13 @@ export default class InfoWindow extends MapComponent {
     super.componentWillUnmount()
   }
   removeInfoWindowContent = () => {
-    if (this.context.markerInstance) {
-      this.context.markerInstance.closeInfoWindow()
+    const { markerInstance, map } = this.context
+    if (markerInstance) {
+      markerInstance.closeInfoWindow()
+      markerInstance.removeEventListener('click', this.onClickMarker)
     } else {
       if (this.props.position) {
-        this.context.map.closeInfoWindow()
+        map.closeInfoWindow()
       }
     }
   }
