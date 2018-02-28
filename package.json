@@ -8,6 +8,12 @@
     "node": ">=6"
   },
   "scripts": {
+    "stylelint": "stylelint \"{src}/**/*.less\" --syntax less",
+    "stylelint-fix": "stylelint \"{src}/**/*.less\" --syntax less --fix",
+    "eslint-fix": "eslint --fix site scripts ./*.js --ext '.js,.jsx' && eslint-tinker ./components/*/demo/*.md",
+    "lint-staged": "lint-staged",
+    "lint-staged:es": "eslint --ext .js,.jsx src",
+    "lint-staged:demo": "cross-env RUN_ENV=DEMO eslint --ext '.md'",
     "babel": "babel ./src --out-dir ./lib",
     "start": "bisheng start",
     "site": "bisheng build",
@@ -23,6 +29,8 @@
     "warning": "~3.0.0"
   },
   "devDependencies": {
+    "lint-staged": "^4.0.2",
+    "cross-env": "^5.0.1",
     "postcss-color-rgba-fallback": "^3.0.0",
     "shx": "^0.2.2",
     "bezier-easing": "^2.0.3",
@@ -57,8 +65,15 @@
     "eslint-plugin-react": "^6.10.0",
     "eslint-plugin-standard": "^2.0.1",
     "css-split-webpack-plugin": "^0.2.3",
+    "pre-commit": "1.x",
     "react": "0.14.9",
     "react-dom": "0.14.9",
     "react-router": "2.3.0"
-  }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": ["lint-staged:es"],
+    "src/**/*.less": "stylelint",
+    "src/demo/*.md": ["lint-staged:demo"]
+  },
+  "pre-commit": ["lint-staged"]
 }
