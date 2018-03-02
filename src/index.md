@@ -5,7 +5,7 @@ type: Data Entry
 title: TileMap
 ---
 
-兼容ie8的地图组件。如果不要兼容ie8，需要国际化，请使用[巨型组件地图的实现](http://git.sdp.nd/component-h5/nd-react-map)
+兼容ie8的地图组件。如果不要求兼容ie8，需要国际化，请使用[通用地图组件](http://git.sdp.nd/component-h5/nd-react-map)
 
 ## UEDC 编号
 
