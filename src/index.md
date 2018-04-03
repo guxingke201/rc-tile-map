@@ -5,7 +5,7 @@ type: Data Entry
 title: TileMap
 ---
 
-兼容ie8的地图组件。如果不要求兼容ie8，需要国际化，请使用[通用地图组件](http://git.sdp.nd/component-h5/nd-react-map)
+兼容ie8的地图组件。如果不要求兼容ie8，需要国际化，请使用[通用地图组件](https://git.sdp.nd/component-h5/nd-react-map)
 
 ## UEDC 编号
 
@@ -18,12 +18,11 @@ title: TileMap
 
 ## API
 
-密钥 ak 业务方使用时自己维护，[快速入门](http://lbsyun.baidu.com/index.php?title=jspopular/guide/helloworld)
+密钥 ak 业务方使用时自己维护，[快速入门](https://lbsyun.baidu.com/index.php?title=jspopular/guide/helloworld)
 
 ```html
-<!-- 按官方方式引入会出现警告，可以使用下面的引入方式避免出现警告 -->
 <!-- 直接调起百度地图不需要引入 -->
-<script type="text/javascript" src="//api.map.baidu.com/getscript?v=3.0&ak=zIT2dNIgEojIIYjD91wIbiespAnwM0Zu&services=&t=20171220141726"></script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&s=1&ak=zIT2dNIgEojIIYjD91wIbiespAnwM0Zu"></script>
 ```
 
 ```jsx
@@ -51,12 +50,12 @@ title: TileMap
 
 | 参数                   | 说明                                                | 类型                                                                                                                                                                        | 默认值          |
 | ---------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| viewport               | 设置地图视野，相当于 center+zoom，viewport 优先生效 | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[]\|[Viewport](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b3) | -               |
-| center                 | 设置地图中心点，如果center类型为字符串，必须是城市名称                                      | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)\|string                                                                                          | 北京            |
+| viewport               | 设置地图视野，相当于 center+zoom，viewport 优先生效 | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[]\|[Viewport](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b3) | -               |
+| center                 | 设置地图中心点，如果center类型为字符串，必须是城市名称                                      | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)\|string                                                                                          | 北京            |
 | zoom                   | 设置地图的缩放等级                                  | number                                                                                                                                                                      | 11              |
 | minZoom                | 地图允许展示的最小级别                              | number                                                                                                                                                                      | -               |
 | maxZoom                | 地图允许展示的最大级别                              | number                                                                                                                                                                      | -               |
-| mapType                | 地图类型，默认为                                    | [MapType](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a5b0)                                                                                        | BMAP_NORMAL_MAP |
+| mapType                | 地图类型，默认为                                    | [MapType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a5b0)                                                                                        | BMAP_NORMAL_MAP |
 | enableAutoResize       | 是否自动适应地图容器变化                            | boolean                                                                                                                                                                     | true            |
 | enableMapClick         | 是否开启底图可点功能                                | boolean                                                                                                                                                                     | true            |
 | disableScrollWheelZoom | 是否禁用滚轮放大缩小                                | boolean                                                                                                                                                                     | false           |
@@ -70,7 +69,7 @@ title: TileMap
 | 参数            | 说明                                                                                                                                                                                                                                                                                                                          | 类型                                            | 默认值 |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------ |
 | getTilesUrl     | 抽象。向地图返回地图图块的网址，图块索引由 tileCoord 的 x 和 y 属性在指定的缩放级别 zoom 提供。如果您在 TileLayerOptions 中提供了 tileUrlTemplate 参数，则可不实现此接口                                                                                                                                                      | function(tileCoord: Pixel, zoom: Number):string | -      |
-| tileUrlTemplate | 指定图块网址模板，该模板可以针对每个图块请求而展开，以根据现有的图块坐标系引用唯一的图块。模板的格式应该为：http://yourhost/tile?x={X}&y={Y}&z={Z}.png 其中 X 和 Y 分别指纬度和经度图块坐标，Z 指缩放级别，比如： http://yourhost/tile?x=3&y=27&z=5.png 如果您没有提供图块网址模板，您需要实现 TileLayer.getTileUrl()抽象方法 | string                                          | -      |
+| tileUrlTemplate | 指定图块网址模板，该模板可以针对每个图块请求而展开，以根据现有的图块坐标系引用唯一的图块。模板的格式应该为：https://yourhost/tile?x={X}&y={Y}&z={Z}.png 其中 X 和 Y 分别指纬度和经度图块坐标，Z 指缩放级别，比如： https://yourhost/tile?x=3&y=27&z=5.png 如果您没有提供图块网址模板，您需要实现 TileLayer.getTileUrl()抽象方法 | string                                          | -      |
 | zIndex          | 图层的 zIndex                                                                                                                                                                                                                                                                                                                 | number                                          | -      |
 
 ### 标注 Marker
@@ -78,16 +77,16 @@ title: TileMap
 | 参数            | 说明                                                            | 类型                                                                               | 默认值                                                                          |
 | --------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | children        | 设置 Marker 关联覆盖物，如 Label，InfoWindow                    | ReactNode                                                                          | -                                                                               |
-| point           | 必填，指定了图像标注所在的地理位置                              | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -                                                                               |
-| offset          | 标注的位置偏移值                                                | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -                                                                               |
-| icon            | 标注所用的图标对象                                              | [Icon](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)  | [marker_red_sprite.png](http://api0.map.bdimg.com/images/marker_red_sprite.png) |
+| point           | 必填，指定了图像标注所在的地理位置                              | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -                                                                               |
+| offset          | 标注的位置偏移值                                                | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -                                                                               |
+| icon            | 标注所用的图标对象                                              | [Icon](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)  | [marker_red_sprite.png](https://api0.map.bdimg.com/images/marker_red_sprite.png) |
 | enableMassClear | 是否在调用 map.clearOverlays 清除此覆盖物                       | boolean                                                                            | true                                                                            |
 | enableDragging  | 是否启用拖拽                                                    | boolean                                                                            | false                                                                           |
 | enableClicking  | 是否响应点击事件                                                | boolean                                                                            | true                                                                            |
 | raiseOnDrag     | 拖拽标注时，标注是否开启离开地图表面效果                        | boolean                                                                            | false                                                                           |
 | draggingCursor  | 拖拽标注时的鼠标指针样式。此属性值需遵循 CSS 的 cursor 属性规范 | string                                                                             | -                                                                               |
 | rotation        | 旋转角度                                                        | number                                                                             | -                                                                               |
-| shadow          | 阴影图标                                                        | [Icon](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)  | [marker_red_sprite.png](http://api0.map.bdimg.com/images/marker_red_sprite.png) |
+| shadow          | 阴影图标                                                        | [Icon](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)  | [marker_red_sprite.png](https://api0.map.bdimg.com/images/marker_red_sprite.png) |
 | title           | 鼠标移到 marker 上的显示内容                                    | string                                                                             | -                                                                               |
 | show            | 是否显示组件                                                    | boolean                                                                            | true                                                                            |
 
@@ -99,11 +98,11 @@ title: TileMap
 | width              | 信息窗宽度，单位像素。取值范围：0, 220 - 730。如果您指定宽度为 0，则信息窗口的宽度将按照其内容自动调整                                                                                             | number                                                                             | 0      |
 | height             | 信息窗高度，单位像素。取值范围：0, 60 - 650。如果您指定高度为 0，则信息窗口的高度将按照其内容自动调整                                                                                              | number                                                                             | 0      |
 | maxWidth           | 信息窗最大化时的宽度，单位像素。取值范围：220 - 730                                                                                                                                                | number                                                                             | -      |
-| offset             | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -      |
+| offset             | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -      |
 | title              | 信息窗标题文字，支持 HTML 内容                                                                                                                                                                     | string                                                                             | -      |
 | enableAutoPan      | 是否开启信息窗口打开时地图自动移动                                                                                                                                                                 | boolean                                                                            | true   |
 | enableCloseOnClick | 是否开启点击地图关闭信息窗口                                                                                                                                                                       | boolean                                                                            | true   |
-| position           | 指定信息窗口所在的地理位置，没有放到 Marker 的 children 时，必填                                                                                                                                   | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -      |
+| position           | 指定信息窗口所在的地理位置，没有放到 Marker 的 children 时，必填                                                                                                                                   | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -      |
 | show               | 是否显示组件                                                                                                                                                                                       | boolean                                                                            | true   |
 | contentEvents      | 内容事件绑定（格式是{key:function}，其中 key 为显示内容中 dom 元素的 className+事件名称，如：confirmButton.click）                                                                                 | {key:function(evt, markerInstance, infoWindowInstance)}                            |
 
@@ -112,7 +111,7 @@ title: TileMap
 | 参数            | 说明                                                                                                                                                                                               | 类型                                                                              | 默认值                                             |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
 | children        | 设置信息窗口内容。支持 HTML 内容。 content 参数支持传入 DOM 结点                                                                                                                                   | string\|node                                                                      | -                                                  |
-| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 15)                               |
+| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 15)                               |
 | boxClass        | 定义 infoBox 的 class                                                                                                                                                                              | string                                                                            | 'infoBox'                                          |
 | boxStyle        | 定义 infoBox 的 style,此项会覆盖 boxClass                                                                                                                                                          | object                                                                            | {}                                                 |
 | closeIconMargin | 关闭按钮的 margin                                                                                                                                                                                  | string                                                                            | '2px'                                              |
@@ -127,7 +126,7 @@ title: TileMap
 | 参数            | 说明                                                                                                                                                                                               | 类型                                                                              | 默认值                                             |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
 | children        | 设置信息窗口内容。支持 HTML 内容。 content 参数支持传入 DOM 结点                                                                                                                                   | string\|node                                                                      | -                                                  |
-| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 43)                               |
+| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 43)                               |
 | boxClass        | 定义 infoBox 的 class                                                                                                                                                                              | string                                                                            | 'ant-map-maplabel'                                 |
 | boxStyle        | 定义 infoBox 的 style,此项会覆盖 boxClass                                                                                                                                                          | object                                                                            | {}                                                 |
 | closeIconMargin | 关闭按钮的 margin                                                                                                                                                                                  | string                                                                            | '2px'                                              |
@@ -141,7 +140,7 @@ title: TileMap
 
 | 参数            | 说明                                      | 类型                                                                                 | 默认值  |
 | --------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ | ------- |
-| points          | 设置折线的点数组，必填                    | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[] | -       |
+| points          | 设置折线的点数组，必填                    | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[] | -       |
 | strokeColor     | 折线颜色                                  | string                                                                               | 'blue'  |
 | strokeWeight    | 折线的宽度，以像素为单位                  | number                                                                               | 2       |
 | strokeOpacity   | 折线的透明度，取值范围 0 - 1              | number                                                                               | 0.5     |
@@ -155,7 +154,7 @@ title: TileMap
 
 | 参数            | 说明                                             | 类型                                                                                 | 默认值  |
 | --------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ | ------- |
-| points          | 设置多边型的点数组，必填                         | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[] | -       |
+| points          | 设置多边型的点数组，必填                         | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0)[] | -       |
 | strokeColor     | 边线颜色                                         | string                                                                               | 'blue'  |
 | fillColor       | 填充颜色。当参数为空时，折线覆盖物将没有填充效果 | string                                                                               | 'white' |
 | strokeWeight    | 边线的宽度，以像素为单位                         | number                                                                               | 2       |
@@ -171,7 +170,7 @@ title: TileMap
 
 | 参数            | 说明                                                 | 类型                                                                               | 默认值  |
 | --------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------- | ------- |
-| center          | 设置圆形的中心点坐标，必填                           | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -       |
+| center          | 设置圆形的中心点坐标，必填                           | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -       |
 | radius          | 设置圆形的半径，单位为米，必填                       | number                                                                             | -       |
 | strokeColor     | 圆形边线颜色                                         | string                                                                             | 'blue'  |
 | fillColor       | 圆形填充颜色。当参数为空时，折线覆盖物将没有填充效果 | string                                                                             | 'white' |
@@ -192,9 +191,9 @@ title: TileMap
 | style           | 设置文本标注样式，该样式将作用于文本标注的容器元素上。其中 styles 为 JavaScript 对象常量，比如： setStyle({ color : "red", fontSize : "12px" }) 注意：如果 css 的属性名中包含连字符，需要将连字符去掉并将其后的字母进行大写处理，例如：背景色属性要写成：backgroundColor | Object                                                                             | -      |
 | title           | 设置文本标注的标题，当鼠标移至标注上时显示此标题                                                                                                                                                                                                                         | string                                                                             | -      |
 | zIndex          | 设置覆盖物的 zIndex                                                                                                                                                                                                                                                      | number                                                                             | -      |
-| offset          | 文本标注的位置偏移值                                                                                                                                                                                                                                                     | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -      |
+| offset          | 文本标注的位置偏移值                                                                                                                                                                                                                                                     | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)  | -      |
 | enableMassClear | 是否在调用 map.clearOverlays 清除此覆盖物                                                                                                                                                                                                                                | boolean                                                                            | true   |
-| position        | 指定文本标注的地理位置，没有放到 Marker 的 children 时，必填                                                                                                                                                                                                             | [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -      |
+| position        | 指定文本标注的地理位置，没有放到 Marker 的 children 时，必填                                                                                                                                                                                                             | [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) | -      |
 | show            | 是否显示组件                                                                                                                                                                                                                                                             | boolean                                                                            | true   |
 
 ### 标注图标 MarkerIcon
@@ -202,37 +201,37 @@ title: TileMap
 | 参数             | 说明                                                                                               | 类型                                                                              | 默认值 |
 | ---------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------ |
 | imageUrl         | 设置图片资源的地址                                                                                 | string                                                                            | -      |
-| imageSize        | 图标所用的图片的大小，此功能的作用等同于 CSS 中的 background-size 属性。可用于实现高清屏的高清效果 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
-| size             | 图标可视区域的大小                                                                                 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
-| anchor           | 信息窗口定位锚点。开启信息窗口时，信息窗口底部尖角相对于图标左上角的位置，默认等于图标的 anchor    | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
-| imageOffset      | 图片相对于可视区域的偏移值                                                                         | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
-| infoWindowAnchor | 信息窗口定位锚点。开启信息窗口时，信息窗口底部尖角相对于图标左上角的位置，默认等于图标的 anchor    | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
+| imageSize        | 图标所用的图片的大小，此功能的作用等同于 CSS 中的 background-size 属性。可用于实现高清屏的高清效果 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
+| size             | 图标可视区域的大小                                                                                 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
+| anchor           | 信息窗口定位锚点。开启信息窗口时，信息窗口底部尖角相对于图标左上角的位置，默认等于图标的 anchor    | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
+| imageOffset      | 图片相对于可视区域的偏移值                                                                         | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
+| infoWindowAnchor | 信息窗口定位锚点。开启信息窗口时，信息窗口底部尖角相对于图标左上角的位置，默认等于图标的 anchor    | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | -      |
 | show             | 是否显示组件                                                                                       | boolean                                                                           | true   |
 
 ### 控件基类 MapControl
 
 | 参数   | 说明                 | 类型                                                                                       | 默认值 |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------ | ------ |
-| anchor | 设置控件停靠的位置   | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | -      |
-| offset | 设置控件停靠的偏移量 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | -      |
+| anchor | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | -      |
+| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | -      |
 | show   | 是否显示控件         | boolean                                                                                    | true   |
 
 ### 比例尺控件 ScaleControl
 
 | 参数   | 说明                 | 类型                                                                                       | 默认值                  |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------ | ----------------------- |
-| anchor | 设置控件停靠的位置   | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT |
-| offset | 设置控件停靠的偏移量 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(112, 26)  |
+| anchor | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT |
+| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(112, 26)  |
 | show   | 是否显示控件         | boolean                                                                                    | true                    |
 
 ### 缩放平移控件 NavigationControl
 
 | 参数              | 说明                 | 类型                                                                                               | 默认值                        |
 | ----------------- | -------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------- |
-| anchor            | 设置控件停靠的位置   | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)         | BMAP_ANCHOR_TOP_LEFT          |
-| offset            | 设置控件停靠的偏移量 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                  | new BMap.Size(10, 10)         |
+| anchor            | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)         | BMAP_ANCHOR_TOP_LEFT          |
+| offset            | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                  | new BMap.Size(10, 10)         |
 | show              | 是否显示控件         | boolean                                                                                            | true                          |
-| type              | 设置控件停靠的位置   | [NavigationControlType](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4) | BMAP_NAVIGATION_CONTROL_LARGE |
+| type              | 设置控件停靠的位置   | [NavigationControlType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4) | BMAP_NAVIGATION_CONTROL_LARGE |
 | showZoomInfo      | 是否显示级别提示信息 | boolean                                                                                            | true                          |
 | enableGeolocation | 控件是否集成定位功能 | boolean                                                                                            | false                         |
 
@@ -240,56 +239,56 @@ title: TileMap
 
 | 参数      | 说明                 | 类型                                                                                       | 默认值                   |
 | --------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
-| anchor    | 设置控件停靠的位置   | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset    | 设置控件停靠的偏移量 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(5, 2)      |
+| anchor    | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
+| offset    | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(5, 2)      |
 | show      | 是否显示控件         | boolean                                                                                    | true                     |
-| copyright | 添加版权信息         | [Copyright](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b14)    | -                        |
+| copyright | 添加版权信息         | [Copyright](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b14)    | -                        |
 
 ### 地图定位控件 GeolocationControl
 
 | 参数               | 说明                         | 类型                                                                                       | 默认值                                                                                             |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| anchor             | 设置控件停靠的位置           | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT                                                                            |
-| offset             | 设置控件停靠的偏移量         | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 50)                                                                               |
+| anchor             | 设置控件停靠的位置           | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT                                                                            |
+| offset             | 设置控件停靠的偏移量         | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 50)                                                                               |
 | show               | 是否显示控件                 | boolean                                                                                    | true                                                                                               |
 | showAddressBar     | 是否显示定位信息面板         | boolean                                                                                    | true                                                                                               |
 | enableAutoLocation | 添加控件时是否进行定位       | boolean                                                                                    | false                                                                                              |
-| locationIcon       | 自定义定位中心点的 Icon 样式 | [Icon](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)          | [success-40x40.png](http://api0.map.bdimg.com/images/geolocation-control/mobile/success-40x40.png) |
+| locationIcon       | 自定义定位中心点的 Icon 样式 | [Icon](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b5)          | [success-40x40.png](https://api0.map.bdimg.com/images/geolocation-control/mobile/success-40x40.png) |
 
 ### 切换地图类型控件 MapTypeControl
 
 | 参数     | 说明                                                                                                   | 类型                                                                                             | 默认值                          |
 | -------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------- |
-| anchor   | 设置控件停靠的位置                                                                                     | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)       | BMAP_ANCHOR_TOP_LEFT            |
-| offset   | 设置控件停靠的偏移量                                                                                   | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                | new BMap.Size(10, 10)           |
+| anchor   | 设置控件停靠的位置                                                                                     | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)       | BMAP_ANCHOR_TOP_LEFT            |
+| offset   | 设置控件停靠的偏移量                                                                                   | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                | new BMap.Size(10, 10)           |
 | show     | 是否显示控件                                                                                           | boolean                                                                                          | true                            |
-| type     | 控件样式                                                                                               | [MapTypeControlType](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b17) | BMAP_MAPTYPE_CONTROL_HORIZONTAL |
-| mapTypes | 控件展示的地图类型，默认为普通图、卫星图、卫星加路网混合图和三维图。通过此属性可配置控件展示的地图类型 | [MapType](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4)[]           | 全部类型                        |
+| type     | 控件样式                                                                                               | [MapTypeControlType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b17) | BMAP_MAPTYPE_CONTROL_HORIZONTAL |
+| mapTypes | 控件展示的地图类型，默认为普通图、卫星图、卫星加路网混合图和三维图。通过此属性可配置控件展示的地图类型 | [MapType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4)[]           | 全部类型                        |
 
 ### 缩略地图控件 OverviewMapControl
 
 | 参数   | 说明                           | 类型                                                                                       | 默认值                   |
 | ------ | ------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------ |
-| anchor | 设置控件停靠的位置             | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset | 设置控件停靠的偏移量           | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
+| anchor | 设置控件停靠的位置             | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
+| offset | 设置控件停靠的偏移量           | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
 | show   | 是否显示控件                   | boolean                                                                                    | true                     |
-| size   | 设置缩略地图的大小             | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(150, 150)  |
+| size   | 设置缩略地图的大小             | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(150, 150)  |
 | isOpen | 缩略地图添加到地图后的开合状态 | boolean                                                                                    | false                    |
 
 ### 切换至全景地图控件 PanoramaControl
 
 | 参数   | 说明                 | 类型                                                                                       | 默认值                   |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
-| anchor | 设置控件停靠的位置   | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset | 设置控件停靠的偏移量 | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
+| anchor | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
+| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
 | show   | 是否显示控件         | boolean                                                                                    | true                     |
 
 ### 自定义控件 CustomControl
 
 | 参数     | 说明                                  | 类型                                                                                       | 默认值                |
 | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------- |
-| anchor   | 设置控件停靠的位置                    | [ControlAnchor](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_TOP_LEFT  |
-| offset   | 设置控件停靠的偏移量                  | [Size](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(10, 10) |
+| anchor   | 设置控件停靠的位置                    | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_TOP_LEFT  |
+| offset   | 设置控件停靠的偏移量                  | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(10, 10) |
 | show     | 是否显示控件                          | boolean                                                                                    | true                  |
 | children | 设置自定义控件内容。支持传入 DOM 结点 | string\|node                                                                               | -                     |
 
@@ -297,8 +296,8 @@ title: TileMap
 
 | 参数             | 说明                                                                                                                                                                                                                                                               | 类型                                                                                                | 默认值   |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | -------- |
-| location         | 表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行 | Map \| [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) \| string | Map 实例 |
-| renderOptions    | 结果呈现设置                                                                                                                                                                                                                                                       | [RenderOptions](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a7b3)          | -        |
+| location         | 表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行 | Map \| [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) \| string | Map 实例 |
+| renderOptions    | 结果呈现设置                                                                                                                                                                                                                                                       | [RenderOptions](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a7b3)          | -        |
 | onMarkersSet     | 标注添加完成后的回调函数。 参数： pois: Array，通过 marker 属性可得到其对应的标注                                                                                                                                                                                  | function                                                                                            | -        |
 | onInfoHtmlSet    | 标注气泡内容创建后的回调函数。 参数： poi: LocalResultPoi，通过其 marker 属性可得到当前的标注。 html: HTMLElement，气泡内的 Dom 元素                                                                                                                               | function                                                                                            | -        |
 | onResultsHtmlSet | 结果列表添加完成后的回调函数。 参数： container: HTMLElement，结果列表所用的 HTML 元素                                                                                                                                                                             | function                                                                                            | -        |
@@ -311,7 +310,7 @@ title: TileMap
 
 | 参数             | 说明                                                                                                                                                                                                                                                                                                                                   | 类型                                                                                                | 默认值   |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------- |
-| location         | 表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行                                                                     | Map \| [Point](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) \| string | Map 实例 |
+| location         | 表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行                                                                     | Map \| [Point](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b0) \| string | Map 实例 |
 | types            | 返回数据类型。两种设置方式，第一种为默认值（即设置值为空），将返回所有数据。如地图初始化为北京，在输入框中输入“小”，输入框下会出现包含“小”关键字的多种类型（如餐饮、地名等）的提示词条。第二种设置值为"city"，将返回省市区县乡镇街道地址类型数据。如地图初始化为北京，在输入框中输入“小”，输入框下会出现“小金县”的地点名称类的提示词条 | string[]                                                                                            | -        |
 | onSearchComplete | 检索完成后的回调函数。 参数：results: LocalResult 或 Array 如果是多关键字检索，回调函数参数返回一个 LocalResult 的数组，数组中的结果顺序和检索中多关键字数组中顺序一致                                                                                                                                                                 | function                                                                                            | -        |
 | input            | 文本输入框元素或其 id                                                                                                                                                                                                                                                                                                                  | string \| HTMLElement                                                                               | -        |
@@ -325,7 +324,7 @@ title: TileMap
 | children   | 内容，必填                                                                                                                                                                                                                 | stirng\|node | -         |
 | className  | 链接节点样式类名称                                                                                                                                                                                                         | string       | -         |
 | style      | 链接节点样式                                                                                                                                                                                                               | Object       | -         |
-| target     | [特殊的文档重定向操作](http://www.w3school.com.cn/tags/att_a_target.asp)，可选值：\_blank,\_self,\_parent,\_top                                                                                                            | string       | '\_blank' |
+| target     | [特殊的文档重定向操作](https://www.w3school.com.cn/tags/att_a_target.asp)，可选值：\_blank,\_self,\_parent,\_top                                                                                                            | string       | '\_blank' |
 | coord_type | 坐标类型，可选参数。默认为 bd09 经纬度坐标。允许的值为 bd09ll、bd09mc、gcj02、wgs84。bd09ll 表示百度经纬度坐标，bd09mc 表示百度墨卡托坐标，gcj02 表示经过国测局加密的坐标，wgs84 表示 gps 获取的坐标。MapLinkPano 无此参数 | string       | -         |
 | zoom       | 展现地图的级别，默认为视觉最优级别。MapLinkPano 无此参数                                                                                                                                                                   | number       | -         |
 

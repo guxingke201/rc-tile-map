@@ -95,12 +95,7 @@ class App extends React.Component {
   }
   getTitle = (resultLoaction, firstPoint) => {
     let title = firstPoint.title;
-    if (
-      !title &&
-      resultLoaction &&
-      resultLoaction.surroundingPois &&
-      resultLoaction.surroundingPois.length > 0
-    ) {
+    if (!title && resultLoaction && resultLoaction.surroundingPois && resultLoaction.surroundingPois.length > 0) {
       title = resultLoaction.surroundingPois[0].title;
     }
     return title || "未知地点";
@@ -136,11 +131,7 @@ class App extends React.Component {
     var positionInfo = item.value;
     this.setState({
       keywordMap:
-        positionInfo.province +
-        positionInfo.city +
-        positionInfo.district +
-        positionInfo.street +
-        positionInfo.business
+        positionInfo.province + positionInfo.city + positionInfo.district + positionInfo.street + positionInfo.business
     });
   };
   onChangeKeyword = keyword => {
@@ -162,8 +153,7 @@ class App extends React.Component {
   };
   onAreaChange = areaValueArray => {
     const areaValue = areaValueArray && areaValueArray.join("");
-    const areaValueCity =
-      areaValueArray && areaValueArray[areaValueArray.length - 1];
+    const areaValueCity = areaValueArray && areaValueArray[areaValueArray.length - 1];
     this.setState({
       areaValue,
       areaValueCity
@@ -207,6 +197,15 @@ class App extends React.Component {
         </Option>
       ]);
   };
+  formatSearchData = searchResults => {
+    let rows = searchResults.getNumPois();
+    if (rows > 10) {
+      rows = 10;
+    }
+    return [...Array(searchResults.getNumPois())]
+      .map((item, index) => searchResults.getPoi(index))
+      .filter(item => !!item);
+  };
   getOptionsBySearchResults = searchResults => {
     const countResult = searchResults && searchResults.getNumPois();
     console.log("countResult:", countResult);
@@ -231,16 +230,11 @@ class App extends React.Component {
         </Option>
       ];
     } else {
-      return searchResults.tr.map((item, index) => {
+      return this.formatSearchData(searchResults).map((item, index) => {
         return (
-          <Option
-            key={index}
-            value={`${item.city}${item.district}${item.business}`}
-          >
+          <Option key={index} value={`${item.city}${item.district}${item.business}`}>
             <span>{`${item.business} `}</span>
-            <span style={{ color: "gray" }}>{`${item.city}${
-              item.district
-            }`}</span>
+            <span style={{ color: "gray" }}>{`${item.city}${item.district}`}</span>
           </Option>
         );
       });
@@ -260,10 +254,7 @@ class App extends React.Component {
               iconProps: {
                 ...this.lastClickMarker.iconProps,
                 size: new NDMap.Size(20, 28),
-                imageOffset: new NDMap.Size(
-                  -20 * this.lastClickMarker.iconProps.index,
-                  0
-                )
+                imageOffset: new NDMap.Size(-20 * this.lastClickMarker.iconProps.index, 0)
               },
               infoWindowProps: { show: false },
               markerProps: {
@@ -312,31 +303,21 @@ class App extends React.Component {
         }}
       >
         <MarkerIcon {...pointInfo.iconProps} />
-        <Label
-          {...pointInfo.labelProps}
-        >{`<p class="global-maplabel-text-main">${pointInfo.title ||
-          ""}</p><p class="global-maplabel-text-sub">${pointInfo.province ||
-          ""}${pointInfo.city || ""}</p>`}</Label>
+        <Label {...pointInfo.labelProps}>{`<p class="global-maplabel-text-main">${pointInfo.title ||
+          ""}</p><p class="global-maplabel-text-sub">${pointInfo.province || ""}${pointInfo.city || ""}</p>`}</Label>
         {this.state.hasSelect ? null : (
           <SimpleInfoWindow
             {...pointInfo.infoWindowProps}
             contentEvents={{
-              "confirmButton.click": (
-                evt,
-                markerInstance,
-                infoWindowInstance
-              ) => {
+              "confirmButton.click": (evt, markerInstance, infoWindowInstance) => {
                 this.onClickMark(pointInfo, infoWindowInstance);
               }
             }}
           >
             <Row className="global-maplabel-wrap">
               <Col span={24} className="global-maplabel-content">
-                <p className="global-maplabel-text-main">{`${pointInfo.title ||
-                  ""}`}</p>
-                <p className="global-maplabel-text-sub">
-                  {pointInfo.address || ""}
-                </p>
+                <p className="global-maplabel-text-main">{`${pointInfo.title || ""}`}</p>
+                <p className="global-maplabel-text-sub">{pointInfo.address || ""}</p>
               </Col>
               <Col span={8} className="global-maplabel-ctrl">
                 <Button type="ghost" className="confirmButton">
@@ -366,9 +347,9 @@ class App extends React.Component {
       this.setState({
         mapState: {
           ...this.state.mapState,
-          viewport: results.tr.map(item => item.point)
+          viewport: this.formatSearchData(results).map(item => item.point)
         },
-        markerList: results.tr.map((item, index) => {
+        markerList: this.formatSearchData(results).map((item, index) => {
           item.iconProps = {
             ...this.state.icon,
             size: new NDMap.Size(20, 28),
@@ -400,9 +381,7 @@ class App extends React.Component {
     });
     this.setState({
       hasSelect: true,
-      markerList: this.state.markerList.filter(
-        item => item.uid === pointInfo.uid
-      )
+      markerList: this.state.markerList.filter(item => item.uid === pointInfo.uid)
     });
     infoWindowInstance.close();
   };
@@ -470,10 +449,7 @@ class App extends React.Component {
             />
           </CustomControl>
           <AutocompleteMap input="mapSearch" onOnconfirm={this.onClickItem} />
-          <LocalSearch
-            keyword={this.state.keywordMap}
-            onSearchComplete={this.onLocalSearchComplete}
-          />
+          <LocalSearch keyword={this.state.keywordMap} onSearchComplete={this.onLocalSearchComplete} />
           <AutocompleteMap
             location={this.state.areaValueCity}
             keyword={this.state.keyword}

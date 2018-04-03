@@ -59,7 +59,7 @@ class App extends React.Component {
       offset: new NDMap.Size(20, -10)
     },
     markerIcon: {
-      imageUrl: "http://api0.map.bdimg.com/images/marker_red_sprite.png",
+      imageUrl: "//api0.map.bdimg.com/images/marker_red_sprite.png",
       size: new NDMap.Size(19, 25)
     },
     infoBox: {
@@ -153,7 +153,7 @@ class App extends React.Component {
           <Marker
             point={new NDMap.Point(116.404, 39.908)}
             icon={
-              new NDMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif", {
+              new NDMap.Icon("//lbsyun.baidu.com/jsdemo/img/fox.gif", {
                 size: new NDMap.Size(300, 157)
               })
             }
@@ -169,10 +169,10 @@ class App extends React.Component {
                   <ul>
                     <li>
                       <div className="left">
-                        <img src="http://api.map.baidu.com/library/InfoBox/1.2/examples/house3.jpg" />
+                        <img src="//api.map.baidu.com/library/InfoBox/1.2/examples/house3.jpg" />
                       </div>
                       <div className="left">
-                        <a target="_blank" href="http://map.baidu.com">
+                        <a target="_blank" href="//map.baidu.com">
                           中海雅园南北通透四居室
                         </a>
                         <p>4室2厅，205.00平米，3层</p>
@@ -181,10 +181,10 @@ class App extends React.Component {
                     </li>
                     <li>
                       <div className="left">
-                        <img src="http://api.map.baidu.com/library/InfoBox/1.2/examples/house1.jpg" />
+                        <img src="//api.map.baidu.com/library/InfoBox/1.2/examples/house1.jpg" />
                       </div>
                       <div className="left">
-                        <a target="_blank" href="http://map.baidu.com">
+                        <a target="_blank" href="//map.baidu.com">
                           中海雅园四居室还带保姆间
                         </a>
                         <p>2室1厅，112.00平米，16层</p>
@@ -193,10 +193,10 @@ class App extends React.Component {
                     </li>
                     <li>
                       <div className="left">
-                        <img src="http://api.map.baidu.com/library/InfoBox/1.2/examples/house2.jpg" />
+                        <img src="//api.map.baidu.com/library/InfoBox/1.2/examples/house2.jpg" />
                       </div>
                       <div className="left">
-                        <a target="_blank" href="http://map.baidu.com">
+                        <a target="_blank" href="//map.baidu.com">
                           《有钥匙 随时看》花园水系
                         </a>
                         <p>3室2厅，241.00平米，16层</p>
@@ -205,10 +205,10 @@ class App extends React.Component {
                     </li>
                     <li>
                       <div className="left">
-                        <img src="http://api.map.baidu.com/library/InfoBox/1.2/examples/house3.jpg" />
+                        <img src="//api.map.baidu.com/library/InfoBox/1.2/examples/house3.jpg" />
                       </div>
                       <div className="left">
-                        <a target="_blank" href="http://map.baidu.com">
+                        <a target="_blank" href="//map.baidu.com">
                           富力城D区正规楼王大三居
                         </a>
                         <p>3室3厅，241.00平米，17层</p>
@@ -217,10 +217,10 @@ class App extends React.Component {
                     </li>
                     <li className="last">
                       <div className="left">
-                        <img src="http://api.map.baidu.com/library/InfoBox/1.2/examples/house1.jpg" />
+                        <img src="//api.map.baidu.com/library/InfoBox/1.2/examples/house1.jpg" />
                       </div>
                       <div className="left">
-                        <a target="_blank" href="http://map.baidu.com">
+                        <a target="_blank" href="//map.baidu.com">
                           富力城豪，身份人士的象征
                         </a>
                         <p>4室2厅，213.90平米，25层</p>
@@ -288,7 +288,7 @@ class App extends React.Component {
             this.setState({
               markerIcon: {
                 ...this.state.markerIcon,
-                imageUrl: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+                imageUrl: "//lbsyun.baidu.com/jsdemo/img/fox.gif",
                 size: new NDMap.Size(300, 157)
               }
             })
@@ -328,7 +328,7 @@ ReactDOM.render(<App />, mountNode);
   font-size: 12px;
 }
 .infoBoxContent .title {
-  background: url(http://api.map.baidu.com/library/InfoBox/1.2/examples/title.jpg)
+  background: url(//api.map.baidu.com/library/InfoBox/1.2/examples/title.jpg)
     no-repeat;
   height: 42px;
   width: 272px;

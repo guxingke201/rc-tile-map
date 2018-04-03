@@ -3,7 +3,7 @@ order: 5
 title: 调起百度地图
 ---
 
-Web 版百度地图面向 PC 浏览器的网站应用，调起的百度地图地址为：http://map.baidu.com/ ；
+Web 版百度地图面向 PC 浏览器的网站应用，调起的百度地图地址为：//map.baidu.com/ ；
 
 ```jsx
 import {

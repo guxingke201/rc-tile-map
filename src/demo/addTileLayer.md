@@ -19,7 +19,7 @@ class App extends React.Component {
   getTilesUrl = (tileCoord, zoom) => {
     var x = tileCoord.x;
     var y = tileCoord.y;
-    return `http://lbsyun.baidu.com/jsdemo/demo/tiles/${zoom}/tile${x}_${y}.png`; //根据当前坐标，选取合适的瓦片图
+    return `//lbsyun.baidu.com/jsdemo/demo/tiles/${zoom}/tile${x}_${y}.png`; //根据当前坐标，选取合适的瓦片图
   };
   onClickAdd = () => {
     this.setState({
@@ -44,12 +44,12 @@ class App extends React.Component {
           <TileLayer zIndex={3} getTilesUrl={this.getTilesUrl} />
           <TileLayer
             zIndex={1}
-            tileUrlTemplate="http://lbsyun.baidu.com/jsdemo/demo/tiles/{Z}/tile{X}_{Y}.png"
+            tileUrlTemplate="//lbsyun.baidu.com/jsdemo/demo/tiles/{Z}/tile{X}_{Y}.png"
           />
           {this.state.showTileLayer ? (
             <TileLayer
               zIndex={4}
-              tileUrlTemplate="http://lbsyun.baidu.com/jsdemo/img/border.png"
+              tileUrlTemplate="//lbsyun.baidu.com/jsdemo/img/border.png"
             />
           ) : null}
         </Map>
