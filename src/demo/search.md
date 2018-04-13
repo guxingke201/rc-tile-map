@@ -202,7 +202,8 @@ class App extends React.Component {
     if (rows > 10) {
       rows = 10;
     }
-    return [...Array(searchResults.getNumPois())]
+    return Array(rows)
+      .fill(0)
       .map((item, index) => searchResults.getPoi(index))
       .filter(item => !!item);
   };
