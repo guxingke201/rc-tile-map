@@ -34,7 +34,7 @@ export default class Circle extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Circle(props.center, props.radius, this.getOptions(props))
+    return new window.BMap.Circle(props.center, props.radius, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {

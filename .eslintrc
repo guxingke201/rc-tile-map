@@ -1,20 +1,6 @@
 {
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
-  "plugins": ["react"],
-  "extends": ["standard", "standard-react"],
-  "env": {
-    "browser": true,
-    "amd": true,
-    "es6": true,
-    "node": true,
-    "mocha": true
-  }
+  "root": true,
+  "extends": [
+    "@sdp.nd/react"
+  ]
 }

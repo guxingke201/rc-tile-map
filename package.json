@@ -8,13 +8,20 @@
     "node": ">=6"
   },
   "scripts": {
+    "lint": "stylelint \"src/**/*.css\" & stylelint \"src/**/*.scss\" & stylelint \"src/**/*.less\" & eslint --ext .js,.jsx src",
+    "fix": "stylelint --fix \"src/**/*.css\" & stylelint --fix \"src/**/*.scss\" & stylelint --fix \"src/**/*.less\" & eslint --ext .js,.jsx --fix src",
     "babel": "babel ./src --out-dir ./lib",
     "start": "bisheng start",
     "site": "bisheng build",
     "build": "npm run babel && shx cp src/style/index.less lib/style/index.less"
   },
   "author": "666595 <pengxing201@163.com>",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "lodash": "^4.17.4",
     "classnames": "~2.2.0",
@@ -23,6 +30,13 @@
     "warning": "~3.0.0"
   },
   "devDependencies": {
+    "pre-commit": "1.x",
+    "@sdp.nd/eslint-config-react": "^2.0.0",
+    "eslint": "^4.14.0",
+    "eslint-loader": "^1.6.3",
+    "eslint-plugin-promise": "^3.5.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0",
     "postcss-color-rgba-fallback": "^3.0.0",
     "shx": "^0.2.2",
     "bezier-easing": "^2.0.3",
@@ -36,7 +50,7 @@
     "@sdp.nd/bisheng-plugin-fish": "^1.0.0",
     "@sdp.nd/bisheng-theme-component": "^1.0.0",
     "@sdp.nd/bisheng": "^1.0.0",
-    "@sdp.nd/fish": "^2.0.0",
+    "@sdp.nd/fish": "^2.7.3",
     "babel-cli": "^6.18.0",
     "babel-plugin-import": "^1.0.0",
     "babel-eslint": "^7.2.3",
@@ -49,11 +63,8 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "es3ify-loader": "^0.2.0",
-    "eslint": "^3.16.1",
     "eslint-config-standard": "^7.0.0",
     "eslint-config-standard-react": "^4.2.0",
-    "eslint-loader": "^1.6.3",
-    "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.0",
     "eslint-plugin-standard": "^2.0.1",
     "css-split-webpack-plugin": "^0.2.3",

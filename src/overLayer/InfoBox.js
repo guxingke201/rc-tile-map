@@ -1,17 +1,15 @@
-import { Children, PropTypes } from 'react'
-import { forEach } from 'lodash'
-require('../BMapLib/InfoBox')
+import { PropTypes } from 'react'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'
 import { size } from '../propTypes/index'
-
+require('../BMapLib/InfoBox')
 export default class InfoBox extends MapComponent {
   static defaultProps = {
     enableAutoPan: true,
     align: window.INFOBOX_AT_TOP,
     show: true,
-    offset: window.BMap && new BMap.Size(0, 15),
+    offset: window.BMap && new window.BMap.Size(0, 15),
     boxClass: 'infoBox',
     boxStyle: {},
     closeIconMargin: '2px',
@@ -36,7 +34,7 @@ export default class InfoBox extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    const instance = new BMapLib.InfoBox(this.context.map, null, {
+    const instance = new window.BMapLib.InfoBox(this.context.map, null, {
       ...this.getOptions(props)
     })
     if (!props.show) {
@@ -75,9 +73,7 @@ export default class InfoBox extends MapComponent {
     this.componentInstance.setContent(dom)
   }
   componentDidMount () {
-    const { position } = this.props
-    const { map, markerInstance } = this.context
-    const el = this.componentInstance
+    const { markerInstance } = this.context
     if (markerInstance) {
       // Attach to container component
       markerInstance.addEventListener('click', this.onClickMarker)

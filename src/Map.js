@@ -1,15 +1,14 @@
-import { forEach, isUndefined, pick, isEqual } from 'lodash'
+import { pick, isEqual } from 'lodash'
 import React, { PropTypes } from 'react'
 
 import MapComponent from './MapComponent'
-import bounds from './propTypes/bounds'
 import children from './propTypes/children'
 import point from './propTypes/point'
 import layerContainer from './propTypes/layerContainer'
 import map from './propTypes/map'
 import viewport from './propTypes/viewport'
 
-const Map_Options = ['minZoom', 'maxZoom', 'mapType', 'enableHighResolution', 'enableAutoResize', 'enableMapClick']
+const MapOptions = ['minZoom', 'maxZoom', 'mapType', 'enableHighResolution', 'enableAutoResize', 'enableMapClick']
 export default class Map extends MapComponent {
   static defaultProps = {
     mapType: window.BMAP_NORMAL_MAP,
@@ -17,7 +16,7 @@ export default class Map extends MapComponent {
     enableMapClick: true,
     disableDoubleClickZoom: false,
     disableScrollWheelZoom: false,
-    center: window.BMap && new BMap.Point(116.404, 39.915),
+    center: window.BMap && new window.BMap.Point(116.404, 39.915),
     zoom: 11
   }
   static propTypes = {
@@ -43,9 +42,6 @@ export default class Map extends MapComponent {
   }
   container
   _updating = false
-  constructor (props, context) {
-    super(props, context)
-  }
 
   getChildContext () {
     return {
@@ -55,8 +51,8 @@ export default class Map extends MapComponent {
   }
 
   createComponentInstance (props) {
-    const { viewport, center, zoom, disableScrollWheelZoom, disableDoubleClickZoom } = props
-    const mapNow = new BMap.Map(this.container, pick(props, Map_Options))
+    const { center, zoom, disableScrollWheelZoom, disableDoubleClickZoom } = props
+    const mapNow = new window.BMap.Map(this.container, pick(props, MapOptions))
     mapNow.centerAndZoom(center, zoom)
     if (disableScrollWheelZoom) {
       mapNow.disableScrollWheelZoom()
@@ -82,7 +78,7 @@ export default class Map extends MapComponent {
       this.componentInstance.centerAndZoom(center, zoom)
     } else if (centerChange && !zoomChange) {
       this.componentInstance.setCenter(center)
-    }else if (zoomChange && !centerChange) {
+    } else if (zoomChange && !centerChange) {
       this.componentInstance.setZoom(zoom)
     }
     if (typeof maxZoom === 'number' && maxZoom !== fromProps.maxZoom) {

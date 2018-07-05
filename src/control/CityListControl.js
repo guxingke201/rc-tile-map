@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { map, controlAnchor, size } from '../propTypes'
 import MapControl from './MapControl'
 
@@ -6,7 +6,7 @@ export default class CityListControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_TOP_LEFT,
-    offset: window.BMap && new BMap.Size(10, 20)
+    offset: window.BMap && new window.BMap.Size(10, 20)
   }
   static propTypes = {
     anchor: controlAnchor,
@@ -18,6 +18,6 @@ export default class CityListControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.CityListControl(this.getOptions(props))
+    return new window.BMap.CityListControl(this.getOptions(props))
   }
 }

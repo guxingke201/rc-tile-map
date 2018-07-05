@@ -80,7 +80,7 @@ export default class MapComponent extends Component {
     // 解决IE8之类不支持getElementsByClassName
     if (!dom.getElementsByClassName) {
       var children = dom.getElementsByTagName('*')
-      var elements = new Array()
+      var elements = []
       for (var i = 0; i < children.length; i++) {
         var child = children[i]
         var classNames = child.className.split(' ')
@@ -121,7 +121,7 @@ export default class MapComponent extends Component {
           evtName.indexOf('.') > 0
             ? this.getElementsByClassName(dom, evtName.split('.')[0])[0]
             : dom
-        let evtNameNow =
+        const evtNameNow =
           evtName.indexOf('.') > 0 ? evtName.split('.')[1] : evtName
         if (domNow.addEventListener) {
           domNow.addEventListener(evtNameNow, evt => {

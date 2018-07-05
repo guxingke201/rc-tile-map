@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { map, controlAnchor, size } from '../propTypes'
 import MapControl from './MapControl'
 
@@ -6,7 +6,7 @@ export default class GeolocationControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_LEFT,
-    offset: window.BMap && new BMap.Size(0, 50),
+    offset: window.BMap && new window.BMap.Size(0, 50),
     showAddressBar: true,
     enableAutoLocation: false
   }
@@ -23,6 +23,6 @@ export default class GeolocationControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.GeolocationControl(this.getOptions(props))
+    return new window.BMap.GeolocationControl(this.getOptions(props))
   }
 }

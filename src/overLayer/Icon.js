@@ -1,4 +1,4 @@
-import { Children, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import MapComponent from '../MapComponent'
 import { layer, size } from '../propTypes/index'
 
@@ -20,13 +20,13 @@ export default class Icon extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    const label = new BMap.Icon(
+    const label = new window.BMap.Icon(
       props.imageUrl,
       props.size,
       this.getOptions(props)
     )
     if (props.imageSize) {
-      label.setImageSize(imageSize)
+      label.setImageSize(props.imageSize)
     }
     if (!props.show) {
       label.hide()

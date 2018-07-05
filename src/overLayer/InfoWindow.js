@@ -1,5 +1,5 @@
-import { Children, PropTypes } from 'react'
-import { isEqual, forEach } from 'lodash'
+import { PropTypes } from 'react'
+import { isEqual } from 'lodash'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'
@@ -33,7 +33,7 @@ export default class InfoWindow extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    const instance = new BMap.InfoWindow(
+    const instance = new window.BMap.InfoWindow(
       this.getHtmlDomByReactDom(props.children),
       this.getOptions(props)
     )

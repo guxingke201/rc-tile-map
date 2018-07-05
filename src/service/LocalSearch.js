@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { location, renderOptions, map } from '../propTypes'
 import MapComponent from '../MapComponent'
 import { isEqual } from 'lodash'
@@ -23,7 +23,7 @@ export default class LocalSearch extends MapComponent {
     map: map
   }
   createComponentInstance (props) {
-    const searchInstance = new BMap.LocalSearch(
+    const searchInstance = new window.BMap.LocalSearch(
       props.location ? props.location : this.context.map,
       { ...this.getOptions(props) }
     )

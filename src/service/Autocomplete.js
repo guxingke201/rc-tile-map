@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { location, renderOptions, htmlElement, map } from '../propTypes'
+import { PropTypes } from 'react'
+import { location, htmlElement, map } from '../propTypes'
 import MapComponent from '../MapComponent'
 import { isEqual } from 'lodash'
 export default class Autocomplete extends MapComponent {
@@ -26,7 +26,7 @@ export default class Autocomplete extends MapComponent {
     } else {
       options = this.getOptions(props)
     }
-    return new BMap.Autocomplete(options)
+    return new window.BMap.Autocomplete(options)
   }
 
   updateComponentInstance (fromProps, toProps) {

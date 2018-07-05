@@ -111,7 +111,7 @@ title: TileMap
 | 参数            | 说明                                                                                                                                                                                               | 类型                                                                              | 默认值                                             |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
 | children        | 设置信息窗口内容。支持 HTML 内容。 content 参数支持传入 DOM 结点                                                                                                                                   | string\|node                                                                      | -                                                  |
-| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 15)                               |
+| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new window.BMap.Size(0, 15)                               |
 | boxClass        | 定义 infoBox 的 class                                                                                                                                                                              | string                                                                            | 'infoBox'                                          |
 | boxStyle        | 定义 infoBox 的 style,此项会覆盖 boxClass                                                                                                                                                          | object                                                                            | {}                                                 |
 | closeIconMargin | 关闭按钮的 margin                                                                                                                                                                                  | string                                                                            | '2px'                                              |
@@ -126,7 +126,7 @@ title: TileMap
 | 参数            | 说明                                                                                                                                                                                               | 类型                                                                              | 默认值                                             |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
 | children        | 设置信息窗口内容。支持 HTML 内容。 content 参数支持传入 DOM 结点                                                                                                                                   | string\|node                                                                      | -                                                  |
-| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new BMap.Size(0, 43)                               |
+| offset          | 信息窗位置偏移值。默认情况下在地图上打开的信息窗底端的尖角将指向其地理坐标，在标注上打开的信息窗底端尖角的位置取决于标注所用图标的 infoWindowOffset 属性值，您可以为信息窗添加偏移量来改变默认位置 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3) | new window.BMap.Size(0, 43)                               |
 | boxClass        | 定义 infoBox 的 class                                                                                                                                                                              | string                                                                            | 'ant-map-maplabel'                                 |
 | boxStyle        | 定义 infoBox 的 style,此项会覆盖 boxClass                                                                                                                                                          | object                                                                            | {}                                                 |
 | closeIconMargin | 关闭按钮的 margin                                                                                                                                                                                  | string                                                                            | '2px'                                              |
@@ -221,7 +221,7 @@ title: TileMap
 | 参数   | 说明                 | 类型                                                                                       | 默认值                  |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------ | ----------------------- |
 | anchor | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT |
-| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(112, 26)  |
+| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(112, 26)  |
 | show   | 是否显示控件         | boolean                                                                                    | true                    |
 
 ### 缩放平移控件 NavigationControl
@@ -229,7 +229,7 @@ title: TileMap
 | 参数              | 说明                 | 类型                                                                                               | 默认值                        |
 | ----------------- | -------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------- |
 | anchor            | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)         | BMAP_ANCHOR_TOP_LEFT          |
-| offset            | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                  | new BMap.Size(10, 10)         |
+| offset            | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                  | new window.BMap.Size(10, 10)         |
 | show              | 是否显示控件         | boolean                                                                                            | true                          |
 | type              | 设置控件停靠的位置   | [NavigationControlType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4) | BMAP_NAVIGATION_CONTROL_LARGE |
 | showZoomInfo      | 是否显示级别提示信息 | boolean                                                                                            | true                          |
@@ -240,7 +240,7 @@ title: TileMap
 | 参数      | 说明                 | 类型                                                                                       | 默认值                   |
 | --------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
 | anchor    | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset    | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(5, 2)      |
+| offset    | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(5, 2)      |
 | show      | 是否显示控件         | boolean                                                                                    | true                     |
 | copyright | 添加版权信息         | [Copyright](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b14)    | -                        |
 
@@ -249,7 +249,7 @@ title: TileMap
 | 参数               | 说明                         | 类型                                                                                       | 默认值                                                                                             |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
 | anchor             | 设置控件停靠的位置           | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_LEFT                                                                            |
-| offset             | 设置控件停靠的偏移量         | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 50)                                                                               |
+| offset             | 设置控件停靠的偏移量         | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(0, 50)                                                                               |
 | show               | 是否显示控件                 | boolean                                                                                    | true                                                                                               |
 | showAddressBar     | 是否显示定位信息面板         | boolean                                                                                    | true                                                                                               |
 | enableAutoLocation | 添加控件时是否进行定位       | boolean                                                                                    | false                                                                                              |
@@ -260,7 +260,7 @@ title: TileMap
 | 参数     | 说明                                                                                                   | 类型                                                                                             | 默认值                          |
 | -------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------- |
 | anchor   | 设置控件停靠的位置                                                                                     | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1)       | BMAP_ANCHOR_TOP_LEFT            |
-| offset   | 设置控件停靠的偏移量                                                                                   | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                | new BMap.Size(10, 10)           |
+| offset   | 设置控件停靠的偏移量                                                                                   | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)                | new window.BMap.Size(10, 10)           |
 | show     | 是否显示控件                                                                                           | boolean                                                                                          | true                            |
 | type     | 控件样式                                                                                               | [MapTypeControlType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b17) | BMAP_MAPTYPE_CONTROL_HORIZONTAL |
 | mapTypes | 控件展示的地图类型，默认为普通图、卫星图、卫星加路网混合图和三维图。通过此属性可配置控件展示的地图类型 | [MapType](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b4)[]           | 全部类型                        |
@@ -270,9 +270,9 @@ title: TileMap
 | 参数   | 说明                           | 类型                                                                                       | 默认值                   |
 | ------ | ------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------ |
 | anchor | 设置控件停靠的位置             | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset | 设置控件停靠的偏移量           | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
+| offset | 设置控件停靠的偏移量           | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(0, 0)      |
 | show   | 是否显示控件                   | boolean                                                                                    | true                     |
-| size   | 设置缩略地图的大小             | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(150, 150)  |
+| size   | 设置缩略地图的大小             | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(150, 150)  |
 | isOpen | 缩略地图添加到地图后的开合状态 | boolean                                                                                    | false                    |
 
 ### 切换至全景地图控件 PanoramaControl
@@ -280,7 +280,7 @@ title: TileMap
 | 参数   | 说明                 | 类型                                                                                       | 默认值                   |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
 | anchor | 设置控件停靠的位置   | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_BOTTOM_RIGHT |
-| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(0, 0)      |
+| offset | 设置控件停靠的偏移量 | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(0, 0)      |
 | show   | 是否显示控件         | boolean                                                                                    | true                     |
 
 ### 自定义控件 CustomControl
@@ -288,7 +288,7 @@ title: TileMap
 | 参数     | 说明                                  | 类型                                                                                       | 默认值                |
 | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------- |
 | anchor   | 设置控件停靠的位置                    | [ControlAnchor](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b1) | BMAP_ANCHOR_TOP_LEFT  |
-| offset   | 设置控件停靠的偏移量                  | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new BMap.Size(10, 10) |
+| offset   | 设置控件停靠的偏移量                  | [Size](https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a1b3)          | new window.BMap.Size(10, 10) |
 | show     | 是否显示控件                          | boolean                                                                                    | true                  |
 | children | 设置自定义控件内容。支持传入 DOM 结点 | string\|node                                                                               | -                     |
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { map, controlAnchor, size, copyright } from '../propTypes'
 import MapControl from './MapControl'
 
@@ -6,7 +6,7 @@ export default class CopyrightControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: window.BMap && new BMap.Size(5, 2)
+    offset: window.BMap && new window.BMap.Size(5, 2)
   }
   static propTypes = {
     anchor: controlAnchor,
@@ -19,7 +19,7 @@ export default class CopyrightControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    const copyrightInstance = new BMap.CopyrightControl(this.getOptions(props))
+    const copyrightInstance = new window.BMap.CopyrightControl(this.getOptions(props))
     copyrightInstance.addCopyright(props.copyright)
     return copyrightInstance
   }

@@ -1,23 +1,21 @@
-import { Children, PropTypes } from 'react'
-import { isEqual } from 'lodash'
+import { PropTypes } from 'react'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'
 import { point, size } from '../propTypes/index'
-let countNum = 0
 export default class Label extends MapComponent {
   static defaultProps = {
     enableMassClear: true,
     show: true,
     style: {
-      color: "#666",
-      fontSize: "12px",
-      lineHeight: "20px",
-      borderColor: "#ddd",
-      boxShadow: "0 2px 6px #aaa",
-      padding: "10px",
-      borderRadius: "0",
-      fontFamily: "微软雅黑"
+      color: '#666',
+      fontSize: '12px',
+      lineHeight: '20px',
+      borderColor: '#ddd',
+      boxShadow: '0 2px 6px #aaa',
+      padding: '10px',
+      borderRadius: '0',
+      fontFamily: '微软雅黑'
     }
   }
   static propTypes = {
@@ -36,7 +34,7 @@ export default class Label extends MapComponent {
     markerInstance: layer
   }
   createComponentInstance (props) {
-    const label = new BMap.Label(props.children, this.getOptions(props))
+    const label = new window.BMap.Label(props.children, this.getOptions(props))
     if (props.style) {
       label.setStyle(props.style)
     }

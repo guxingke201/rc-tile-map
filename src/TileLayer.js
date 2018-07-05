@@ -17,7 +17,7 @@ export default class TileLayer extends MapLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    const layer = new BMap.TileLayer(this.getOptions(props))
+    const layer = new window.BMap.TileLayer(this.getOptions(props))
     if (props.getTilesUrl) {
       layer.getTilesUrl = props.getTilesUrl
     }

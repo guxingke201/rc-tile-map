@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { map, controlAnchor, size } from '../propTypes'
 import MapControl from './MapControl'
 
@@ -6,8 +6,8 @@ export default class OverviewMapControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_BOTTOM_RIGHT,
-    offset: window.BMap && new BMap.Size(0, 0),
-    size: window.BMap && new BMap.Size(150, 150),
+    offset: window.BMap && new window.BMap.Size(0, 0),
+    size: window.BMap && new window.BMap.Size(150, 150),
     isOpen: false
   }
   static propTypes = {
@@ -22,7 +22,7 @@ export default class OverviewMapControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.OverviewMapControl(this.getOptions(props))
+    return new window.BMap.OverviewMapControl(this.getOptions(props))
   }
   updateComponentInstance (fromProps, toProps) {
     super.updateComponentInstance(fromProps, toProps)

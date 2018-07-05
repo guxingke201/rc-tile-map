@@ -33,7 +33,7 @@ export default class Polygon extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Polygon(props.points, this.getOptions(props))
+    return new window.BMap.Polygon(props.points, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {

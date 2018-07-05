@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { map, controlAnchor, size } from '../propTypes'
 import MapControl from './MapControl'
 
@@ -6,7 +6,7 @@ export default class NavigationControl extends MapControl {
   static defaultProps = {
     show: true,
     anchor: window.BMAP_ANCHOR_TOP_LEFT,
-    offset: window.BMap && new BMap.Size(10, 10),
+    offset: window.BMap && new window.BMap.Size(10, 10),
     type: window.BMAP_NAVIGATION_CONTROL_LARGE,
     showZoomInfo: true,
     enableGeolocation: false
@@ -29,7 +29,7 @@ export default class NavigationControl extends MapControl {
     map: map
   }
   createComponentInstance (props) {
-    return new BMap.NavigationControl(this.getOptions(props))
+    return new window.BMap.NavigationControl(this.getOptions(props))
   }
   updateComponentInstance (fromProps, toProps) {
     super.updateComponentInstance(fromProps, toProps)

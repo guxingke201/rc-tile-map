@@ -1,5 +1,4 @@
 import { PropTypes } from 'react'
-import { isEqual } from 'lodash'
 import OverLayer from './OverLayer'
 import { point, size, layer, children, layerContainer, map } from '../propTypes'
 
@@ -10,9 +9,9 @@ export default class Marker extends OverLayer {
     enableClicking: true,
     raiseOnDrag: false,
     show: true,
-    shadow: window.BMap && new BMap.Icon(
+    shadow: window.BMap && new window.BMap.Icon(
       '//cdncs.101.com/v0.1/static/fish/image/blank.gif',
-      new BMap.Size(1, 1)
+      new window.BMap.Size(1, 1)
     )
   }
   static propTypes = {
@@ -45,7 +44,7 @@ export default class Marker extends OverLayer {
   }
 
   createComponentInstance (props) {
-    const marker = new BMap.Marker(props.point, this.getOptions(props))
+    const marker = new window.BMap.Marker(props.point, this.getOptions(props))
     if (props.shadow) {
       marker.setShadow(props.shadow)
     }

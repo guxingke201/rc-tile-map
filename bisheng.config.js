@@ -48,26 +48,7 @@ module.exports = {
     config.module.postLoaders = [
       {
         test: /\.(js|jsx|md)$/,
-        loaders: ['es3ify-loader'],
-        include: [
-          path.join(basePath, 'src'),
-          // 重新编译node_modules下的一些库，让他们支持ie8
-          path.join(nodeModulesPath, '@sdp.nd'),
-          path.join(nodeModulesPath, 'react-copy-to-clipboard'),
-          path.join(nodeModulesPath, 'react-color-standalone'),
-          path.join(nodeModulesPath, 'deep-eql'),
-          path.join(nodeModulesPath, 'style-utils'),
-          path.join(nodeModulesPath, 'exist.js'),
-          path.join(nodeModulesPath, 'regenerator-runtime'),
-          path.join(nodeModulesPath, 'jsonml-to-react-element'),
-          path.join(nodeModulesPath, 'react-side-effect'),
-          path.join(nodeModulesPath, 'react-router'),
-          path.join(nodeModulesPath, 'lodash'),
-          path.join(nodeModulesPath, 'babel-runtime'),
-          path.join(nodeModulesPath, 'react-slick'),
-          path.join(nodeModulesPath, 'babel-polyfill'),
-          path.join(nodeModulesPath, 'prop-types')
-        ]
+        loaders: ['es3ify-loader']
       }
     ]
     // 拆分css,兼容IE8，9

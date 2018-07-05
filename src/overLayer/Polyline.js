@@ -29,7 +29,7 @@ export default class Polyline extends OverLayer {
     pane: PropTypes.string
   }
   createComponentInstance (props) {
-    return new BMap.Polyline(props.points, this.getOptions(props))
+    return new window.BMap.Polyline(props.points, this.getOptions(props))
   }
 
   updateComponentInstance (fromProps, toProps) {
