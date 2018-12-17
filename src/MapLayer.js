@@ -1,4 +1,5 @@
-import React, { Children, PropTypes } from 'react'
+import React, { Children } from 'react'
+import PropTypes from 'prop-types'
 import MapComponent from './MapComponent'
 import children from './propTypes/children'
 import layerContainer from './propTypes/layerContainer'

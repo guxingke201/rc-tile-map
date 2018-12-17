@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'
 import map from '../propTypes/map'

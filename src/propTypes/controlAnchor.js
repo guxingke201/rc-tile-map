@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 
 export default PropTypes.oneOf([
   window.BMAP_ANCHOR_TOP_LEFT,

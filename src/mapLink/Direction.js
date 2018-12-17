@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import BaseMapLink from './BaseMapLink'
 import { keys } from 'lodash'
 import warning from 'warning'

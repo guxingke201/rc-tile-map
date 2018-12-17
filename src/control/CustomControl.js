@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import { map, controlAnchor, size, children } from '../propTypes'
 import MapControl from './MapControl'
 

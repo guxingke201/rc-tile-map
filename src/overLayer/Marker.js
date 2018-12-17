@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import OverLayer from './OverLayer'
 import { point, size, layer, children, layerContainer, map } from '../propTypes'
 

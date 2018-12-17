@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import children from '../propTypes/children'
 import { pick, toPairs } from 'lodash'
 const apiHost = '//api.map.baidu.com/'

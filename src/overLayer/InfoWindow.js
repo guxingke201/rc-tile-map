@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import { isEqual } from 'lodash'
 import MapComponent from '../MapComponent'
 import layer from '../propTypes/layer'

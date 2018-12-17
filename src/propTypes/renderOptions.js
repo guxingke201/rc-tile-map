@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import map from './map'
 import htmlElement from './htmlElement'
 export default PropTypes.shape({

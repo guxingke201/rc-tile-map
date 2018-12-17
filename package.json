@@ -1,6 +1,6 @@
 {
   "name": "@sdp.nd/nd-tile-map",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "地图组件",
   "license": "MIT",
   "main": "lib/index.js",
@@ -23,10 +23,11 @@
     "lint"
   ],
   "dependencies": {
-    "lodash": "^4.17.4",
-    "classnames": "~2.2.0",
-    "shallowequal": "^0.2.2",
     "babel-runtime": "^6.22.0",
+    "classnames": "~2.2.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.2",
+    "shallowequal": "^0.2.2",
     "warning": "~3.0.0"
   },
   "devDependencies": {

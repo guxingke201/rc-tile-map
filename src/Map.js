@@ -1,5 +1,6 @@
 import { pick, isEqual } from 'lodash'
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import MapComponent from './MapComponent'
 import children from './propTypes/children'
