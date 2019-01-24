@@ -1,6 +1,6 @@
 {
   "name": "@sdp.nd/nd-tile-map",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "地图组件",
   "license": "MIT",
   "main": "lib/index.js",
