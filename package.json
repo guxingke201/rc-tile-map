@@ -1,5 +1,5 @@
 {
-  "name": "@sdp.nd/nd-tile-map",
+  "name": "@gem-mine/rc-tile-map",
   "version": "1.0.8",
   "description": "地图组件",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "site": "md-tools build",
     "build": "npm run clean && npm run babel",
     "clean": "shx rm -rf lib site && shx echo clean Done",
-    "pub": "npm run build && npm publish --access publish"
+    "pub": "npm run build && npm publish --access public"
   },
   "author": "666595 <pengxing201@163.com>",
   "files": [
