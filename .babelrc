@@ -4,10 +4,6 @@
     "add-module-exports",
     "transform-decorators-legacy",
     "transform-es3-member-expression-literals",
-    "transform-es3-property-literals",
-    "transform-class-properties",
-    ["transform-es2015-classes", {"loose": true}],
-    "transform-object-rest-spread",
-    ["import", { "libraryName": "src", "libraryDirectory": "", "style": true }]
+    "transform-es3-property-literals"
   ]
 }

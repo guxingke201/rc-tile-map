@@ -1,6 +1,19 @@
 {
   "root": true,
-  "extends": [
-    "@sdp.nd/react"
-  ]
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react"],
+  "plugins": ["react"],
+  "rules": {
+    "semi": ["error","never"],
+    "camelcase": 0,
+    "prefer-const": 2,
+    "space-before-function-paren": [2],
+    "jsx-quotes": [2, "prefer-double"],
+    "no-async-promise-executor": 0,
+    "no-misleading-character-class": 0,
+    "no-useless-catch": 0,
+    "lines-between-class-members": 0,
+    "dot-notation": 0,
+    "no-prototype-builtins": 0
+  }
 }
