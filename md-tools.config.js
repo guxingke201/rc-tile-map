@@ -14,8 +14,6 @@ module.exports = {
   theme: 'md-tools-theme-component-react',
   webpackConfig: config => {
     const alias = {
-      'fish/lib': '@sdp.nd/fish/lib',
-      fish: '@sdp.nd/fish',
       'react-router': 'react-router/umd/ReactRouter'
     }
     alias[cname + '/lib'] = path.join(process.cwd(), 'src') // 必须alias[cname]上方

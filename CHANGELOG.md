@@ -42,4 +42,4 @@ timeline: true
 
 `2017-12-21`
 
-* [项目源码](http://git.sdp.nd/component-h5/nd-tile-map), 兼容 IE8 的地图组件
+* [项目源码](https://github.com/gem-mine/rc-tile-map), 兼容 IE8 的地图组件
