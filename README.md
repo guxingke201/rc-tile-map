@@ -1042,9 +1042,7 @@ class App extends React.Component {
           <SimpleInfoWindow
             {...pointInfo.infoWindowProps}
             contentEvents={{
-              "confirmButton.click": (evt, markerInstance, infoWindowInstance) => {
-                this.onClickMark(pointInfo, infoWindowInstance);
-              }
+              "confirmButton.click": (evt, markerInstance, infoWindowInstance) => this.onClickMark(pointInfo, infoWindowInstance)
             }}
           >
             <Row className="global-maplabel-wrap">
