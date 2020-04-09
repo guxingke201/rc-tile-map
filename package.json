@@ -1,7 +1,19 @@
 {
   "name": "rc-tile-map",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "地图组件",
+  "keywords": [
+    "百度地图",
+    "map",
+    "BMap",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "framework",
+    "frontend"
+  ],
   "license": "MIT",
   "main": "lib/index.js",
   "engines": {
@@ -12,18 +24,23 @@
     "fix": "eslint --ext .js,.jsx --fix src",
     "babel": "babel ./src --out-dir ./lib",
     "start": "md-tools start -c ./md-tools.config.js",
-    "site": "npm run clean && md-tools build",
-    "build": "npm run clean && npm run babel",
-    "clean": "shx rm -rf lib site && shx echo clean Done",
+    "site": "shx rm -rf site && md-tools build",
+    "build": "shx rm -rf lib dist && npm run babel && npm run dist ",
+    "dist": "shx rm -rf dist && md-tools dist",
+    "clean": "shx rm -rf lib site dist && shx echo clean Done",
     "pub": "npm run build && npm publish --access public"
   },
   "author": "666595 <pengxing201@163.com>",
-  "files": [
-    "lib"
-  ],
-  "pre-commit": [
-    "lint"
-  ],
+  "homepage": "https://github.com/guxingke201/rc-tile-map",
+  "bugs": {
+    "url": "http://git.sdp.nd/app-web/fish-docs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guxingke201/rc-tile-map"
+  },
+  "files": [ "lib", "dist" ],
+  "pre-commit": [ "lint" ],
   "dependencies": {
     "babel-runtime": "^6.22.0",
     "classnames": "~2.2.0",
