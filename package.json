@@ -1,5 +1,5 @@
 {
-  "name": "@gem-mine/rc-tile-map",
+  "name": "rc-tile-map",
   "version": "1.0.8",
   "description": "地图组件",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "warning": "~3.0.0"
   },
   "devDependencies": {
+    "antd": "^2.13.14",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",

@@ -4,23 +4,47 @@
 
 基于百度 Javascript API 的地图组件
 
+## 何时使用
+
+- 需要显示或获取空间数据的时候。
+
+- 直接调起百度地图
+
 ## 浏览器支持
 
 | ![IE](https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png) | ![Chrome](https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png) | ![Firefox](https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png) | ![Opera](https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png) | ![Safari](https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png) |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| IE 8+ ✔                                                                                            | Chrome 31.0+ ✔                                                                                           | Firefox 31.0+ ✔                                                                                            | Opera 30.0+ ✔                                                                                          | Safari 7.0+ ✔                                                                                            |
+| IE 9+ ✔                                                                                            | Chrome 31.0+ ✔                                                                                           | Firefox 31.0+ ✔                                                                                            | Opera 30.0+ ✔                                                                                          | Safari 7.0+ ✔                                                                                            |
 
-## 本地运行
+## 安装
 
+```bash
+npm install rc-tile-map --save
 ```
-npm install
+
+## 运行
+
+```bash
+# 默认开启服务器，地址为 ：http://localhost:8000/
+
+# 能在ie9+下浏览本站，修改代码后自动重新构建，且能在ie10+运行热更新，页面会自动刷新
 npm run start
+
+# 构建生产环境静态文件，用于发布文档
+npm run site
 ```
 
-### 地图初始化基础操作
+## 代码演示
+
+在线示例：https://guxingke201.github.io/rc-tile-map/site/
+
+### 初始化地图
+
+地图初始化基础操作
 
 ```jsx
-import { Map, NDMap } from "@gem-mine/rc-tile-map";
+import "rc-tile-map/lib/style/";
+import { Map, NDMap } from "rc-tile-map";
 let nowCenter = new NDMap.Point(116.332782, 40.007978);
 class App extends React.Component {
   mapNow;
@@ -123,8 +147,10 @@ ReactDOM.render(<App />, mountNode);
 
 ### 叠加图层
 
+叠加图层
+
 ```jsx
-import { Map, NDMap, TileLayer } from "@gem-mine/rc-tile-map";
+import { Map, NDMap, TileLayer } from "rc-tile-map";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -202,7 +228,7 @@ import {
   Circle,
   Label,
   MarkerIcon
-} from "@gem-mine/rc-tile-map";
+} from "rc-tile-map";
 var pStart = new NDMap.Point(116.392214, 39.918985);
 var pEnd = new NDMap.Point(116.41478, 39.911901);
 class App extends React.Component {
@@ -587,7 +613,7 @@ import {
   OverviewMapControl,
   PanoramaControl,
   CustomControl
-} from "@gem-mine/rc-tile-map";
+} from "rc-tile-map";
 class App extends React.Component {
   mapNow;
   state = {
@@ -698,4 +724,748 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, mountNode);
+```
+
+### 检索相关
+
+位置检索（LocalSearch）、结果提示及自动完成类（Autocomplete）
+
+```jsx
+import {
+  Map,
+  NDMap,
+  CustomControl,
+  AutocompleteMap,
+  LocalSearch,
+  Marker,
+  MarkerIcon,
+  SimpleInfoWindow,
+  Label
+} from "rc-tile-map";
+import { Input, Button, Icon, Row, Col, Cascader, AutoComplete } from "antd";
+const Option = AutoComplete.Option;
+const Search = Input.Search;
+const geoc = new NDMap.Geocoder();
+let timer = null;
+class App extends React.Component {
+  mapNow;
+  localSearchDiv;
+  lastClickMarker;
+  state = {
+    hasSelect: false,
+    keywordMap: null,
+    keyword: null,
+    mapState: {
+      zoom: 15
+    },
+    markerState: {
+      enableDragging: true
+    },
+    markerList: [],
+    icon: {
+      imageUrl: "//cdncs.101.com/v0.1/static/fish/image/markers_num.png"
+    },
+    label: {
+      offset: new NDMap.Size(30, -15)
+    },
+    pointInfo: {
+      point: null,
+      title: "",
+      region: "",
+      address: ""
+    },
+    areaValue: "",
+    areaValueCity: "",
+    areaData: [
+      {
+        value: "浙江",
+        label: "浙江",
+        children: [
+          {
+            value: "杭州",
+            label: "杭州"
+          }
+        ]
+      },
+      {
+        value: "江苏",
+        label: "江苏",
+        children: [
+          {
+            value: "南京",
+            label: "南京"
+          }
+        ]
+      },
+      {
+        value: "福建",
+        label: "福建",
+        children: [
+          {
+            value: "福州",
+            label: "福州"
+          },
+          {
+            value: "莆田",
+            label: "莆田"
+          }
+        ]
+      }
+    ],
+    historyArray: ["福州市鼓楼区851大楼", "福州长乐", "福州亚太"],
+    dataSource: []
+  };
+  componentDidMount() {
+    this.setState({ dataSource: this.getOptions(this.state.historyArray) });
+  }
+  getTitle = (resultLoaction, firstPoint) => {
+    let title = firstPoint.title;
+    if (!title && resultLoaction && resultLoaction.surroundingPois && resultLoaction.surroundingPois.length > 0) {
+      title = resultLoaction.surroundingPois[0].title;
+    }
+    return title || "未知地点";
+  };
+  updateMarkerItem = (uid, newPointInfo) => {
+    this.setState({
+      markerList: this.state.markerList.map(item => {
+        if (item.uid === uid) {
+          return { ...item, ...newPointInfo };
+        } else {
+          return item;
+        }
+      })
+    });
+  };
+  setPositionInfo = (endPoint, uid) => {
+    console.log("setPositionInfo endPoint:", endPoint);
+    geoc.getLocation(endPoint.point, resultLoaction => {
+      console.log("resultLoaction:", resultLoaction);
+      const positionInfo = resultLoaction.addressComponents;
+      this.updateMarkerItem(uid, {
+        point: endPoint.point,
+        address: resultLoaction.address,
+        province: positionInfo.province,
+        city: positionInfo.city,
+        title: `${this.getTitle(resultLoaction, endPoint)}`
+      });
+    });
+  };
+  onClickItem = ({ type, target, item }) => {
+    console.log("type:", type, "target:", target, "item:", item);
+    // this.mapNow.clearOverlays();
+    var positionInfo = item.value;
+    this.setState({
+      keywordMap:
+        positionInfo.province + positionInfo.city + positionInfo.district + positionInfo.street + positionInfo.business
+    });
+  };
+  onChangeKeyword = keyword => {
+    console.log("onChangeKeyword keyword:", keyword);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      this.setState({
+        keyword: keyword || "",
+        dataSource: !keyword ? this.getOptions(this.state.historyArray) : [] //没有关键字时使用历史记录
+      });
+    }, 200);
+  };
+  onClickMapInputSearch = keywordMap => {
+    this.setState({
+      keywordMap
+    });
+  };
+  onAreaChange = areaValueArray => {
+    const areaValue = areaValueArray && areaValueArray.join("");
+    const areaValueCity = areaValueArray && areaValueArray[areaValueArray.length - 1];
+    this.setState({
+      areaValue,
+      areaValueCity
+    });
+    geoc.getPoint(
+      areaValue,
+      point => {
+        if (point) {
+          this.setState({
+            mapState: {
+              ...this.state.mapState,
+              zoom: 11,
+              center: point
+            }
+          });
+        }
+      },
+      areaValueCity
+    );
+  };
+  getOptions = historyArray => {
+    if (!historyArray || historyArray.length === 0) {
+      return [];
+    }
+    return historyArray
+      .map((historyItem, index) => (
+        <Option key={index} value={historyItem}>
+          <span>{historyItem}</span>
+        </Option>
+      ))
+      .concat([
+        <Option disabled key="del" className="del-item">
+          <Button
+            type="font"
+            onClick={() => {
+              this.setState({ dataSource: [], historyArray: [] });
+            }}
+          >
+            清空搜索历史
+          </Button>
+        </Option>
+      ]);
+  };
+  formatSearchData = searchResults => {
+    let rows = searchResults.getNumPois();
+    if (rows > 10) {
+      rows = 10;
+    }
+    return Array(rows)
+      .fill(0)
+      .map((item, index) => searchResults.getPoi(index))
+      .filter(item => !!item);
+  };
+  getOptionsBySearchResults = searchResults => {
+    const countResult = searchResults && searchResults.getNumPois();
+    console.log("countResult:", countResult);
+    if (!searchResults || countResult === 0) {
+      return [
+        <Option disabled key="empty" className="empty-item">
+          <p className="global-search-empty-text">未找到相关地点</p>
+          <p className="global-search-empty-text">您还可以：</p>
+          <ul className="global-search-empty-list">
+            <li>检查输入是否正确或者输入其他词</li>
+            <li>
+              在网页中查找“<a
+                className="global-search-empty-strong"
+                target="_blank"
+                href={`//www.baidu.com/s?wd=${searchResults.keyword}`}
+              >
+                {searchResults.keyword}
+              </a>”
+            </li>
+            <li>进行意见反馈</li>
+          </ul>
+        </Option>
+      ];
+    } else {
+      return this.formatSearchData(searchResults).map((item, index) => {
+        return (
+          <Option key={index} value={`${item.city}${item.district}${item.business}`}>
+            <span>{`${item.business} `}</span>
+            <span style={{ color: "gray" }}>{`${item.city}${item.district}`}</span>
+          </Option>
+        );
+      });
+    }
+  };
+  getMarker(pointInfo) {
+    return (
+      <Marker
+        key={pointInfo.uid}
+        {...pointInfo.markerProps}
+        onClick={() => {
+          if (this.state.hasSelect) {
+            return;
+          }
+          if (this.lastClickMarker) {
+            this.updateMarkerItem(this.lastClickMarker.uid, {
+              iconProps: {
+                ...this.lastClickMarker.iconProps,
+                size: new NDMap.Size(20, 28),
+                imageOffset: new NDMap.Size(-20 * this.lastClickMarker.iconProps.index, 0)
+              },
+              infoWindowProps: { show: false },
+              markerProps: {
+                ...this.lastClickMarker.markerProps,
+                offset: new NDMap.Size(0, -10)
+              }
+            });
+          }
+          this.lastClickMarker = pointInfo;
+          this.updateMarkerItem(pointInfo.uid, {
+            iconProps: {
+              ...pointInfo.iconProps,
+              size: new NDMap.Size(28, 40),
+              imageOffset: new NDMap.Size(-28 * pointInfo.iconProps.index, -28)
+            },
+            infoWindowProps: { show: true },
+            labelProps: { show: false },
+            markerProps: {
+              ...pointInfo.markerProps,
+              offset: new NDMap.Size(-4, -22)
+            }
+          });
+          this.setState({
+            mapState: {
+              ...this.state.mapState,
+              center: pointInfo.point
+            }
+          });
+        }}
+        onDragend={endPoint => {
+          this.setPositionInfo(endPoint, pointInfo.uid);
+        }}
+        onMouseout={() => {
+          setTimeout(() => {
+            this.updateMarkerItem(pointInfo.uid, {
+              labelProps: { show: false }
+            });
+          }, 0);
+        }}
+        onMouseover={() => {
+          setTimeout(() => {
+            this.updateMarkerItem(pointInfo.uid, {
+              labelProps: { show: true }
+            });
+          }, 0);
+        }}
+      >
+        <MarkerIcon {...pointInfo.iconProps} />
+        <Label {...pointInfo.labelProps}>{`<p class="global-maplabel-text-main">${pointInfo.title ||
+          ""}</p><p class="global-maplabel-text-sub">${pointInfo.province || ""}${pointInfo.city || ""}</p>`}</Label>
+        {this.state.hasSelect ? null : (
+          <SimpleInfoWindow
+            {...pointInfo.infoWindowProps}
+            contentEvents={{
+              "confirmButton.click": (evt, markerInstance, infoWindowInstance) => {
+                this.onClickMark(pointInfo, infoWindowInstance);
+              }
+            }}
+          >
+            <Row className="global-maplabel-wrap">
+              <Col span={24} className="global-maplabel-content">
+                <p className="global-maplabel-text-main">{`${pointInfo.title || ""}`}</p>
+                <p className="global-maplabel-text-sub">{pointInfo.address || ""}</p>
+              </Col>
+              <Col span={8} className="global-maplabel-ctrl">
+                <Button type="ghost" className="confirmButton">
+                  确定
+                </Button>
+              </Col>
+            </Row>
+          </SimpleInfoWindow>
+        )}
+      </Marker>
+    );
+  }
+  startSearch = keywordStart => {
+    this.setState({
+      hasSelect: false
+    });
+    if (keywordStart) {
+      let historyArray = this.state.historyArray;
+      if (!historyArray.includes(keywordStart)) {
+        historyArray.push(keywordStart);
+      }
+      this.setState({ historyArray, markerList: [] });
+      this.localSearchDiv.search(keywordStart);
+    }
+  };
+  onLocalSearchComplete = results => {
+    var firstPoint = results && results.getPoi(0);
+    console.log("onLocalSearchComplete results:", results, firstPoint);
+    if (firstPoint) {
+      this.setState({
+        mapState: {
+          ...this.state.mapState,
+          viewport: this.formatSearchData(results).map(item => item.point)
+        },
+        markerList: this.formatSearchData(results).map((item, index) => {
+          item.iconProps = {
+            ...this.state.icon,
+            size: new NDMap.Size(20, 28),
+            index,
+            imageOffset: new NDMap.Size(-20 * index, 0)
+          };
+          item.labelProps = { ...this.state.label, show: false };
+          item.infoWindowProps = { show: false };
+          item.markerProps = {
+            ...this.state.markerState,
+            point: item.point,
+            offset: new NDMap.Size(0, -10)
+          };
+          return item;
+        })
+      });
+    } else {
+      alert("没找到");
+    }
+  };
+  onClickMark = (pointInfo, infoWindowInstance) => {
+    //react事件和百度地图InfoWindow事件冲突了，目前采用这种方式绑定事件
+    this.updateMarkerItem(pointInfo.uid, {
+      iconProps: {
+        ...pointInfo.iconProps,
+        size: new NDMap.Size(28, 40),
+        imageOffset: new NDMap.Size(0, -68)
+      }
+    });
+    this.setState({
+      hasSelect: true,
+      markerList: this.state.markerList.filter(item => item.uid === pointInfo.uid)
+    });
+    infoWindowInstance.close();
+  };
+  render() {
+    return (
+      <div className="tilemap-container-demo">
+        <Row style={{ height: 50 }}>
+          <Col span={6}>
+            <Cascader
+              size="large"
+              options={this.state.areaData}
+              onChange={this.onAreaChange}
+              placeholder="请选择地区"
+            />
+          </Col>
+          <Col span={13} offset={1}>
+            <AutoComplete
+              filterOption={false}
+              allowClear
+              className="global-search"
+              dropdownClassName="global-search-search-dropdown"
+              size="large"
+              dataSource={this.state.dataSource}
+              onChange={this.onChangeKeyword}
+              onSelect={value => {
+                this.startSearch(value);
+              }}
+              placeholder={`在 ${this.state.areaValue || "全国"} 搜索`}
+              optionLabelProp="value"
+            >
+              <Input id="divSearch" />
+            </AutoComplete>
+          </Col>
+          <Col span={3} offset={1}>
+            <Button
+              className="search-btn"
+              size="large"
+              type="primary"
+              onClick={() => {
+                this.startSearch(this.state.keyword);
+              }}
+            >
+              搜索
+            </Button>
+          </Col>
+        </Row>
+        <Map
+          setComponentInstance={mapNow => {
+            this.mapNow = mapNow;
+          }}
+          className="tilemap-demo"
+          {...this.state.mapState}
+        >
+          {this.state.markerList
+            ? this.state.markerList.map((itemMarkerData, index) => {
+                return this.getMarker(itemMarkerData);
+              })
+            : null}
+          <CustomControl anchor={BMAP_ANCHOR_TOP_RIGHT}>
+            <Search
+              placeholder="全国搜索"
+              id="mapSearch"
+              style={{ width: 200 }}
+              onSearch={this.onClickMapInputSearch}
+            />
+          </CustomControl>
+          <AutocompleteMap input="mapSearch" onOnconfirm={this.onClickItem} />
+          <LocalSearch keyword={this.state.keywordMap} onSearchComplete={this.onLocalSearchComplete} />
+          <AutocompleteMap
+            location={this.state.areaValueCity}
+            keyword={this.state.keyword}
+            onSearchComplete={results => {
+              console.log("divSearch AutocompleteMap results:", results);
+              if (results && results.keyword) {
+                this.setState({
+                  dataSource: this.getOptionsBySearchResults(results)
+                });
+              }
+            }}
+          />
+          <LocalSearch
+            setComponentInstance={localSearchDiv => {
+              this.localSearchDiv = localSearchDiv;
+            }}
+            location={this.state.areaValueCity}
+            onSearchComplete={this.onLocalSearchComplete}
+          />
+        </Map>
+        <div id="error-ie8" />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, mountNode);
+```
+
+```css
+.global-search-wrapper {
+  padding-right: 50px;
+}
+
+.global-search {
+  width: 100%;
+}
+
+/* ？ */
+.global-search.ant-select-auto-complete
+  .ant-input-affix-wrapper
+  .ant-input:not(:last-child) {
+  padding-right: 62px;
+}
+/* ？ */
+.global-search.ant-select-auto-complete
+  .ant-input-affix-wrapper
+  .ant-input-suffix {
+  right: 0;
+}
+
+.global-search-search-dropdown .ant-select-dropdown-menu-item {
+  padding: 5px 12px 4px;
+}
+.global-search-search-dropdown .ant-select-dropdown-menu-item.del-item {
+  text-align: right;
+  cursor: default;
+  border-top: 1px solid #ddd;
+}
+.global-search-search-dropdown .ant-select-dropdown-menu-item.del-item .ant-btn-font {
+  font-size: 12px;
+  color:#bbb;
+  vertical-align:top;
+  border:none;
+  height:20px;
+  line-height:20px;
+}
+.global-search-search-dropdown .ant-select-dropdown-menu-item.empty-item {
+  cursor: default;
+  padding: 16px 20px;
+}
+}
+.global-search-search-dropdown .ant-select-dropdown-menu-item.custom-item {
+  cursor: default;
+}
+.global-search.ant-select-auto-complete
+  .ant-input-affix-wrapper
+  .ant-input-suffix
+  button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.global-search-empty-text {
+  line-height:24px;
+  font-size:12px;
+  color:#666;
+}
+.global-search-empty-list li {
+  position:relative;
+  padding-left:8px;
+  line-height:20px;
+  font-size:12px;
+  color:#666;
+}
+.global-search-empty-list li:before {
+  position:absolute;
+  left:0;
+  top:50%;
+  width:2px;
+  height:2px;
+  content:"";
+  margin-top:-1px;
+  background-color:#666;
+}
+.global-search-empty-strong {
+  color:#3ba8f0;
+}
+.global-maplabel-wrap {
+  position:relative;
+  padding: 10px;
+  padding-right: 54px;
+}
+.global-maplabel-ctrl {
+  position: absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:54px;
+  border-left:1px solid #ddd;
+}
+.global-maplabel-ctrl .confirmButton {
+  width:100%;
+  padding: 5px;
+  border: none;
+  font-size:12px;
+  color: #3ba8f0;
+  height: 100%;
+  text-align:center;
+}
+.global-maplabel-ctrl .confirmButton:after {
+  display: inline-block;
+  vertical-align:middle;
+  width: 0;
+  height: 100%;
+  content: "";
+}
+.global-maplabel-ctrl .confirmButton > span {
+  display: inline-block;
+  vertical-align:middle;
+  margin: 0;
+}
+```
+
+### 调起百度地图
+
+Web 版百度地图面向 PC 浏览器的网站应用，调起的百度地图地址为：//map.baidu.com/ ；
+
+```jsx
+import {
+  MapLinkMarker,
+  MapLinkDirection,
+  MapLinkGeocoder,
+  MapLinkLine,
+  MapLinkPano,
+  MapLinkPlaceDetail,
+  MapLinkPlaceSearch
+} from "rc-tile-map";
+import { Icon, Tabs, Row, Col } from "antd";
+const TabPane = Tabs.TabPane;
+class App extends React.Component {
+  state = {
+    marker: {
+      location: "26.097159,119.319762",
+      title: "851大楼",
+      content: "福州市鼓楼区温泉支路58号"
+    }
+  };
+  render() {
+    return (
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="链接模式" key="1">
+          <div className="tilemap-demo">
+            <Row className="line-demo">
+              <MapLinkMarker
+                className="maplink-demo"
+                style={{ color: "red" }}
+                {...this.state.marker}
+              >
+                <Icon type="link" />
+                在指定坐标点上显示名称"851大楼"，内容"福州市鼓楼区温泉支路58号"的信息窗口
+              </MapLinkMarker>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkDirection
+                className="maplink-demo"
+                origin="latlng:26.097159,119.319762|name:我的公司"
+                destination="亚太中心"
+                mode="driving"
+                region="福州"
+              >
+                <Icon type="link" />
+                展示"福州市"从（lat:26.097159，lng:119.319762 ）"我的公司"到"亚太中心"的驾车路线
+              </MapLinkDirection>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkGeocoder
+                className="maplink-demo"
+                address="福州市鼓楼区851大楼"
+              >
+                <Icon type="link" />
+                显示“福州市鼓楼区851大楼”对应的坐标点
+              </MapLinkGeocoder>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkGeocoder
+                className="maplink-demo"
+                location="26.097159,119.319762"
+              >
+                <Icon type="link" />
+                逆地理编码坐标（lat:26.097159，lng:119.319762）后，以标注形式显示位置和地址信息
+              </MapLinkGeocoder>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkLine
+                className="maplink-demo"
+                region="福州"
+                name="地铁1号线"
+              >
+                <Icon type="link" />
+                展示"福州市"地铁1号线
+              </MapLinkLine>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkPano
+                className="maplink-demo"
+                ak="zIT2dNIgEojIIYjD91wIbiespAnwM0Zu"
+                x={119.319642}
+                y={26.096715}
+                z={1}
+              >
+                <Icon type="link" />
+                展示坐标（lat:26.096715，lng:119.319642）对应的全景点
+              </MapLinkPano>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkPlaceDetail
+                className="maplink-demo"
+                uid="6a78257f421f66d3af31e5ad"
+              >
+                <Icon type="link" />
+                展示通过LocalSearch查询获取到的uid为"6a78257f421f66d3af31e5ad"对应的详情页面
+              </MapLinkPlaceDetail>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkPlaceSearch
+                className="maplink-demo"
+                query="停车场"
+                location="latlng:26.097159,119.319762|name:我的公司"
+                radius={1000}
+              >
+                <Icon type="link" />
+                检索坐标（lat:26.097159，lng:119.319762，name:我的公司）周边1000m的停车场
+              </MapLinkPlaceSearch>
+            </Row>
+            <Row className="line-demo">
+              <MapLinkPlaceSearch
+                className="maplink-demo"
+                query="亚太中心 停车场"
+                region="福州"
+              >
+                <Icon type="link" />
+                在“福州”检索“亚太中心 停车场”
+              </MapLinkPlaceSearch>
+            </Row>
+          </div>
+        </TabPane>
+        <TabPane tab="iframe模式" key="2">
+          <iframe
+            src={new MapLinkMarker().getLinkUrl(this.state.marker)}
+            className="tilemap-demo"
+          />
+        </TabPane>
+      </Tabs>
+    );
+  }
+}
+
+ReactDOM.render(<App />, mountNode);
+```
+
+```css
+.maplink-demo {
+  border: solid 1px gray;
+  padding: 5px;
+}
+.tilemap-demo .line-demo {
+  height: 50px;
+}
 ```
