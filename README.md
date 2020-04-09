@@ -1036,8 +1036,8 @@ class App extends React.Component {
         }}
       >
         <MarkerIcon {...pointInfo.iconProps} />
-        <Label {...pointInfo.labelProps}>{`<p class="global-maplabel-text-main">${pointInfo.title ||
-          ""}</p><p class="global-maplabel-text-sub">${pointInfo.province || ""}${pointInfo.city || ""}</p>`}</Label>
+        <Label {...pointInfo.labelProps}>{`<p class="global-maplabel-text-main">${pointInfo.title || 
+""}</p><p class="global-maplabel-text-sub">${pointInfo.province || ""}${pointInfo.city || ""}</p>`}</Label>
         {this.state.hasSelect ? null : (
           <SimpleInfoWindow
             {...pointInfo.infoWindowProps}
