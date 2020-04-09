@@ -12,7 +12,7 @@
     "fix": "eslint --ext .js,.jsx --fix src",
     "babel": "babel ./src --out-dir ./lib",
     "start": "md-tools start -c ./md-tools.config.js",
-    "site": "md-tools build",
+    "site": "npm run clean && md-tools build",
     "build": "npm run clean && npm run babel",
     "clean": "shx rm -rf lib site && shx echo clean Done",
     "pub": "npm run build && npm publish --access public"
