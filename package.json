@@ -24,7 +24,7 @@
     "fix": "eslint --ext .js,.jsx --fix src",
     "babel": "babel ./src --out-dir ./lib",
     "start": "md-tools start -c ./md-tools.config.js",
-    "site": "shx rm -rf site && md-tools build",
+    "site": "shx rm -rf site && md-tools build -c ./md-tools.config.js",
     "build": "shx rm -rf lib dist && npm run babel && npm run dist ",
     "dist": "shx rm -rf dist && md-tools dist",
     "clean": "shx rm -rf lib site dist && shx echo clean Done",
